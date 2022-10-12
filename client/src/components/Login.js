@@ -1,29 +1,30 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Login () {
+function Login ({ onUserEntry }) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     function handleSubmit(e) {
         e.preventDefault()
-        // let loginInput = {
-        //     email: email,
-        //     password: password
-        // }
+        let loginInput = {
+            email: email,
+            password: password
+        }
         // console.log(loginInput)
-        // fetch("/login", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type" : "application/json"
-        //     },
-        //     body: JSON.stringify(loginInput)
-        // })
-        //     .then(res => res.json())
-        //     .then(loggedInUser => {
-        //         onLogIn(loggedInUser)
-        //         history.push('/')
-        //     })
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(loginInput)
+        })
+            .then(res => res.json())
+            .then(loggedInUser => {
+                onUserEntry(loggedInUser)
+                // history.push('/')
+            })
         setEmail("")
         setPassword("")
     }
@@ -32,31 +33,33 @@ function Login () {
         <div>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email</label>
-                    <div>
-                        <input 
-                            className='form-control'
-                            required 
-                            type="text" 
-                            name="email" 
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <label htmlFor="password">Password</label>
-                    <div>
-                        <input 
-                            className='form-control'
-                            required 
-                            type="password" 
-                            name="password" 
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
+                <label htmlFor="email">Email</label>
+                <div>
+                    <input 
+                        required 
+                        type="text" 
+                        name="email" 
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
+                <label htmlFor="password">Password</label>
+                <div>
+                    <input 
+                        required 
+                        type="password" 
+                        name="password" 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </div>
                 {/* <input type="checkbox" onClick={showPassword}>Show Password</input> */}
                 <button type="submit">Log In</button>
             </form>
+            <br/>
+            <div>
+                Don't have an account yet? <Link to='/signup'>Sign up now!</Link>
+            </div>
         </div>
     )
 }
