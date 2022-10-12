@@ -6,9 +6,10 @@ import Signup from './components/Signup'
 import UserDetails from './components/UserDetails'
 import { UserProvider } from './context/UserProvider'
 import './App.css'
+import CartsList from './components/CartsList'
+import CartDetails from './components/CartDetails'
 
 function App() {
-
 
   // All currentUser state has been moved to UserProvider 
 
@@ -49,8 +50,11 @@ function App() {
               // onUserEntry={onUserEntry} 
             />
           </Route>
-          <Route path="/carts">
-            <h1>Carts</h1>
+          <Route exact path="/carts">
+            <CartsList />
+          </Route>
+          <Route exact path="/carts/:id">
+            <CartDetails />
           </Route>
           <Route path="/favorites">
             <h1>Favorites</h1>
