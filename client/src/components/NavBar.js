@@ -1,12 +1,16 @@
 import { Link, NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserProvider'
 
-function NavBar({ currentUser, onLogOut }) {
+function NavBar() {
+
+    let [currentUser, setCurrentUser] = useContext(UserContext)
 
     function handleLogOut() {
         fetch('/logout', {
             method: 'DELETE'
         })
-            .then(() => onLogOut())
+            .then(() => setCurrentUser(null))
     }
 
     return(

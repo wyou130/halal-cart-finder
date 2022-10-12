@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../context/UserProvider'
 
-function Signup({ onUserEntry }) {
+function Signup() {
+
+    let [currentUser, setCurrentUser] = useContext(UserContext)
     
-        const [name, setName] = useState("")
-        const [email, setEmail] = useState("")
-        const [password, setPassword] = useState("")
-        const [location, setLocation] = useState("")
-        const [image, setImage] = useState("")
-        // let history = useHistory()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [location, setLocation] = useState("")
+    const [image, setImage] = useState("")
+    // let history = useHistory()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -30,7 +33,7 @@ function Signup({ onUserEntry }) {
             .then(res => {
                 if(res.ok) {
                     res.json()
-                    .then(newUser => onUserEntry(newUser))
+                    .then(newUser => setCurrentUser(newUser))
                     // history.push('/')
                 }
             })
