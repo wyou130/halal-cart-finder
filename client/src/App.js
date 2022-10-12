@@ -1,52 +1,53 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+// import { useState, useEffect } from 'react'
+import { Switch, Route } from 'react-router-dom'
 import Login from './components/Login'
 import NavBar from './components/NavBar'
 import Signup from './components/Signup'
 import UserDetails from './components/UserDetails'
+import { UserProvider } from './context/UserProvider'
 import './App.css'
 
 function App() {
-  
-  // const [count, setCount] = useState(0)
-  const [currentUser, setCurrentUser] = useState(null)
+
+
+  // All currentUser state has been moved to UserProvider 
+
+  // const [currentUser, setCurrentUser] = useState(null)
 
   // useEffect(() => {
-  //   fetch("/hello")
-  //     .then((r) => r.json())
-  //     .then((data) => setCount(data.count))
+  //   fetch('/me')
+  //     .then(res => {
+  //       if(res.ok) {
+  //         res.json()
+  //         .then((loggedInUser) => setCurrentUser(loggedInUser))
+  //       }
+  //     })
   // }, [])
 
-  useEffect(() => {
-    fetch('/me')
-      .then(res => {
-        if(res.ok) {
-          res.json()
-          .then((loggedInUser) => setCurrentUser(loggedInUser))
-        }
-      })
-  }, [])
+  // function onUserEntry(user) {
+  //   setCurrentUser(user)
+  // }
 
-  function onUserEntry(user) {
-    setCurrentUser(user)
-  }
-
-  function onLogOut() {
-    setCurrentUser(null)
-  }
-  
-  // console.log(currentUser)
+  // function onLogOut() {
+  //   setCurrentUser(null)
+  // }
 
   return (
-    <BrowserRouter>
+    <UserProvider>
       <div className="App">
-        <NavBar currentUser={currentUser} onLogOut={onLogOut} />
+        <NavBar 
+            // currentUser={currentUser} onLogOut={onLogOut} 
+        />
         <Switch>
           <Route path="/login">
-            <Login onUserEntry={onUserEntry} />
+            <Login 
+              // onUserEntry={onUserEntry} 
+            />
           </Route>
           <Route path="/signup">
-            <Signup onUserEntry={onUserEntry} />
+            <Signup 
+              // onUserEntry={onUserEntry} 
+            />
           </Route>
           <Route path="/carts">
             <h1>Carts</h1>
@@ -65,7 +66,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </BrowserRouter>
+    </UserProvider>
   )
 }
 

@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../context/UserProvider'
 
-function Login ({ onUserEntry }) {
+function Login () {
+
+    let [currentUser, setCurrentUser] = useContext(UserContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -22,7 +25,7 @@ function Login ({ onUserEntry }) {
         })
             .then(res => res.json())
             .then(loggedInUser => {
-                onUserEntry(loggedInUser)
+                setCurrentUser(loggedInUser)
                 // history.push('/')
             })
         setEmail("")
