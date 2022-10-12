@@ -1,8 +1,8 @@
 class User < ApplicationRecord
 
-    has_many :reviews
-    has_many :comments
-    has_many :favorites
+    has_many :reviews, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :favorites, dependent: :destroy
     has_many :carts, through: :favorites
 
     has_secure_password
