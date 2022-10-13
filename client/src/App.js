@@ -8,6 +8,7 @@ import { UserProvider } from './context/UserProvider'
 import './App.css'
 import CartsList from './components/CartsList'
 import CartDetails from './components/CartDetails'
+import ReviewsList from './components/ReviewsList'
 
 function App() {
 
@@ -60,7 +61,7 @@ function App() {
             <h1>Favorites</h1>
           </Route>
           <Route path="/reviews">
-            <h1>Reviews</h1>
+            <ReviewsList />
           </Route>
           <Route path="/users/:id">
             <UserDetails />
