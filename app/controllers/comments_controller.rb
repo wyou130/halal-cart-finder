@@ -23,6 +23,10 @@ class CommentsController < ApplicationController
         head :no_content
     end
 
+    def specific_review
+        render json: Comment.where(review_id: params[:review_id])
+    end
+
     private 
     
     def comment_params

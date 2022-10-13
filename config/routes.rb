@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   # Logout route 
   delete '/logout', to: 'sessions#destroy'
 
+  # Custom route for showing comments attached to specific review
+  get '/comments/:review_id', to: 'comments#specific_review'
+
 end

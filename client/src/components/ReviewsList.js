@@ -11,8 +11,6 @@ function ReviewsList() {
             .then(reviews => setReviewsList(reviews))
     }, [])
 
-    // console.log(reviewsList)
-
     return (
         <div>
             <h3>All Reviews</h3>

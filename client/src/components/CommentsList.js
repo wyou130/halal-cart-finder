@@ -1,12 +1,19 @@
+import { useEffect, useState } from "react";
 import CommentItem from "./CommentItem";
 
-function CommentsList({ comments }) {
+function CommentsList({ review }) {
 
-    // console.log(comments)
+    const [displayedComments, setDisplayedComments] = useState([])
+
+    useEffect(() => {
+        fetch(`/comments/${review}`)
+            .then(res => res.json())
+            .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
+    }, [])
     
     return (
         <div>
-            {comments.map(comment => <CommentItem key={comment.id} comment={comment} />) }
+            {displayedComments.map(comment => <CommentItem key={comment.id} comment={comment} />) }
         </div>
     )
 }
