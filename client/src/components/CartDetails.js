@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
+import ReviewItem from "./ReviewItem";
 
 function CartDetails() {
 
@@ -13,7 +14,8 @@ function CartDetails() {
             .then(oneCart => setDisplayedCart(oneCart))
     }, [])
 
-    console.log(displayedCart.reviews)
+    // console.log("cart's reviews:")
+    // console.log(displayedCart.comments)
 
     return (
         <div>
@@ -27,6 +29,12 @@ function CartDetails() {
             </div>
             <div>
                 {/* map of cart reviews goes here and rendering a ReviewItem component for each */}
+                <h3>Reviews</h3>
+                {displayedCart.reviews ? 
+                    displayedCart.reviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} />)
+                    :
+                    null
+                }
             </div>
         </div>
     )
