@@ -1,9 +1,6 @@
 import CommentsList from "./CommentsList"
 
-function ReviewItem({ review, comments }) {
-
-    // console.log(review)
-    // console.log(comments)
+function ReviewItem({ review }) {
 
     return (
         <div>
@@ -20,7 +17,7 @@ function ReviewItem({ review, comments }) {
                     :
                     <CommentsList comments={review.comments}/>
                 } */}
-                <CommentsList comments={comments ? comments : review.comments}/>
+                <CommentsList review={review.id}/>
             </div>
         </div>
     )
