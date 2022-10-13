@@ -5,6 +5,7 @@ import CommentsList from "./CommentsList"
 function ReviewItem({ review }) {
 
     const [displayedComments, setDisplayedComments] = useState([])
+    const [isShowingForm, setIsShowingForm] = useState(false)
 
     // console.log(review.id)
 
@@ -13,6 +14,10 @@ function ReviewItem({ review }) {
             .then(res => res.json())
             .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
     }, [])
+
+    function toggleForm() {
+        setIsShowingForm(!isShowingForm)
+    }
 
     function onSubmitNewComment(newComment) {
         setDisplayedComments([...displayedComments, newComment])
@@ -34,8 +39,18 @@ function ReviewItem({ review }) {
                     <CommentsList comments={review.comments}/>
                 } */}
                 <CommentsList displayedComments={displayedComments} />
-                <button>Write Comment</button>
-                <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                <button onClick={toggleForm}>
+                    {isShowingForm ?
+                        "Cancel"
+                        :
+                        "Comment on This Review"
+                    }
+                </button>
+                {isShowingForm ? 
+                    <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                    :
+                    null 
+                }
             </div>
         </div>
     )

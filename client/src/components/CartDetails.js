@@ -9,6 +9,7 @@ function CartDetails() {
 
     const [displayedCart, setDisplayedCart] = useState("")
     const [displayedReviews, setDisplayedReviews] = useState([])
+    const [isShowingForm, setIsShowingForm] = useState(false)
 
     useEffect(() => {
         fetch(`/carts/${id}`)
@@ -18,6 +19,10 @@ function CartDetails() {
                 setDisplayedReviews(oneCart.reviews)
             })
     }, [])
+
+    function toggleForm() {
+        setIsShowingForm(!isShowingForm)
+    }
 
     function onSubmitNewReview(newReview) {
         setDisplayedReviews([...displayedReviews, newReview])
@@ -34,10 +39,19 @@ function CartDetails() {
                 <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
             </div>
             <div>
-                {/* map of cart reviews goes here and rendering a ReviewItem component for each */}
                 <h3>Reviews</h3>
-                <button>Review This Cart</button>
-                <ReviewForm cart={displayedCart.id} onSubmitNewReview={onSubmitNewReview} />
+                <button onClick={toggleForm}>
+                    {isShowingForm ?
+                        "Cancel"
+                        :
+                        "Review This Cart"
+                    }
+                </button>
+                {isShowingForm ? 
+                    <ReviewForm cart={displayedCart.id} onSubmitNewReview={onSubmitNewReview} /> 
+                    : 
+                    null
+                }
                 {displayedReviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} />)
                 }
             </div>
