@@ -1,21 +1,31 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import ReviewItem from "./ReviewItem";
+import ReviewForm from "./ReviewForm";
 
 function CartDetails() {
 
     let { id } = useParams()
 
     const [displayedCart, setDisplayedCart] = useState("")
+    const [displayedReviews, setDisplayedReviews] = useState([])
 
     useEffect(() => {
         fetch(`/carts/${id}`)
             .then(res => res.json())
-            .then(oneCart => setDisplayedCart(oneCart))
+            .then(oneCart => {
+                setDisplayedCart(oneCart)
+                setDisplayedReviews(oneCart.reviews)
+            })
     }, [])
 
     // console.log("cart's reviews:")
-    // console.log(displayedCart.comments)
+    // console.log(displayedCart.id)
+    // console.log(displayedReviews)
+
+    function onSubmitNewReview(newReview) {
+        setDisplayedReviews([...displayedReviews, newReview])
+    }
 
     return (
         <div>
@@ -30,10 +40,9 @@ function CartDetails() {
             <div>
                 {/* map of cart reviews goes here and rendering a ReviewItem component for each */}
                 <h3>Reviews</h3>
-                {displayedCart.reviews ? 
-                    displayedCart.reviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} />)
-                    :
-                    null
+                <button>Review This Cart</button>
+                <ReviewForm cart={displayedCart.id} onSubmitNewReview={onSubmitNewReview} />
+                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} />)
                 }
             </div>
         </div>
