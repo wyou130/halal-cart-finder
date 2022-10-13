@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import CommentItem from "./CommentItem";
 
-function CommentsList({ review }) {
+function CommentsList({ displayedComments }) {
 
-    const [displayedComments, setDisplayedComments] = useState([])
+    // const [displayedComments, setDisplayedComments] = useState([])
 
-    useEffect(() => {
-        fetch(`/comments/${review}`)
-            .then(res => res.json())
-            .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
-    }, [])
+    // useEffect(() => {
+    //     fetch(`/comments/${review}`)
+    //         .then(res => res.json())
+    //         .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
+    // }, [])
+
+    // function onSubmitNewComment(newComment) {
+    //     console.log(newComment)
+    // }
     
     return (
         <div>
