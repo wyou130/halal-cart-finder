@@ -1,6 +1,8 @@
+import CommentsList from "./CommentsList"
+
 function ReviewItem({ review }) {
 
-    // console.log(review)
+    // console.log(review.comments)
 
     return (
         <div>
@@ -10,6 +12,10 @@ function ReviewItem({ review }) {
             <p>Overall rating: {review.rating}</p>
             <p>Hot sauce spice rating: {review.hot_sauce_spice}</p>
             <p>{review.review}</p>
+            <div>
+                <p>Comments</p>
+                <CommentsList comments={review.comments}/>
+            </div>
         </div>
     )
 }
