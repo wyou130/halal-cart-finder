@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
+import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 
 function ReviewItem({ review }) {
+
+    const [displayedComments, setDisplayedComments] = useState([])
+
+    // console.log(review.id)
+
+    useEffect(() => {
+        fetch(`/comments/${review.id}`)
+            .then(res => res.json())
+            .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
+    }, [])
+
+    function onSubmitNewComment(newComment) {
+        setDisplayedComments([...displayedComments, newComment])
+    }
 
     return (
         <div>
@@ -17,7 +33,9 @@ function ReviewItem({ review }) {
                     :
                     <CommentsList comments={review.comments}/>
                 } */}
-                <CommentsList review={review.id}/>
+                <CommentsList displayedComments={displayedComments} />
+                <button>Write Comment</button>
+                <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
             </div>
         </div>
     )

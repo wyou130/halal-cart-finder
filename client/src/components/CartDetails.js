@@ -19,10 +19,6 @@ function CartDetails() {
             })
     }, [])
 
-    // console.log("cart's reviews:")
-    // console.log(displayedCart.comments)
-    // console.log(displayedReviews)
-
     function onSubmitNewReview(newReview) {
         setDisplayedReviews([...displayedReviews, newReview])
     }

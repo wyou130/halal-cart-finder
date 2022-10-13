@@ -35,6 +35,10 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                     alert('Review successfully added!')
                 }
             })
+        setDateVisited("")
+        setRating("")
+        setHotSauceSpice("")
+        setReview("")
     }
 
     return (
