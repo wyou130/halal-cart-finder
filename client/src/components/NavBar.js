@@ -23,6 +23,7 @@ function NavBar() {
                 currentUser ? 
                 <span>
                     <NavLink to="/favorites">Favorites</NavLink>
+                    <NavLink to="/users">Users</NavLink>
                     <NavLink to="/login" onClick={handleLogOut}>Log Out</NavLink>
                 </span>
                 :

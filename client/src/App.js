@@ -9,6 +9,7 @@ import './App.css'
 import CartsList from './components/CartsList'
 import CartDetails from './components/CartDetails'
 import ReviewsList from './components/ReviewsList'
+import UserList from './components/UserList'
 
 function App() {
 
@@ -63,7 +64,10 @@ function App() {
           <Route path="/reviews">
             <ReviewsList />
           </Route>
-          <Route path="/users/:id">
+          <Route exact path="/users">
+            <UserList />
+          </Route>
+          <Route exact path="/users/:id">
             <UserDetails />
           </Route>
           <Route path="/">
