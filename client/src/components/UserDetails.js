@@ -13,6 +13,18 @@ function UserDetails() {
     const [location, setLocation] = useState()
     const [image, setImage] = useState()
 
+    // This useEffect fixes the issue of initial state being set as undefined
+    // This runs after rendering the first time (when currentUser is undefined)
+    // After this runs, currentUser is then defined and the attributes can be accessed
+    // Does not fix issue when page is refreshed
+    useEffect(() => {
+        setName(currentUser.name)
+        setLocation(currentUser.location)
+        setImage(currentUser.image)
+    }, [])
+    
+    // console.log(currentUser.name, name)
+
     useEffect(() => {
         fetch(`/users/${id}`)
         .then(res => {
@@ -27,11 +39,38 @@ function UserDetails() {
         setIsEditing(!isEditing)
     }
 
+    function handleUpdate(e) {
+        e.preventDefault()
+        let updateInput = {
+            name: name,
+            location: location,
+            image: image
+        }
+        // console.log(updateInput)
+        fetch(`/users/${currentUser.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(updateInput)
+        }) 
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    .then((updatedUser) => {
+                        setDisplayedUser(updatedUser)
+                        setIsEditing(false)
+                    }) 
+                }
+                alert('Profile successfully updated!')
+            })
+    }
+
     return(
         <div>
             {
-                isEditing ? 
-                <form>
+                currentUser && isEditing ? 
+                <form onSubmit={handleUpdate}>
                     <label htmlFor="image">Profile Picture</label>
                     <div>
                         <input 
@@ -69,7 +108,7 @@ function UserDetails() {
                     <p>{displayedUser.location}</p>
                 </div>
             }
-                {displayedUser.id === currentUser.id ? 
+                {currentUser && displayedUser.id === currentUser.id ? 
                     <button onClick={toggleForm}>
                     {isEditing ? "Cancel" : "Edit Profile"}
                     </button>
