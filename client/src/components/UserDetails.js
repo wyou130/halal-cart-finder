@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 
 function UserDetails() {
 
     let { id } = useParams()
+    let history = useHistory()
     let [currentUser, setCurrentUser] = useContext(UserContext)
 
     const [isEditing, setIsEditing] = useState(false)
@@ -66,6 +67,20 @@ function UserDetails() {
             })
     }
 
+    function handleDelete(currentUser) {
+        // console.log(currentUser)
+        if(window.confirm('Are you sure you want to delete your account?')) {
+            fetch(`/users/${currentUser.id}`, {
+                method: 'DELETE'
+              })
+              .then(() => {
+                  setCurrentUser(null)
+                  setDisplayedUser(null)
+                  history.push('/login')
+              })
+        } 
+    }
+
     return(
         <div>
             {
@@ -109,9 +124,14 @@ function UserDetails() {
                 </div>
             }
                 {currentUser && displayedUser.id === currentUser.id ? 
-                    <button onClick={toggleForm}>
-                    {isEditing ? "Cancel" : "Edit Profile"}
-                    </button>
+                    <div>
+                        <button onClick={toggleForm}>
+                        {isEditing ? "Cancel" : "Edit Profile"}
+                        </button>
+                        <button onClick={() => handleDelete(currentUser)}>
+                        Delete Account
+                        </button>
+                    </div>
                     :
                     null
                 }

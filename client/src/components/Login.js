@@ -23,10 +23,14 @@ function Login () {
             },
             body: JSON.stringify(loginInput)
         })
-            .then(res => res.json())
-            .then(loggedInUser => {
-                setCurrentUser(loggedInUser)
-                // history.push('/')
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    .then(loggedInUser => {
+                    setCurrentUser(loggedInUser)
+                    // history.push('/')
+                    })
+                }
             })
         setEmail("")
         setPassword("")
