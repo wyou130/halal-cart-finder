@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :create, :destroy]
   resources :reviews
   resources :carts, only: [:index, :show]
-  resources :users, only: [:show, :create, :update, :destroy]
+  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

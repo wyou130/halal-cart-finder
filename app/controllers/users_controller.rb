@@ -18,6 +18,21 @@ class UsersController < ApplicationController
         end
     end
 
+    def index
+        render json: User.all, status: :ok
+    end
+
+    def update
+        updated_user = User.find(params[:id])
+        updated_user.update!(user_params)
+        render json: updated_user, status: :accepted
+    end
+
+    def destroy
+        render json: User.find(params[:id]).destroy!
+        head :no_content
+    end
+
     private
 
     def user_params
