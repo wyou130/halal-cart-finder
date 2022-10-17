@@ -4,7 +4,7 @@ const UserContext = createContext()
 
 function UserProvider({ children }) {
 
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState("");
 
     // Don't need these because useContext passes BOTH variables and setter functions 
     

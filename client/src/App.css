@@ -6,3 +6,23 @@ nav {
   background-color: lightgray;
 }
 
+/* datalist {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  writing-mode: vertical-lr;
+  width: 200px;
+  /* align-self: center; */
+/* } */
+
+/* option {
+  padding: 0;
+  /* align-items: center; */
+  /* text-align: center; */
+  /* align-content: center;
+/* } */
+
+/* input[type="range"] {
+  width: 200px;
+  margin: 0;
+} */
