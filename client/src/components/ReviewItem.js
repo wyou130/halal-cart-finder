@@ -55,8 +55,10 @@ function ReviewItem({ review, onUpdateReview }) {
             .then(res => {
                 if(res.ok) {
                     res.json()
-                    .then(updatedReview => onUpdateReview(updatedReview))
-                        // setIsEditing(false) 
+                    .then((updatedReview) => {
+                        onUpdateReview(updatedReview)
+                        setIsEditing(false)
+                    })
                     alert('Review successfully updated!')
                 }
             })
