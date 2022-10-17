@@ -12,7 +12,11 @@ function ReviewsList() {
     }, [])
 
     function onUpdateReview(updatedReview) {
-        console.log(updatedReview)
+        const updatedReviewList = reviewsList.map(review => {
+            if (review.id === updatedReview.id) return updatedReview
+            else return review
+        })
+        setReviewsList(updatedReviewList)
     }
 
     return (

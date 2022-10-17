@@ -28,6 +28,15 @@ function CartDetails() {
         setDisplayedReviews([...displayedReviews, newReview])
     }
 
+    function onUpdateReview(updatedReview) {
+        // console.log(updatedReview)
+        const updatedReviewList = displayedReviews.map(review => {
+            if (review.id === updatedReview.id) return updatedReview
+            else return review
+        })
+        setDisplayedReviews(updatedReviewList)
+    }
+
     return (
         <div>
             <div>
@@ -52,7 +61,7 @@ function CartDetails() {
                     : 
                     null
                 }
-                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} />)
+                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} onUpdateReview={onUpdateReview} />)
                 }
             </div>
         </div>
