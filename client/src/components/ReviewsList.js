@@ -11,10 +11,14 @@ function ReviewsList() {
             .then(reviews => setReviewsList(reviews))
     }, [])
 
+    function onUpdateReview(updatedReview) {
+        console.log(updatedReview)
+    }
+
     return (
         <div>
             <h3>All Reviews</h3>
-            {reviewsList.map(review => <ReviewItem key={review.id} review={review} />)}
+            {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} key={review.id} review={review}/>)}
         </div>
     )
 }

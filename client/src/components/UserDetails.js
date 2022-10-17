@@ -18,6 +18,7 @@ function UserDetails() {
     // This runs after rendering the first time (when currentUser is undefined)
     // After this runs, currentUser is then defined and the attributes can be accessed
     // Does not fix issue when page is refreshed
+    // Changing Provider initial state of user to "" instead of null may be the fix...
     useEffect(() => {
         setName(currentUser.name)
         setLocation(currentUser.location)
