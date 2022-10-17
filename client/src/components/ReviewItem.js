@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react"
+import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
@@ -88,20 +89,12 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
     return (
         <div>
-            <p>{review.cart_name}</p>
+            <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
             <p>Visited on: {review.date_visited}</p>
-            <p>By {review.user_name}</p>
+            <Link to={`/users/${review.user_id}`}>By {review.user_name}</Link>
             {
                 isEditing ?
                 <form onSubmit={handleEdit}>
-                    {/* <datalist id="tickmarks">
-                        <option value="0" label="0"></option>
-                        <option value="1" label="1"></option>
-                        <option value="2" label="2"></option>
-                        <option value="3" label="3"></option>
-                        <option value="4" label="4"></option>
-                        <option value="5" label="5"></option>
-                    </datalist> */}
                     <label htmlFor="rating">Rating</label>
                     <div>
                         <input 

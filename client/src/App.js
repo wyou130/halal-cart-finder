@@ -10,47 +10,20 @@ import CartsList from './components/CartsList'
 import CartDetails from './components/CartDetails'
 import ReviewsList from './components/ReviewsList'
 import UserList from './components/UserList'
+import Home from './components/Home'
 
 function App() {
-
-  // All currentUser state has been moved to UserProvider 
-
-  // const [currentUser, setCurrentUser] = useState(null)
-
-  // useEffect(() => {
-  //   fetch('/me')
-  //     .then(res => {
-  //       if(res.ok) {
-  //         res.json()
-  //         .then((loggedInUser) => setCurrentUser(loggedInUser))
-  //       }
-  //     })
-  // }, [])
-
-  // function onUserEntry(user) {
-  //   setCurrentUser(user)
-  // }
-
-  // function onLogOut() {
-  //   setCurrentUser(null)
-  // }
 
   return (
     <UserProvider>
       <div className="App">
-        <NavBar 
-            // currentUser={currentUser} onLogOut={onLogOut} 
-        />
+        <NavBar />
         <Switch>
           <Route path="/login">
-            <Login 
-              // onUserEntry={onUserEntry} 
-            />
+            <Login />
           </Route>
           <Route path="/signup">
-            <Signup 
-              // onUserEntry={onUserEntry} 
-            />
+            <Signup />
           </Route>
           <Route exact path="/carts">
             <CartsList />
@@ -71,7 +44,7 @@ function App() {
             <UserDetails />
           </Route>
           <Route path="/">
-            <h1>Home</h1>
+            <Home /> 
           </Route>
         </Switch>
       </div>
