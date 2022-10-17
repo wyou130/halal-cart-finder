@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react"
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
@@ -32,9 +32,13 @@ function ReviewItem({ review, onUpdateReview }) {
         setIsEditing(!isEditing)
     }
 
-    // function onUpdateReview(updatedReview) {
-    //     console.log(updatedReview)
-    // }
+    function onUpdateComment(updatedComment) {
+        const updatedCommentList = displayedComments.map(comment => {
+            if (comment.id === updatedComment.id) return updatedComment
+            else return comment
+        })
+        setDisplayedComments(updatedCommentList)
+    }
 
     function handleEdit(e) {
         e.preventDefault()
@@ -43,8 +47,6 @@ function ReviewItem({ review, onUpdateReview }) {
             review: reviewInput,
             hot_sauce_spice: hotSauceSpice
         }
-        // console.log(editInput)
-        // setIsEditing(false)
         fetch(`/reviews/${review.id}`, {
             method: 'PATCH',
             headers: {
@@ -143,7 +145,12 @@ function ReviewItem({ review, onUpdateReview }) {
                     <p>{review.review}</p>
                 </>
             }
-            {review.user_id === currentUser.id ? <button onClick={toggleEdit}>Edit Review</button> : null}
+            {
+                review.user_id === currentUser.id ? 
+                <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Review"}</button> 
+                : 
+                null
+            }
             <div>
                 <p>Comments</p>
                 {/* {comments ? 
@@ -151,7 +158,7 @@ function ReviewItem({ review, onUpdateReview }) {
                     :
                     <CommentsList comments={review.comments}/>
                 } */}
-                <CommentsList displayedComments={displayedComments} />
+                <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} />
                 <button onClick={toggleForm}>
                     {isShowingForm ?
                         "Cancel"
