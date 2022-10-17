@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
+import ReviewItem from "./ReviewItem"
 
 function UserDetails() {
 
@@ -13,6 +14,7 @@ function UserDetails() {
     const [name, setName] = useState()
     const [location, setLocation] = useState()
     const [image, setImage] = useState()
+    const [displayedReviews, setDisplayedReviews] = useState([])
 
     // This useEffect fixes the issue of initial state being set as undefined
     // This runs after rendering the first time (when currentUser is undefined)
@@ -32,10 +34,15 @@ function UserDetails() {
         .then(res => {
             if(res.ok) {
                 res.json()
-                .then(oneUser => setDisplayedUser(oneUser))
+                .then(oneUser => {
+                    setDisplayedUser(oneUser)
+                    setDisplayedReviews(oneUser.reviews)
+                })
             }
         })
     }, [id])
+
+    console.log(displayedReviews)
 
     function toggleForm() {
         setIsEditing(!isEditing)
@@ -80,6 +87,21 @@ function UserDetails() {
                   history.push('/login')
               })
         } 
+    }
+
+    function onUpdateReview(updatedReview) {
+        const updatedReviewList = displayedReviews.map(review => {
+            if (review.id === updatedReview.id) return updatedReview
+            else return review
+        })
+        setDisplayedReviews(updatedReviewList)
+    }
+
+    function onDeleteReview(deletedReview) {
+        const updatedReviewList = displayedReviews.filter(review => {
+            return review.id !== deletedReview.id
+        })
+        setDisplayedReviews(updatedReviewList)
     }
 
     return(
@@ -137,6 +159,8 @@ function UserDetails() {
                     null
                 }
                 <p>{displayedUser.number_of_reviews} Reviews</p>
+                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} />)
+                }
         </div>
     )
 }
