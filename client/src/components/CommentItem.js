@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { UserContext } from '../context/UserProvider'
 
-function CommentItem({ comment, onUpdateComment }) {
+function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
 
     let [currentUser, setCurrentUser] = useContext(UserContext)
 
@@ -37,6 +37,19 @@ function CommentItem({ comment, onUpdateComment }) {
             })
     }
 
+    function handleDelete(comment) {
+        // console.log(comment)
+        if(window.confirm('Are you sure you want to delete your comment?')) {
+            fetch(`/comments/${comment.id}`, {
+                method: "DELETE"
+            })
+              .then(() => {
+                  onDeleteComment(comment)
+              })
+        } 
+        
+    }
+
     // console.log(currentUser.id)
     // console.log(comment)
 
@@ -60,7 +73,10 @@ function CommentItem({ comment, onUpdateComment }) {
             }
             {
                 comment.user_id === currentUser.id ? 
-                <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Comment"}</button> 
+                <>
+                    <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Comment"}</button> 
+                    <button onClick={() => handleDelete(comment)}>Delete Comment</button>
+                </>
                 : 
                 null
             }

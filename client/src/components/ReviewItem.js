@@ -25,6 +25,7 @@ function ReviewItem({ review, onUpdateReview }) {
     }
 
     function onSubmitNewComment(newComment) {
+        setIsShowingForm(false)
         setDisplayedComments([...displayedComments, newComment])
     }
 
@@ -36,6 +37,13 @@ function ReviewItem({ review, onUpdateReview }) {
         const updatedCommentList = displayedComments.map(comment => {
             if (comment.id === updatedComment.id) return updatedComment
             else return comment
+        })
+        setDisplayedComments(updatedCommentList)
+    }
+
+    function onDeleteComment(deletedComment) {
+        const updatedCommentList = displayedComments.filter(comment => {
+            return comment.id !== deletedComment.id
         })
         setDisplayedComments(updatedCommentList)
     }
@@ -153,12 +161,7 @@ function ReviewItem({ review, onUpdateReview }) {
             }
             <div>
                 <p>Comments</p>
-                {/* {comments ? 
-                    <CommentsList comments={comments}/>
-                    :
-                    <CommentsList comments={review.comments}/>
-                } */}
-                <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} />
+                <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
                 <button onClick={toggleForm}>
                     {isShowingForm ?
                         "Cancel"
