@@ -37,6 +37,13 @@ function CartDetails() {
         setDisplayedReviews(updatedReviewList)
     }
 
+    function onDeleteReview(deletedReview) {
+        const updatedReviewList = displayedReviews.filter(review => {
+            return review.id !== deletedReview.id
+        })
+        setDisplayedReviews(updatedReviewList)
+    }
+
     return (
         <div>
             <div>
@@ -61,7 +68,7 @@ function CartDetails() {
                     : 
                     null
                 }
-                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} comments={displayedCart.comments} onUpdateReview={onUpdateReview} />)
+                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} />)
                 }
             </div>
         </div>
