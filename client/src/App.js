@@ -11,6 +11,7 @@ import CartDetails from './components/CartDetails'
 import ReviewsList from './components/ReviewsList'
 import UserList from './components/UserList'
 import Home from './components/Home'
+import Favorites from './components/Favorites'
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
             <CartDetails />
           </Route>
           <Route path="/favorites">
-            <h1>Favorites</h1>
+            <Favorites />
           </Route>
           <Route path="/reviews">
             <ReviewsList />

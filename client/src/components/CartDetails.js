@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom'
+import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem";
 import ReviewForm from "./ReviewForm";
 
 function CartDetails() {
 
     let { id } = useParams()
+    let [currentUser, setCurrentUser] = useContext(UserContext)
 
     const [displayedCart, setDisplayedCart] = useState("")
     const [displayedReviews, setDisplayedReviews] = useState([])
@@ -44,6 +46,30 @@ function CartDetails() {
         setDisplayedReviews(updatedReviewList)
     }
 
+    function handleFavorited() {
+        // console.log(displayedCart.id)
+        // console.log(currentUser.id)
+        let newFavorite = {
+            user_id: currentUser.id,
+            cart_id: displayedCart.id
+        }
+        console.log(newFavorite)
+        fetch('/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(newFavorite)
+        })
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    .then(newFavorite => console.log(newFavorite))
+                    alert('Cart successfully favorited!')
+                }
+            })
+    }
+
     return (
         <div>
             <div>
@@ -54,6 +80,7 @@ function CartDetails() {
                 <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
                 <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
             </div>
+            <button onClick={handleFavorited}>Add to Favorites</button>
             <div>
                 <h3>Reviews</h3>
                 <button onClick={toggleForm}>

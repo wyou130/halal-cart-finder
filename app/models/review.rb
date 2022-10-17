@@ -5,7 +5,7 @@ class Review < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :date_visited, :rating, :review, :hot_sauce_spice, presence: true
-  validates :rating, :hot_sauce_spice, inclusion: { in: 1..5 }
+  validates :rating, :hot_sauce_spice, inclusion: { in: 0..5 }
   validates :user_id, uniqueness: { scope: :cart_id }
 
 end

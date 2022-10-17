@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 function CartItem({ cart }) {
 
+    // console.log(cart)
+
     return (
         <Link to={`/carts/${cart.id}`}>
             <div>
