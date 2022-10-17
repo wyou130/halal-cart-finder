@@ -6,16 +6,6 @@ function UserProvider({ children }) {
 
     const [currentUser, setCurrentUser] = useState("");
 
-    // Don't need these because useContext passes BOTH variables and setter functions 
-    
-    // function onUserEntry(user) {
-    //   setCurrentUser(user)
-    // }
-    
-    // function onLogOut() {
-    //   setCurrentUser(null)
-    // }
-
     useEffect(() => {
         fetch('/me')
           .then(res => {

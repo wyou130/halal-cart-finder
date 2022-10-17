@@ -42,8 +42,6 @@ function UserDetails() {
         })
     }, [id])
 
-    console.log(displayedReviews)
-
     function toggleForm() {
         setIsEditing(!isEditing)
     }
@@ -55,7 +53,6 @@ function UserDetails() {
             location: location,
             image: image
         }
-        // console.log(updateInput)
         fetch(`/users/${currentUser.id}`, {
             method: 'PATCH',
             headers: {
@@ -76,13 +73,12 @@ function UserDetails() {
     }
 
     function handleDelete(currentUser) {
-        // console.log(currentUser)
         if(window.confirm('Are you sure you want to delete your account?')) {
             fetch(`/users/${currentUser.id}`, {
                 method: 'DELETE'
               })
               .then(() => {
-                  setCurrentUser(null)
+                  setCurrentUser("")
                   setDisplayedUser(null)
                   history.push('/login')
               })
