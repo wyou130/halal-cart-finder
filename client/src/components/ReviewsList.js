@@ -19,10 +19,17 @@ function ReviewsList() {
         setReviewsList(updatedReviewList)
     }
 
+    function onDeleteReview(deletedReview) {
+        const updatedReviewList = reviewsList.filter(review => {
+            return review.id !== deletedReview.id
+        })
+        setReviewsList(updatedReviewList)
+    }
+
     return (
         <div>
             <h3>All Reviews</h3>
-            {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} key={review.id} review={review}/>)}
+            {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
         </div>
     )
 }

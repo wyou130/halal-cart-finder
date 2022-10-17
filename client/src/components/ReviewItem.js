@@ -3,7 +3,7 @@ import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
 
-function ReviewItem({ review, onUpdateReview }) {
+function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
     let [currentUser, setCurrentUser] = useContext(UserContext)
 
@@ -72,6 +72,18 @@ function ReviewItem({ review, onUpdateReview }) {
                     alert('Review successfully updated!')
                 }
             })
+    }
+
+    function handleDelete(review) {
+        // console.log(review)
+        if(window.confirm('Are you sure you want to delete your review?')) {
+            fetch(`/reviews/${review.id}`, {
+                method: "DELETE"
+            })
+              .then(() => {
+                onDeleteReview(review)
+              })
+        } 
     }
 
     return (
@@ -155,7 +167,10 @@ function ReviewItem({ review, onUpdateReview }) {
             }
             {
                 review.user_id === currentUser.id ? 
-                <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Review"}</button> 
+                <>
+                    <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Review"}</button> 
+                    <button onClick={() => handleDelete(review)}>Delete Review</button> 
+                </>
                 : 
                 null
             }
