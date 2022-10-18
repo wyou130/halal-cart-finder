@@ -12,6 +12,7 @@ function CartDetails() {
     const [displayedCart, setDisplayedCart] = useState("")
     const [displayedReviews, setDisplayedReviews] = useState([])
     const [isShowingForm, setIsShowingForm] = useState(false)
+    const [usersFavorited, setUsersFavorited] = useState([])
 
     useEffect(() => {
         fetch(`/carts/${id}`)
@@ -19,6 +20,7 @@ function CartDetails() {
             .then(oneCart => {
                 setDisplayedCart(oneCart)
                 setDisplayedReviews(oneCart.reviews)
+                setUsersFavorited(oneCart.favorited_by)
             })
     }, [])
 
@@ -31,7 +33,6 @@ function CartDetails() {
     }
 
     function onUpdateReview(updatedReview) {
-        // console.log(updatedReview)
         const updatedReviewList = displayedReviews.map(review => {
             if (review.id === updatedReview.id) return updatedReview
             else return review
@@ -46,28 +47,47 @@ function CartDetails() {
         setDisplayedReviews(updatedReviewList)
     }
 
+    function onDeleteFavorited(userId) {
+        let newFavoritesList = usersFavorited.filter(id => {
+            return id !== userId
+        })
+        setUsersFavorited(newFavoritesList)
+    }
+
+    function onAddFavorited(newFavorite) {
+        setUsersFavorited([...usersFavorited, newFavorite.user_id])
+    }
+
     function handleFavorited() {
-        // console.log(displayedCart.id)
-        // console.log(currentUser.id)
-        let newFavorite = {
+        if(usersFavorited.includes(currentUser.id)) {
+            fetch(`/favorites/${currentUser.id}/${displayedCart.id}`, {
+                method: "DELETE"
+            })
+              .then(() => {
+                  onDeleteFavorited(currentUser.id)
+                  alert('Cart removed from favorites')
+              })
+        }
+        else {
+            let newFavorite = {
             user_id: currentUser.id,
             cart_id: displayedCart.id
-        }
-        console.log(newFavorite)
-        fetch('/favorites', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(newFavorite)
-        })
-            .then(res => {
-                if(res.ok) {
-                    res.json()
-                    .then(newFavorite => console.log(newFavorite))
-                    alert('Cart successfully favorited!')
-                }
+            }
+            fetch('/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(newFavorite)
             })
+                .then(res => {
+                    if(res.ok) {
+                        res.json()
+                        .then(newFavorite => onAddFavorited(newFavorite))
+                        alert('Cart successfully favorited!')
+                    }
+                })
+        }
     }
 
     return (
@@ -80,7 +100,9 @@ function CartDetails() {
                 <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
                 <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
             </div>
-            <button onClick={handleFavorited}>Add to Favorites</button>
+            <button onClick={handleFavorited}>
+                {usersFavorited.includes(currentUser.id) ? "Remove from Favorites" : "Add to Favorites"}
+            </button>
             <div>
                 <h3>Reviews</h3>
                 <button onClick={toggleForm}>

@@ -9,8 +9,8 @@ class FavoritesController < ApplicationController
         render json: Favorite.create!(favorite_params), status: :created
     end
 
-    def destroy
-        render json: Favorite.find(params[:id]).destroy!
+    def delete
+        render json: Favorite.find_by(user_id: params[:user_id], cart_id: params[:cart_id]).destroy!
         head :no_content
     end
 
