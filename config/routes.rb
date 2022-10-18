@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :comments, only: [:create, :update, :destroy]
-  resources :favorites, only: [:index, :create, :destroy]
+  resources :favorites, only: [:index, :create]
   resources :reviews
   resources :carts, only: [:index, :show]
   resources :users
@@ -29,5 +29,8 @@ Rails.application.routes.draw do
 
   # Custom route for showing comments attached to specific review
   get '/comments/:review_id', to: 'comments#specific_review'
+
+  # Custom route for deleting favorite based on user_id and cart_id
+  delete '/favorites/:user_id/:cart_id', to: 'favorites#delete'
 
 end
