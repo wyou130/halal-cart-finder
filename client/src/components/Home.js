@@ -1,11 +1,28 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import { FcRating } from 'react-icons/fc'
 
 function Home() {
 
     let [currentUser, setCurrentUser] = useContext(UserContext)
+
+    const [cartsList, setCartsList] = useState([])
+    const [selectedCart, setSelectedCart] = useState(null)
+
+    // console.log(selectedCart)
+
+    useEffect(() => {
+        fetch('/carts')
+            .then(res => res.json())
+            .then(carts => {setCartsList(carts)})
+    }, [])
+
+
+    // const cartCoordinates = cartsList.map(cart => cart.latitude)
+
+    // console.log(typeof cartsList[0].latitude)
 
     const [viewport, setViewport] = useState({
         latitude: 40.770627,
@@ -52,7 +69,40 @@ function Home() {
                         setViewport(viewport)
                     }}
                 >
-                    markers here
+                    {cartsList.map(cart => {
+                        return (
+                            <>
+                                <Marker 
+                                    key={cart.id}
+                                    latitude={cart.latitude}
+                                    longitude={cart.longitude}
+                                >
+                                    <FcRating 
+                                        onClick={e => {
+                                            e.preventDefault()
+                                            // e.stopPropagation()
+                                            setSelectedCart(cart)
+                                        }}
+                                    />
+                                </Marker>
+                            </>
+                        )
+                    })}
+                    {selectedCart ? 
+                        <Popup
+                            key={selectedCart.id}
+                            latitude={selectedCart.latitude}
+                            longitude={selectedCart.longitude}
+                            onClose={() => setSelectedCart(null)}
+                        >
+                            <div>
+                                <h4>{selectedCart.name}</h4>
+                                <p>{selectedCart.street} & {selectedCart.avenue}</p>
+                            </div>
+                        </Popup>
+                        :
+                        null
+                    }
                 </ReactMapGL>
             </div>
         </div>
