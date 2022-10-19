@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import { FcRating } from 'react-icons/fc'
 
@@ -61,6 +62,9 @@ function Map() {
                         <div>
                             <h4>{selectedCart.name}</h4>
                             <p>{selectedCart.street} & {selectedCart.avenue}</p>
+                            <Link to={`/carts/${selectedCart.id}`}>
+                                See More
+                            </Link>
                         </div>
                     </Popup>
                     :
