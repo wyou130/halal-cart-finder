@@ -12,6 +12,7 @@ function Signup() {
     const [password, setPassword] = useState("")
     const [location, setLocation] = useState("")
     const [image, setImage] = useState("")
+    const [errors, setErrors] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -36,6 +37,9 @@ function Signup() {
                         setCurrentUser(newUser)
                         history.push('/')
                     })
+                } else {
+                    res.json()
+                    .then(errors => setErrors(errors.error))
                 }
             })
         setName("")
@@ -100,6 +104,7 @@ function Signup() {
                 </div>
                 <button type="submit">Create Account</button>
             </form>
+            {errors.map(error => <p key={error} className='error'>{error}</p>)}
             <br/>
             <div>
                 Already have an account? <Link to='/login'>Log in now!</Link>

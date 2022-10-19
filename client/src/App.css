@@ -6,6 +6,11 @@ nav {
   background-color: lightgray;
 }
 
+.error {
+  color: red;
+  font-weight: bold;
+}
+
 /* datalist {
   display: flex;
   flex-direction: column;
