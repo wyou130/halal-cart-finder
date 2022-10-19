@@ -9,6 +9,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
     const [rating, setRating] = useState("")
     const [hotSauceSpice, setHotSauceSpice] = useState("")
     const [review, setReview] = useState("")
+    const [errors, setErrors] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -33,6 +34,9 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                     res.json()
                     .then(newReview => onSubmitNewReview(newReview))
                     alert('Review successfully added!')
+                } else {
+                    res.json()
+                    .then(errors => setErrors(errors.error))
                 }
             })
         setDateVisited("")
@@ -102,6 +106,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </div>
                 <button type="submit">Add Review</button>
             </form>
+            {errors.map(error => <p key={error} className='error'>{error}</p>)}
         </div>
     )
 }

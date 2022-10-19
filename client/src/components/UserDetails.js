@@ -15,6 +15,7 @@ function UserDetails() {
     const [location, setLocation] = useState()
     const [image, setImage] = useState()
     const [displayedReviews, setDisplayedReviews] = useState([])
+    const [errors, setErrors] = useState([])
 
     // This useEffect fixes the issue of initial state being set as undefined
     // This runs after rendering the first time (when currentUser is undefined)
@@ -66,9 +67,12 @@ function UserDetails() {
                     .then((updatedUser) => {
                         setDisplayedUser(updatedUser)
                         setIsEditing(false)
+                        alert('Profile successfully updated!')
                     }) 
+                } else {
+                    res.json()
+                    .then(errors => setErrors(errors.error))
                 }
-                alert('Profile successfully updated!')
             })
     }
 
@@ -104,38 +108,41 @@ function UserDetails() {
         <div>
             {
                 currentUser && isEditing ? 
-                <form onSubmit={handleUpdate}>
-                    <label htmlFor="image">Profile Picture</label>
-                    <div>
-                        <input 
-                            type="text" 
-                            name="image" 
-                            value={image}
-                            onChange={e => setImage(e.target.value)}
-                        />
-                    </div>
-                    <label htmlFor="name">Username</label>
-                    <div>
-                        <input 
-                            required 
-                            type="text" 
-                            name="name" 
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                        />
-                    </div>
-                    <label htmlFor="location">Location</label>
-                    <div>
-                        <input 
-                            required 
-                            type="text" 
-                            name="location" 
-                            value={location}
-                            onChange={e => setLocation(e.target.value)}
-                        />
-                    </div>
-                    <button type="submit">Update Profile</button>
-                </form>
+                <>
+                    <form onSubmit={handleUpdate}>
+                        <label htmlFor="image">Profile Picture</label>
+                        <div>
+                            <input 
+                                type="text" 
+                                name="image" 
+                                value={image}
+                                onChange={e => setImage(e.target.value)}
+                            />
+                        </div>
+                        <label htmlFor="name">Username</label>
+                        <div>
+                            <input 
+                                required 
+                                type="text" 
+                                name="name" 
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </div>
+                        <label htmlFor="location">Location</label>
+                        <div>
+                            <input 
+                                required 
+                                type="text" 
+                                name="location" 
+                                value={location}
+                                onChange={e => setLocation(e.target.value)}
+                            />
+                        </div>
+                        <button type="submit">Update Profile</button>
+                    </form>
+                    {errors.map(error => <p key={error} className='error'>{error}</p>)}
+                </>
                 :
                 <div>
                     <p>{displayedUser.name}</p>

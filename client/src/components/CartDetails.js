@@ -30,6 +30,7 @@ function CartDetails() {
 
     function onSubmitNewReview(newReview) {
         setDisplayedReviews([...displayedReviews, newReview])
+        setIsShowingForm(false)
     }
 
     function onUpdateReview(updatedReview) {
