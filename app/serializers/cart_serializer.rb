@@ -9,5 +9,13 @@ class CartSerializer < ActiveModel::Serializer
   def favorited_by
     object.favorites.pluck(:user_id)
   end
+
+  def latitude
+    object.latitude.to_f
+  end
+
+  def longitude
+    object.longitude.to_f
+  end
   
 end

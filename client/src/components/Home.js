@@ -1,36 +1,30 @@
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
-import { FcRating } from 'react-icons/fc'
+import Map from "./Map"
+// import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+// import { FcRating } from 'react-icons/fc'
 
 function Home() {
 
     let [currentUser, setCurrentUser] = useContext(UserContext)
 
-    const [cartsList, setCartsList] = useState([])
-    const [selectedCart, setSelectedCart] = useState(null)
+    // const [cartsList, setCartsList] = useState([])
+    // const [selectedCart, setSelectedCart] = useState(null)
 
-    // console.log(selectedCart)
+    // useEffect(() => {
+    //     fetch('/carts')
+    //         .then(res => res.json())
+    //         .then(carts => {setCartsList(carts)})
+    // }, [])
 
-    useEffect(() => {
-        fetch('/carts')
-            .then(res => res.json())
-            .then(carts => {setCartsList(carts)})
-    }, [])
-
-
-    // const cartCoordinates = cartsList.map(cart => cart.latitude)
-
-    // console.log(typeof cartsList[0].latitude)
-
-    const [viewport, setViewport] = useState({
-        latitude: 40.770627,
-        longitude: -73.974409,
-        width: '80vw',
-        height: '80vh',
-        zoom: 11
-    })
+    // const [viewport, setViewport] = useState({
+    //     latitude: 40.770627,
+    //     longitude: -73.974409,
+    //     width: '80vw',
+    //     height: '80vh',
+    //     zoom: 11
+    // })
 
     return(
         <div>
@@ -59,8 +53,9 @@ function Home() {
                 }
             </div>
             <br/>
+            <Map /> 
             {/* Map from Mapbox */}
-            <div>
+            {/* <div>
                 <ReactMapGL 
                     {...viewport} 
                     mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -104,7 +99,7 @@ function Home() {
                         null
                     }
                 </ReactMapGL>
-            </div>
+            </div> */}
         </div>
     )
 }
