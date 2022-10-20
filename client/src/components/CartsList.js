@@ -27,6 +27,7 @@ function CartsList() {
 
     function onHandleSort(sortInput) {
         setSortBy(sortInput)
+        // console.log(sortInput)
     }
 
     const sortedFilteredCarts = cartsList
@@ -34,8 +35,8 @@ function CartsList() {
         .filter(cart => isShowingAcceptsCard ? cart.accepts_card : true )
         .sort((a, b) => {
             if (sortBy === "") return cartsList
-            else if (sortBy === "rating") return b.average_rating - a.average_rating
-            else if (sortBy === "price") return a.average_price - b.average_price
+            else if (sortBy === "Rating High-to-Low") return b.average_rating - a.average_rating
+            else if (sortBy === "Price Low-to-High") return a.average_price - b.average_price
         })
 
     return (
@@ -47,8 +48,12 @@ function CartsList() {
                     onHandleShowAcceptsCard={onHandleShowAcceptsCard} 
                     isShowingAcceptsCard={isShowingAcceptsCard} 
                     onHandleSort={onHandleSort} 
+                    sortBy={sortBy}
                 />
-                <Grid columns={3}> 
+            </div>
+            <br/>
+            <div>
+                <Grid columns={3} padded> 
                     {sortedFilteredCarts.map(cart => <CartItem key={cart.id} cart={cart} />)}
                 </Grid>
             </div>
