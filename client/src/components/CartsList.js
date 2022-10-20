@@ -28,7 +28,7 @@ function CartsList() {
         .filter(cart => isShowingAcceptsCard ? cart.accepts_card : true )
 
     // console.log(cartsList)
-    console.log(sortedFilteredCarts)
+    // console.log(sortedFilteredCarts)
 
     return (
         <>

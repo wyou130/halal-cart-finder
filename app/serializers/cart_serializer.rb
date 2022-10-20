@@ -1,5 +1,5 @@
 class CartSerializer < ActiveModel::Serializer
-  attributes :id, :name, :street, :avenue, :landmarks, :accepts_card, :approximate_hours, :chicken_over_rice, :combo_over_rice, :favorited_by, :latitude, :longitude
+  attributes :id, :name, :street, :avenue, :landmarks, :accepts_card, :approximate_hours, :chicken_over_rice, :combo_over_rice, :favorited_by, :latitude, :longitude, :average_rating, :average_price, :average_spice_rating
 
   # Putting this association uses review serializer
   has_many :reviews
@@ -16,6 +16,18 @@ class CartSerializer < ActiveModel::Serializer
 
   def longitude
     object.longitude.to_f
+  end
+
+  def average_rating
+    object.reviews.average(:rating)
+  end
+
+  def average_spice_rating
+    object.reviews.average(:hot_sauce_spice)
+  end
+
+  def average_price
+    ((object.combo_over_rice.to_f + object.chicken_over_rice.to_f) / 2.0).to_f
   end
   
 end
