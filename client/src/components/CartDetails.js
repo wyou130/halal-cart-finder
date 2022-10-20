@@ -1,8 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react"
 import { useParams } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import ReviewItem from "./ReviewItem";
-import ReviewForm from "./ReviewForm";
+import ReviewItem from "./ReviewItem"
+import ReviewForm from "./ReviewForm"
+import { Grid } from 'semantic-ui-react'
 
 function CartDetails() {
 
@@ -120,8 +121,16 @@ function CartDetails() {
                     : 
                     null
                 }
-                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} />)
-                }
+                <Grid columns={3}>
+                    {
+                        displayedReviews.map(review => <ReviewItem 
+                            key={review.id} 
+                            review={review} 
+                            onUpdateReview={onUpdateReview} 
+                            onDeleteReview={onDeleteReview} 
+                        />)
+                    }
+                </Grid>
             </div>
         </div>
     )

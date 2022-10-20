@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
+import { Grid } from 'semantic-ui-react'
 
 function UserDetails() {
 
@@ -162,8 +163,16 @@ function UserDetails() {
                     null
                 }
                 <p>{displayedUser.number_of_reviews} Reviews</p>
-                {displayedReviews.map(review => <ReviewItem key={review.id} review={review} onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} />)
-                }
+                <Grid columns={3}>
+                    {
+                        displayedReviews.map(review => <ReviewItem 
+                            key={review.id} 
+                            review={review} 
+                            onUpdateReview={onUpdateReview} 
+                            onDeleteReview={onDeleteReview} 
+                        />)
+                    }
+                </Grid>
         </div>
     )
 }
