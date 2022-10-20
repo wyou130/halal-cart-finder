@@ -19,7 +19,7 @@ class CartSerializer < ActiveModel::Serializer
   end
 
   def average_rating
-    object.reviews.average(:rating)
+    object.reviews.average(:rating).to_f
   end
 
   def average_spice_rating
