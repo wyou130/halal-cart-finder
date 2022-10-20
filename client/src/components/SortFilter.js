@@ -1,6 +1,4 @@
-import { useState } from "react"
-
-function SortFilter({ onHandleSearch, onHandleShowAcceptsCard, isShowingAcceptsCard }) {
+function SortFilter({ onHandleSearch, onHandleShowAcceptsCard, isShowingAcceptsCard, onHandleSort }) {
 
     return (
         <div>
@@ -8,10 +6,10 @@ function SortFilter({ onHandleSearch, onHandleShowAcceptsCard, isShowingAcceptsC
                 <label htmlFor="sort">Sort By: </label>
                 <select 
                     name="sort" 
-                    // onChange={handleSortChange}
+                    onChange={(e) => onHandleSort(e.target.value)}
                 >
                 <option></option>
-                <option value="ratings">Ratings High-to-Low</option>
+                <option value="rating">Rating High-to-Low</option>
                 <option value="price">Price Low-to-High</option>
                 </select>
             </div>
