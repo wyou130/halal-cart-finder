@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
+import { Grid } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -88,7 +89,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     }
 
     return (
-        <div>
+        <Grid.Column>
+        {/* <div> */}
             <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
             <p>Visited on: {review.date_visited}</p>
             <Link to={`/users/${review.user_id}`}>By {review.user_name}</Link>
@@ -183,7 +185,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     null 
                 }
             </div>
-        </div>
+        {/* </div> */}
+        </Grid.Column>
     )
 }
 

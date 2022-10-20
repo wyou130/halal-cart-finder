@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import CartItem from "./CartItem";
+import { useEffect, useState } from "react"
+import CartItem from "./CartItem"
 import Map from "./Map"
-import SortFilter from "./SortFilter";
+import SortFilter from "./SortFilter"
 import { Grid } from 'semantic-ui-react'
 
 function CartsList() {
@@ -49,9 +49,7 @@ function CartsList() {
                     onHandleSort={onHandleSort} 
                 />
                 <Grid columns={3}> 
-                    {/* <Grid.Row> */}
-                        {sortedFilteredCarts.map(cart => <CartItem key={cart.id} cart={cart} />)}
-                    {/* </Grid.Row> */}
+                    {sortedFilteredCarts.map(cart => <CartItem key={cart.id} cart={cart} />)}
                 </Grid>
             </div>
             <div>
