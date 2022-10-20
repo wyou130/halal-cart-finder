@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
+import { Menu } from 'semantic-ui-react'
 
 function NavBar() {
 
@@ -14,22 +15,31 @@ function NavBar() {
     }
 
     return(
-        <nav>
-            <Link to="/">Cart Finder</Link>
+        // <nav>
+        <Menu pointing secondary>
+            {/* <Link to="/">Cart Finder</Link> */}
+            <Menu.Item as={Link} to="/">Cart Finder</Menu.Item>
             {/* Above is for logo so not NavLink */}
-            <NavLink to="/carts">Carts</NavLink>
-            <NavLink to="/reviews">Reviews</NavLink>
+            {/* <NavLink to="/carts">Carts</NavLink> */}
+            <Menu.Item as={NavLink} to="/carts">Carts</Menu.Item>
+            {/* <NavLink to="/reviews">Reviews</NavLink> */}
+            <Menu.Item as={NavLink} to="/reviews">Reviews</Menu.Item>
             {
                 currentUser ? 
-                <span>
-                    <NavLink to="/favorites">Favorites</NavLink>
-                    <NavLink to="/users">Users</NavLink>
-                    <NavLink to="/login" onClick={handleLogOut}>Log Out</NavLink>
-                </span>
+                <>
+                    {/* <NavLink to="/favorites">Favorites</NavLink> */}
+                    <Menu.Item as={NavLink} to="/favorites">Favorites</Menu.Item>
+                    {/* <NavLink to="/users">Users</NavLink> */}
+                    <Menu.Item as={NavLink} to="/users">Users</Menu.Item>
+                    {/* <NavLink to="/login" onClick={handleLogOut}>Log Out</NavLink> */}
+                    <Menu.Item as={NavLink} to="/login" onClick={handleLogOut}>Log Out</Menu.Item>
+                </>
                 :
-                <NavLink to="/login">Log In / Sign Up</NavLink>
+                // <NavLink to="/login">Log In / Sign Up</NavLink>
+                <Menu.Item as={NavLink} to="/login">Log In / Sign Up</Menu.Item>
             }
-        </nav>
+        {/* </nav> */}
+        </Menu>
     )
 }
 

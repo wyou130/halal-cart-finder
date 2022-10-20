@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
+import { Grid } from 'semantic-ui-react'
+
 function CartItem({ cart }) {
 
-    // console.log(cart)
-
     return (
-        <Link to={`/carts/${cart.id}`}>
-            <div>
+        <Grid.Column as={Link} to={`/carts/${cart.id}`}>
+        {/* <Link to={`/carts/${cart.id}`}> */}
+            {/* <div> */}
                 <p>{cart.name}</p>
                 <p>Average Rating: {"⭐️".repeat(cart.average_rating)}</p>
                 <em>{cart.average_rating} out of 5</em>
@@ -15,8 +16,9 @@ function CartItem({ cart }) {
                 <p>Approximate hours: {cart.approximate_hours}</p>
                 <p>Chicken over rice: ${cart.chicken_over_rice}</p>
                 <p>Combo over rice: ${cart.combo_over_rice}</p>
-            </div>
-        </Link>
+            {/* </div> */}
+        {/* </Link> */}
+        </Grid.Column>
     )
 }
 
