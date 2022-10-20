@@ -153,8 +153,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 </form>
                 :
                 <>
-                    <p>Overall rating: {review.rating}</p>
-                    <p>Hot sauce spice rating: {review.hot_sauce_spice}</p>
+                    <p>Overall rating: {"⭐️".repeat(review.rating)}</p>
+                    <p>Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}</p>
                     <p>{review.review}</p>
                 </>
             }

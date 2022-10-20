@@ -96,6 +96,8 @@ function CartDetails() {
             <div>
                 <h3>Cart Details</h3>
                 <p>{displayedCart.name}</p>
+                <p>Average Rating: {"⭐️".repeat(displayedCart.average_rating)}</p>
+                <em>{displayedCart.average_rating} out of 5</em>
                 <p>Typically at {displayedCart.street} and {displayedCart.avenue}</p>
                 <p>Approximate hours: {displayedCart.approximate_hours}</p>
                 <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>

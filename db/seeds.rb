@@ -12,9 +12,9 @@ ethan = User.create(name: "ebb", email: "ebb0202@aol.com", password: "456", loca
 justin = User.create(name: "sustin", email: "susgancala@gmail.com", password: "789", location: "Upper East Side, Manhattan, NY")
 
 puts "Seeding carts..."
-friends = Cart.create(name: "Friends", street: "E 77th St", avenue: "2nd Ave", landmarks: "TD Bank", accepts_card: false, approximate_hours: "10AM to 2AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.771833, longitude: -73.955891)
-adams = Cart.create(name: "Adam's", street: "E 83rd St", avenue: "2nd Ave", landmarks: "Subway station: 86th St Q train", accepts_card: false, approximate_hours: "10AM to 12AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.776112, longitude: -73.952858)
-midos = Cart.create(name: "Mido's", street: "W 58th St", avenue: "9th Ave", landmarks: "Amore Pizzeria", accepts_card: false, approximate_hours: "11AM to 2AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.768620, longitude: -73.984971)
+friends = Cart.create(name: "Friends", street: "E 77th St", avenue: "2nd Ave", landmarks: "TD Bank", accepts_card: false, approximate_hours: "10AM to 2AM", chicken_over_rice: 8, combo_over_rice: 9, latitude: 40.771833, longitude: -73.955891)
+adams = Cart.create(name: "Adam's", street: "E 83rd St", avenue: "2nd Ave", landmarks: "Subway station: 86th St Q train", accepts_card: false, approximate_hours: "10AM to 12AM", chicken_over_rice: 8, combo_over_rice: 8, latitude: 40.776112, longitude: -73.952858)
+midos = Cart.create(name: "Mido's", street: "W 58th St", avenue: "9th Ave", landmarks: "Amore Pizzeria", accepts_card: false, approximate_hours: "11AM to 2AM", chicken_over_rice: 9, combo_over_rice: 10, latitude: 40.768620, longitude: -73.984971)
 usa = Cart.create(name: "USA Best Halal Food", street: "W 60th St", avenue: "Columbus Ave", landmarks: "Fordham University Lincoln Center", accepts_card: true, approximate_hours: "10AM to 1AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.770033, longitude: -73.984452)
 
 puts "Seeding reviews..."
