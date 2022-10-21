@@ -17,7 +17,7 @@ function Favorites() {
     return (
         <div>
             <h3>Favorite Carts</h3>
-            <Grid columns={3}> 
+            <Grid columns={3} padded> 
                 {favoriteCartsList.map(cart => <CartItem key={cart.id} cart={cart.cart} />)}
             </Grid>
         </div>

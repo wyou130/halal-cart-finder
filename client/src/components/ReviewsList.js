@@ -30,7 +30,7 @@ function ReviewsList() {
     return (
         <div>
             <h3>All Reviews</h3>
-            <Grid columns={3}> 
+            <Grid columns={3} padded> 
                 {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
             </Grid>
         </div>
