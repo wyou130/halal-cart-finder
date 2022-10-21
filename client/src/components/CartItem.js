@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Grid, Card, Divider } from 'semantic-ui-react'
+import { Grid, Card, Divider, Icon } from 'semantic-ui-react'
 
 function CartItem({ cart }) {
 
@@ -22,7 +22,8 @@ function CartItem({ cart }) {
                     <Card.Meta>{cart.average_spice_rating} out of 5</Card.Meta>
                 </Card.Content>
                 <Card.Content extra>
-                    <p>Icon and # of Reviews</p>
+                    <Icon name='food'/>
+                    {cart.total_reviews} Reviews
                 </Card.Content>
             {/* </div> */}
             </Card>

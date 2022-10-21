@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid, Card, Icon } from 'semantic-ui-react'
 
 function UserItem({ user }) {
 
@@ -13,7 +13,8 @@ function UserItem({ user }) {
                     <Card.Description>{user.location}</Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                    <p>Icon and # of Reviews</p>
+                    <Icon name='food'/>
+                    {user.total_reviews} Reviews
                 </Card.Content>
             </Card>
         {/* </Link> */}
