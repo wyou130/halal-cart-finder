@@ -1,5 +1,7 @@
 import { useState, useContext } from "react"
+import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
+import { Comment, Button, Icon } from 'semantic-ui-react'
 
 function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
 
@@ -50,9 +52,6 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
         
     }
 
-    // console.log(currentUser.id)
-    // console.log(comment)
-
     return (
         <>
             {
@@ -69,13 +68,23 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                     <button type="submit">Update Comment</button>
                 </form>
                 : 
-                <p>{comment.user_name} replied: {comment.comment}</p>
+                // <p>{comment.user_name} replied: {comment.comment}</p>
+                <Comment>
+                    <Comment.Content>
+                        <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
+                        <Comment.Text>{comment.comment}</Comment.Text>
+                    </Comment.Content>
+                </Comment>
             }
             {
                 comment.user_id === currentUser.id ? 
                 <>
-                    <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Comment"}</button> 
-                    <button onClick={() => handleDelete(comment)}>Delete Comment</button>
+                    <Button size='mini' icon onClick={toggleEdit}>
+                        {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                    </Button> 
+                    <Button size='mini' icon onClick={() => handleDelete(comment)}>
+                        <Icon name='trash alternate'/>
+                    </Button>
                 </>
                 : 
                 null
