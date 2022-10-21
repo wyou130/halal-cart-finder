@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button, Icon } from 'semantic-ui-react'
 
 function UserDetails() {
 
@@ -152,12 +152,14 @@ function UserDetails() {
             }
                 {currentUser && displayedUser.id === currentUser.id ? 
                     <div>
-                        <button onClick={toggleForm}>
-                        {isEditing ? "Cancel" : "Edit Profile"}
-                        </button>
-                        <button onClick={() => handleDelete(currentUser)}>
-                        Delete Account
-                        </button>
+                        <Button icon labelPosition='left' onClick={toggleForm}>
+                        {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                        {isEditing ? "Cancel Edit" : "Edit Profile"}
+                        </Button>
+                        <Button icon labelPosition='left' onClick={() => handleDelete(currentUser)}>
+                            <Icon name='trash alternate'/>
+                            Delete Account
+                        </Button>
                     </div>
                     :
                     null
