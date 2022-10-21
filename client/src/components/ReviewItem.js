@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
-import { Grid, Card, Divider } from 'semantic-ui-react'
+import { Grid, Card, Divider, Button, Icon } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -168,8 +168,13 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     {
                         review.user_id === currentUser.id ? 
                         <>
-                            <button onClick={toggleEdit}>{isEditing ? "Cancel" : "Edit Review"}</button> 
-                            <button onClick={() => handleDelete(review)}>Delete Review</button> 
+                            <Button icon onClick={toggleEdit}>
+                                {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                                {/* {isEditing ? "Cancel" : "Edit Review"} */}
+                            </Button> 
+                            <Button icon onClick={() => handleDelete(review)}>
+                                <Icon name='trash alternate'/>
+                            </Button> 
                         </>
                         : 
                         null
