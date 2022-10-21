@@ -68,8 +68,8 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                     <button type="submit">Update Comment</button>
                 </form>
                 : 
-                // <p>{comment.user_name} replied: {comment.comment}</p>
                 <Comment>
+                    <Comment.Avatar src={comment.user_image}/>
                     <Comment.Content>
                         <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
                         <Comment.Text>{comment.comment}</Comment.Text>

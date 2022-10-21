@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Grid, Card, Divider, Icon } from 'semantic-ui-react'
+import { Grid, Card, Divider, Icon, Image } from 'semantic-ui-react'
 
 function CartItem({ cart }) {
 
-    // console.log(cart)
-
     return (
         <Grid.Column as={Link} to={`/carts/${cart.id}`}>
-        {/* <Link to={`/carts/${cart.id}`}> */}
-            {/* <div> */}
             <Card>
+            <Image src={cart.image} wrapped ui={false}/>
                 <Card.Content>
                     <Card.Header>{cart.name}</Card.Header>
                     <Card.Description>Around {cart.street} and {cart.avenue}</Card.Description>
@@ -25,9 +22,7 @@ function CartItem({ cart }) {
                     <Icon name='food'/>
                     {cart.total_reviews} Reviews
                 </Card.Content>
-            {/* </div> */}
             </Card>
-        {/* </Link> */}
         </Grid.Column>
     )
 }
