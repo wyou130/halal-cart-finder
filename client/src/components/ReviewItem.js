@@ -16,6 +16,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     const [hotSauceSpice, setHotSauceSpice] = useState(review.hot_sauce_spice)
     const [reviewInput, setReviewInput] = useState(review.review)
     const [isShowingComments, setIsShowingComments] = useState(false)
+    const [totalComments, setTotalComments] = useState(review.total_comments)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
@@ -30,6 +31,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     function onSubmitNewComment(newComment) {
         setIsShowingForm(false)
         setDisplayedComments([...displayedComments, newComment])
+        setTotalComments(totalComments => totalComments + 1)
     }
 
     function toggleEdit() {
@@ -53,6 +55,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
             return comment.id !== deletedComment.id
         })
         setDisplayedComments(updatedCommentList)
+        setTotalComments(totalComments => totalComments - 1)
     }
 
     function handleEdit(e) {
@@ -184,9 +187,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         null
                     }
                     <Divider section />
-                    <Card.Description>
-                        {review.total_comments} Comments
-                    </Card.Description>
                     <Button onClick={toggleComments}>
                         {isShowingComments ? "Hide Comments" : "Show Comments"}
                     </Button>
@@ -209,7 +209,9 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                                 }
                             </>
                             :
-                            null 
+                            <Card.Description>
+                                {totalComments} Comments
+                            </Card.Description> 
                         }
                 </Card.Content>
             </Card>
