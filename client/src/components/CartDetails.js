@@ -99,14 +99,20 @@ function CartDetails() {
                 <p>{displayedCart.name}</p>
                 <p>Average Rating: {"⭐️".repeat(displayedCart.average_rating)}</p>
                 <em>{displayedCart.average_rating} out of 5</em>
+                <p>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)}</p>
+                <em>{displayedCart.average_spice_rating} out of 5</em>
                 <p>Typically at {displayedCart.street} and {displayedCart.avenue}</p>
                 <p>Approximate hours: {displayedCart.approximate_hours}</p>
                 <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
                 <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
             </div>
-            <button onClick={handleFavorited}>
-                {usersFavorited.includes(currentUser.id) ? "Remove from Favorites" : "Add to Favorites"}
-            </button>
+            <br/>
+            <div>
+                <button onClick={handleFavorited}>
+                    {usersFavorited.includes(currentUser.id) ? "Remove from Favorites" : "Add to Favorites"}
+                </button>
+            </div>
+            <br/>
             <div>
                 <h3>Reviews</h3>
                 <button onClick={toggleForm}>
@@ -121,6 +127,9 @@ function CartDetails() {
                     : 
                     null
                 }
+            </div>
+            <br/>
+            <div>
                 <Grid columns={3}>
                     {
                         displayedReviews.map(review => <ReviewItem 
