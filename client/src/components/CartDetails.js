@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react"
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
 import ReviewForm from "./ReviewForm"
@@ -8,6 +8,7 @@ import { Grid } from 'semantic-ui-react'
 function CartDetails() {
 
     let { id } = useParams()
+    let history = useHistory()
     let [currentUser, setCurrentUser] = useContext(UserContext)
 
     const [displayedCart, setDisplayedCart] = useState("")
@@ -94,6 +95,7 @@ function CartDetails() {
 
     return (
         <div>
+            <button onClick={() => history.goBack()}>Go Back</button>
             <div>
                 <h3>Cart Details</h3>
                 <p>{displayedCart.name}</p>

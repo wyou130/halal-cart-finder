@@ -107,6 +107,7 @@ function UserDetails() {
 
     return(
         <div>
+            <button onClick={() => history.goBack()}>Go Back</button>
             {
                 currentUser && isEditing ? 
                 <>
