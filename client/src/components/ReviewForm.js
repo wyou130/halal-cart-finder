@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
+import { Rating } from 'semantic-ui-react'
 
 function ReviewForm({ cart, onSubmitNewReview }) {
 
@@ -79,6 +80,8 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                         value={rating}
                         onChange={e => setRating(e.target.value)}
                     />
+                    <br/>
+                    <Rating icon='star' size='huge' rating={rating} maxRating={5}/>
                 </div>
                 <label htmlFor="hotSauceSpice">How hot is the hot sauce?</label>
                 <div>
@@ -93,6 +96,8 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                         value={hotSauceSpice}
                         onChange={e => setHotSauceSpice(e.target.value)}
                     />
+                    <br/>
+                    <Rating icon='star' size='huge' rating={hotSauceSpice} maxRating={5}/>
                 </div>
                 <label htmlFor="review">Review</label>
                 <div>
