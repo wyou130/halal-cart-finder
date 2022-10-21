@@ -17,7 +17,7 @@ function UserList() {
     return(
         <div>
             <h3>Users List</h3>
-            <Grid columns={3}> 
+            <Grid columns={3} padded> 
                 {usersList.map(user => <UserItem key={user.id} user={user}/>)}
             </Grid>
         </div>
