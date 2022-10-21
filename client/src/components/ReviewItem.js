@@ -15,6 +15,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     const [rating, setRating] = useState(review.rating)
     const [hotSauceSpice, setHotSauceSpice] = useState(review.hot_sauce_spice)
     const [reviewInput, setReviewInput] = useState(review.review)
+    const [isShowingComments, setIsShowingComments] = useState(false)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
@@ -33,6 +34,10 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
     function toggleEdit() {
         setIsEditing(!isEditing)
+    }
+
+    function toggleComments() {
+        setIsShowingComments(!isShowingComments)
     }
 
     function onUpdateComment(updatedComment) {
@@ -170,7 +175,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         <>
                             <Button icon onClick={toggleEdit}>
                                 {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                                {/* {isEditing ? "Cancel" : "Edit Review"} */}
                             </Button> 
                             <Button icon onClick={() => handleDelete(review)}>
                                 <Icon name='trash alternate'/>
@@ -180,23 +184,33 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         null
                     }
                     <Divider section />
-                    <div>
-                        <p>Comments</p>
-                        <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                        <br />
-                        <button onClick={toggleForm}>
-                            {isShowingForm ?
-                                "Cancel"
-                                :
-                                "Comment on This Review"
-                            }
-                        </button>
-                        {isShowingForm ? 
-                            <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                    <Card.Description>
+                        {review.total_comments} Comments
+                    </Card.Description>
+                    <Button onClick={toggleComments}>
+                        {isShowingComments ? "Hide Comments" : "Show Comments"}
+                    </Button>
+                        {
+                            isShowingComments ? 
+                            <>
+                                <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
+                                <br />
+                                <button onClick={toggleForm}>
+                                    {isShowingForm ?
+                                        "Cancel"
+                                        :
+                                        "Comment on This Review"
+                                    }
+                                </button>
+                                {isShowingForm ? 
+                                    <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                                    :
+                                    null 
+                                }
+                            </>
                             :
                             null 
                         }
-                    </div>
                 </Card.Content>
             </Card>
         {/* </div> */}

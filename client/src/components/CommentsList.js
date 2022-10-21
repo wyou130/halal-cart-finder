@@ -1,5 +1,6 @@
 // import { useEffect, useState } from "react";
-import CommentItem from "./CommentItem";
+import CommentItem from "./CommentItem"
+import { Comment, Header } from 'semantic-ui-react'
 
 function CommentsList({ displayedComments, onUpdateComment, onDeleteComment }) {
 
@@ -16,9 +17,10 @@ function CommentsList({ displayedComments, onUpdateComment, onDeleteComment }) {
     // }
     
     return (
-        <div>
+        <Comment.Group>
+            <Header as='h4' dividing>Comments</Header>
             {displayedComments.map(comment => <CommentItem key={comment.id} comment={comment} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />) }
-        </div>
+        </Comment.Group>
     )
 }
 
