@@ -7,15 +7,15 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 puts "Seeding users..."
-wendy = User.create(name: "wenday", email: "wyou130@gmail.com", password: "123", location: "Hell's Kitchen, Manhattan, NY")
+wendy = User.create(name: "wenday", email: "wyou130@gmail.com", password: "123", location: "Hell's Kitchen, Manhattan, NY", image: "https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjIxMWJhdGNoMTAtbnVub29uLTM3LWZhc3Rmb29kXzIuanBn.jpg")
 ethan = User.create(name: "ebb", email: "ebb0202@aol.com", password: "456", location: "Hell's Kitchen, Manhattan, NY")
 justin = User.create(name: "sustin", email: "susgancala@gmail.com", password: "789", location: "Upper East Side, Manhattan, NY")
 
 puts "Seeding carts..."
-friends = Cart.create(name: "Friends", street: "E 77th St", avenue: "2nd Ave", landmarks: "TD Bank", accepts_card: false, approximate_hours: "10AM to 2AM", chicken_over_rice: 8, combo_over_rice: 9, latitude: 40.771833, longitude: -73.955891)
-adams = Cart.create(name: "Adam's", street: "E 83rd St", avenue: "2nd Ave", landmarks: "Subway station: 86th St Q train", accepts_card: false, approximate_hours: "10AM to 12AM", chicken_over_rice: 8, combo_over_rice: 8, latitude: 40.776112, longitude: -73.952858)
-midos = Cart.create(name: "Mido's", street: "W 58th St", avenue: "9th Ave", landmarks: "Amore Pizzeria", accepts_card: false, approximate_hours: "11AM to 2AM", chicken_over_rice: 9, combo_over_rice: 10, latitude: 40.768620, longitude: -73.984971)
-usa = Cart.create(name: "USA Best Halal Food", street: "W 60th St", avenue: "Columbus Ave", landmarks: "Fordham University Lincoln Center", accepts_card: true, approximate_hours: "10AM to 1AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.770033, longitude: -73.984452)
+friends = Cart.create(name: "Friends", street: "E 77th St", avenue: "2nd Ave", landmarks: "TD Bank", accepts_card: false, approximate_hours: "10AM to 2AM", chicken_over_rice: 8, combo_over_rice: 9, latitude: 40.771833, longitude: -73.955891, image: "../friends.jpg")
+adams = Cart.create(name: "Adam's", street: "E 83rd St", avenue: "2nd Ave", landmarks: "Subway station: 86th St Q train", accepts_card: false, approximate_hours: "10AM to 12AM", chicken_over_rice: 8, combo_over_rice: 8, latitude: 40.776112, longitude: -73.952858, image: "https://10619-2.s.cdn12.com/rests/original/108_504798933.jpg")
+midos = Cart.create(name: "Mido's", street: "W 58th St", avenue: "9th Ave", landmarks: "Amore Pizzeria", accepts_card: false, approximate_hours: "11AM to 2AM", chicken_over_rice: 9, combo_over_rice: 10, latitude: 40.768620, longitude: -73.984971, image: "https://fastly.4sqi.net/img/general/600x600/3016_i6qh0sDDAf0XW-vHTuCNy-8jYOg7FVtbNFkJGzNgmko.jpg")
+usa = Cart.create(name: "USA Best Halal Food", street: "W 60th St", avenue: "Columbus Ave", landmarks: "Fordham University Lincoln Center", accepts_card: true, approximate_hours: "10AM to 1AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.770033, longitude: -73.984452, image: "https://fordhamobserver.com/wp-content/uploads/2019/12/Halal-Cart-Photo.png")
 
 puts "Seeding reviews..."
 r1 = Review.create(date_visited: "2019-06-10", rating: 5, review: "Best halal in the city", hot_sauce_spice: 5, user_id: ethan.id, cart_id: friends.id)
