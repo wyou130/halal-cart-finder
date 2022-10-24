@@ -1,5 +1,5 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :rating, :review, :hot_sauce_spice, :date_visited, :cart_name, :user_name, :user_id, :cart_id, :total_comments, :user_image, :created_at, :updated_at
+  attributes :id, :rating, :review, :hot_sauce_spice, :date_visited, :cart_name, :user_name, :user_id, :cart_id, :total_comments, :date_visited_formatted, :created_at, :updated_at, :user_image
 
   has_one :user
   has_one :cart
@@ -30,6 +30,10 @@ class ReviewSerializer < ActiveModel::Serializer
   end
 
   def date_visited
+    object.date_visited.to_date
+  end
+
+  def date_visited_formatted
     object.date_visited.strftime("%b %-d %Y")
   end
 

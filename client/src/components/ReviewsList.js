@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import ReviewItem from "./ReviewItem"
+import Sort from "./Sort"
+import Search from "./Search"
 import { Item } from 'semantic-ui-react'
 
 function ReviewsList() {
 
     const [reviewsList, setReviewsList] = useState([])
+    const [search, setSearch] = useState("")
+    const [sortBy, setSortBy] = useState("")
 
     useEffect(() => {
         fetch('/reviews')
@@ -27,11 +31,57 @@ function ReviewsList() {
         setReviewsList(updatedReviewList)
     }
 
+    function onHandleSort(sortInput) {
+        setSortBy(sortInput)
+    }
+
+    function onHandleSearch(searchInput) {
+        setSearch(searchInput)
+    }
+
+    const sortOptions = [
+        {
+            text: '',
+            value: ''
+        },
+        {
+            text: 'Rating High-to-Low',
+            value: 'rating'
+        },
+        {
+            text: 'Date New-to-Old',
+            value: 'date'
+        }
+    ]
+
+    const sortedFilteredReviews = reviewsList
+        // map necessary to turn date_visited string into date format so sort by date would work
+        .map(review => {return {...review, date_visited: new Date(review.date_visited)}})
+        .filter(review => {
+            return (
+                review.review.toLowerCase().includes(search.toLocaleLowerCase()) || review.user_name.toLowerCase().includes(search.toLocaleLowerCase()) || review.cart_name.toLowerCase().includes(search.toLocaleLowerCase())
+            )
+        })
+        .sort((a, b) => {
+            if (sortBy === "") return reviewsList
+            else if (sortBy === "Rating High-to-Low") return b.rating - a.rating
+            else if (sortBy === "Date New-to-Old") return b.date_visited - a.date_visited
+        })
+
     return (
         <div>
             <h3>All Reviews</h3>
+            <Sort 
+                sortOptions={sortOptions} 
+                onHandleSort={onHandleSort}
+            />
+            <Search 
+                onHandleSearch={onHandleSearch} 
+                label="Reviews" 
+                placeholder="by cart, user, or content"
+            />
             <Item.Group divided> 
-                {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
+                {sortedFilteredReviews.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
             </Item.Group>
         </div>
     )
