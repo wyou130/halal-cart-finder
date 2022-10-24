@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL, { Marker, NavigationControl, Popup } from 'react-map-gl'
 import { FcRating } from 'react-icons/fc'
 
 function Map() {
@@ -33,6 +33,7 @@ function Map() {
                     setViewport(viewport)
                 }}
             >
+                <NavigationControl/>
                 {cartsList.map(cart => {
                     return (
                         <>
