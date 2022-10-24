@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
+import { Input, Icon, Button } from 'semantic-ui-react'
 
 function Login () {
 
@@ -10,6 +11,7 @@ function Login () {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([])
+    const [isShowingPassword, setIsShowingPassword] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -46,7 +48,7 @@ function Login () {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <div>
-                    <input 
+                    <Input 
                         required 
                         type="text" 
                         name="email" 
@@ -56,16 +58,16 @@ function Login () {
                 </div>
                 <label htmlFor="password">Password</label>
                 <div>
-                    <input 
+                    <Input 
                         required 
-                        type="password" 
+                        type={isShowingPassword ? "text" : "password"} 
                         name="password" 
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
+                    <Icon name={isShowingPassword ? 'eye slash' : 'eye'} size='large' onClick={() => setIsShowingPassword(!isShowingPassword)}/>
                 </div>
-                {/* <input type="checkbox" onClick={showPassword}>Show Password</input> */}
-                <button type="submit">Log In</button>
+                <Button type="submit">Log In</Button>
             </form>
             {errors.map(error => <p key={error} className='error'>{error}</p>)}
             <br/>
