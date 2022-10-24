@@ -171,6 +171,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         <Item.Description>{review.review}</Item.Description>
                     </>
                 }
+                <Item.Extra>Posted on {review.created_at}, last updated {review.updated_at}</Item.Extra>
                 {
                     review.user_id === currentUser.id ? 
                     <>

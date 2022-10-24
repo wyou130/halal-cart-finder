@@ -72,6 +72,7 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                     <Comment.Avatar src={comment.user_image}/>
                     <Comment.Content>
                         <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
+                        <Comment.Metadata>on {comment.created_at}, last updated {comment.updated_at}</Comment.Metadata>
                         <Comment.Text>{comment.comment}</Comment.Text>
                     </Comment.Content>
                 </Comment>
