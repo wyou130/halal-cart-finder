@@ -15,7 +15,8 @@ puts "Seeding carts..."
 friends = Cart.create(name: "Friends", street: "E 77th St", avenue: "2nd Ave", landmarks: "TD Bank", accepts_card: false, approximate_hours: "10AM to 2AM", chicken_over_rice: 8, combo_over_rice: 9, latitude: 40.771833, longitude: -73.955891, image: "../friends.jpg")
 adams = Cart.create(name: "Adam's", street: "E 83rd St", avenue: "2nd Ave", landmarks: "Subway station: 86th St Q train", accepts_card: false, approximate_hours: "10AM to 12AM", chicken_over_rice: 8, combo_over_rice: 8, latitude: 40.776112, longitude: -73.952858, image: "https://10619-2.s.cdn12.com/rests/original/108_504798933.jpg")
 midos = Cart.create(name: "Mido's", street: "W 58th St", avenue: "9th Ave", landmarks: "Amore Pizzeria", accepts_card: false, approximate_hours: "11AM to 2AM", chicken_over_rice: 9, combo_over_rice: 10, latitude: 40.768620, longitude: -73.984971, image: "https://fastly.4sqi.net/img/general/600x600/3016_i6qh0sDDAf0XW-vHTuCNy-8jYOg7FVtbNFkJGzNgmko.jpg")
-usa = Cart.create(name: "USA Best Halal Food", street: "W 60th St", avenue: "Columbus Ave", landmarks: "Fordham University Lincoln Center", accepts_card: true, approximate_hours: "10AM to 1AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.770033, longitude: -73.984452, image: "https://fordhamobserver.com/wp-content/uploads/2019/12/Halal-Cart-Photo.png")
+usa = Cart.create(name: "USA Best", street: "W 60th St", avenue: "Columbus Ave", landmarks: "Fordham University Lincoln Center", accepts_card: true, approximate_hours: "10AM to 1AM", chicken_over_rice: 9, combo_over_rice: 9, latitude: 40.770033, longitude: -73.984452, image: "../USA.jpg")
+mama = Cart.create(name: "Mama", street: "W 50th St", avenue: "9th Ave", landmarks: "Orange Theory", accepts_card: false, approximate_hours: "10AM to 10PM", chicken_over_rice: 8, combo_over_rice: 9, latitude: 40.763315, longitude: -73.988906, image: "../mama.jpg")
 
 puts "Seeding reviews..."
 r1 = Review.create(date_visited: "2019-06-10", rating: 5, review: "Best halal in the city", hot_sauce_spice: 5, user_id: ethan.id, cart_id: friends.id)
@@ -26,6 +27,8 @@ r5 = Review.create(date_visited: "2022-05-15", rating: 5, review: "Lucky to call
 r6 = Review.create(date_visited: "2022-07-20", rating: 3, review: "Not worth the trek but does the job", hot_sauce_spice: 3, user_id: justin.id, cart_id: adams.id)
 r7 = Review.create(date_visited: "2021-05-29", rating: 4, review: "Reliable, classic cart style. Sometimes (though rare) you find cardamom in the rice and cilantro in the salad that makes it *chef's kiss*", hot_sauce_spice: 5, user_id: ethan.id, cart_id: usa.id)
 r8 = Review.create(date_visited: "2021-05-30", rating: 4, review: "As close to Friends as you can get in the neighborhood and exactly what I want when craving halal", hot_sauce_spice: 5, user_id: wendy.id, cart_id: usa.id)
+r9 = Review.create(date_visited: "2021-08-01", rating: 3, review: "Not bad, nothing special", hot_sauce_spice: 3, user_id: ethan.id, cart_id: mama.id)
+r10 = Review.create(date_visited: "2021-08-02", rating: 3, review: "Pretty average, could use some more spices to make it stand out", hot_sauce_spice: 3, user_id: wendy.id, cart_id: mama.id)
 
 puts "Seeding comments..."
 Comment.create(comment: "AGREED 10000%", review_id: r1.id, user_id: wendy.id)
@@ -35,6 +38,7 @@ Comment.create(comment: "Forever indebted to you for recommending this cart", re
 Comment.create(comment: "Convenient but mediocre", review_id: r2.id, user_id: ethan.id)
 Comment.create(comment: "UGH please don't remind me that I can't get Friends anymore", review_id: r8.id, user_id: ethan.id)
 Comment.create(comment: "One day I'll take that crosstown and uptown bus just for Friends", review_id: r5.id, user_id: ethan.id)
+Comment.create(comment: "Sounds like the Adam's of Hell's Kitchen", review_id: r10.id, user_id: justin.id)
 
 puts "Seeding favorites..."
 Favorite.create(user_id: wendy.id, cart_id: friends.id)
