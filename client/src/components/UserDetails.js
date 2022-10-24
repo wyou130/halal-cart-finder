@@ -148,9 +148,10 @@ function UserDetails() {
                 :
                 <Item.Group>
                     <Item>
-                        <Item.Image 
+                        <img
+                            alt={displayedUser.name} 
                             src={displayedUser.image}
-                            size='medium'
+                            style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "2em", marginLeft: "2em"}}
                         />
                         <Item.Content>
                             <Item.Header>{displayedUser.name}</Item.Header>

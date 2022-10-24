@@ -98,7 +98,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
     return (
         <Grid.Column>
-            <Card>
+            <Card style={{width: 'auto', height: '360px'}}>
                 <Card.Content>
                     {/* <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
                     <p>Visited on: {review.date_visited}</p>
