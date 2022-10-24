@@ -6,8 +6,8 @@ function UserItem({ user }) {
     return (
         <Grid.Column as={Link} to={`/users/${user.id}`}>
         {/* <Link to={`/users/${user.id}`}> */}
-            <Card>
-                <Image src={user.image} wrapped ui={false}/>
+            <Card style={{width: 'auto', height: '480px'}}>
+                <img alt={user.name} src={user.image} style={{width: '100%', height: '75%', objectFit: 'cover'}}/>
                 <Card.Content> 
                     {/* <img src={user.image} alt={user.name}/> */}
                     <Card.Header>{user.name}</Card.Header>

@@ -98,10 +98,10 @@ function CartDetails() {
             <button onClick={() => history.goBack()}>Go Back</button>
             <Item.Group>
                 <Item>
-                    <Item.Image 
+                    <img 
+                        alt={displayedCart.name}
                         src={displayedCart.image} 
-                        size='medium' 
-                        style={{width: '360px', height: '360px', objectFit: 'cover'}}
+                        style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "2em", marginLeft: "2em"}}
                     />
                     <Item.Content>
                         <Item.Header>{displayedCart.name}</Item.Header>
@@ -126,17 +126,14 @@ function CartDetails() {
             </Item.Group>
             <br/>
             <div>
-            </div>
-            <br/>
-            <div>
-                <h3>Reviews</h3>
-                <button onClick={toggleForm}>
+                <h3>{displayedCart.total_reviews} Reviews</h3>
+                <Button onClick={toggleForm}>
                     {isShowingForm ?
                         "Cancel"
                         :
                         "Review This Cart"
                     }
-                </button>
+                </Button>
                 {isShowingForm ? 
                     <ReviewForm cart={displayedCart.id} onSubmitNewReview={onSubmitNewReview} /> 
                     : 

@@ -27,7 +27,7 @@ r5 = Review.create(date_visited: "2022-05-15", rating: 5, review: "Lucky to call
 r6 = Review.create(date_visited: "2022-07-20", rating: 3, review: "Not worth the trek but does the job", hot_sauce_spice: 3, user_id: justin.id, cart_id: adams.id)
 r7 = Review.create(date_visited: "2021-05-29", rating: 4, review: "Reliable, classic cart style. Sometimes (though rare) you find cardamom in the rice and cilantro in the salad that makes it *chef's kiss*", hot_sauce_spice: 5, user_id: ethan.id, cart_id: usa.id)
 r8 = Review.create(date_visited: "2021-05-30", rating: 4, review: "As close to Friends as you can get in the neighborhood and exactly what I want when craving halal", hot_sauce_spice: 5, user_id: wendy.id, cart_id: usa.id)
-r9 = Review.create(date_visited: "2021-08-01", rating: 3, review: "Not bad, nothing special", hot_sauce_spice: 3, user_id: ethan.id, cart_id: mama.id)
+r9 = Review.create(date_visited: "2021-08-01", rating: 2, review: "Not bad, nothing special", hot_sauce_spice: 3, user_id: ethan.id, cart_id: mama.id)
 r10 = Review.create(date_visited: "2021-08-02", rating: 3, review: "Pretty average, could use some more spices to make it stand out", hot_sauce_spice: 3, user_id: wendy.id, cart_id: mama.id)
 
 puts "Seeding comments..."
