@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
-import { Grid, Card, Divider, Button, Icon } from 'semantic-ui-react'
+import { Divider, Button, Icon, Item } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -97,126 +97,123 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     }
 
     return (
-        <Grid.Column>
-            <Card style={{width: 'auto', height: '360px'}}>
-                <Card.Content>
-                    {/* <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
-                    <p>Visited on: {review.date_visited}</p>
-                    <Link to={`/users/${review.user_id}`}>By {review.user_name}</Link> */}
-                    <Card.Header>
-                        <Link to={`/users/${review.user_id}`}>{review.user_name}</Link> visited <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
-                    </Card.Header>
-                    <Card.Meta>on {review.date_visited}</Card.Meta>
+        <Item>
+            <Item.Image src={review.user_image} avatar size='tiny'/>
+            <Item.Content>
+                <Item.Header>
+                    <Link to={`/users/${review.user_id}`}>{review.user_name}</Link> visited <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
+                </Item.Header>
+                <Item.Meta>on {review.date_visited}</Item.Meta>
+                {
+                    isEditing ?
+                    <form onSubmit={handleEdit}>
+                        <label htmlFor="rating">Rating</label>
+                        <div>
+                            <input 
+                                required 
+                                type="range" 
+                                min="0"
+                                max="5"
+                                step="1"
+                                list="tickmarks"
+                                name="rating" 
+                                value={rating}
+                                onChange={e => setRating(e.target.value)}
+                            />
+                            <datalist id="tickmarks">
+                                <option value="0" label="0"></option>
+                                <option value="1" label="1"></option>
+                                <option value="2" label="2"></option>
+                                <option value="3" label="3"></option>
+                                <option value="4" label="4"></option>
+                                <option value="5" label="5"></option>
+                            </datalist>
+                        </div>
+                        <label htmlFor="hotSauceSpice">How hot is the hot sauce?</label>
+                        <div>
+                            <input 
+                                required 
+                                type="range" 
+                                min="0"
+                                max="5"
+                                step="1"
+                                list="tickmarks"
+                                name="hotSauceSpice" 
+                                value={hotSauceSpice}
+                                onChange={e => setHotSauceSpice(e.target.value)}
+                            />
+                            <datalist id="tickmarks">
+                                <option value="0" label="0"></option>
+                                <option value="1" label="1"></option>
+                                <option value="2" label="2"></option>
+                                <option value="3" label="3"></option>
+                                <option value="4" label="4"></option>
+                                <option value="5" label="5"></option>
+                            </datalist>
+                        </div>
+                        <label htmlFor="review">Review</label>
+                        <div>
+                            <input 
+                                required 
+                                type="text" 
+                                name="review" 
+                                value={reviewInput}
+                                onChange={e => setReviewInput(e.target.value)}
+                            />
+                        </div>
+                        <button type="submit">Update Review</button>
+                    </form>
+                    :
+                    <>
+                        <Item.Description>
+                            Overall rating: {"⭐️".repeat(review.rating)} | Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}
+                        </Item.Description>
+                        <Item.Description>{review.review}</Item.Description>
+                    </>
+                }
+                {
+                    review.user_id === currentUser.id ? 
+                    <>
+                        <Button icon onClick={toggleEdit}>
+                            {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                        </Button> 
+                        <Button icon onClick={() => handleDelete(review)}>
+                            <Icon name='trash alternate'/>
+                        </Button> 
+                    </>
+                    : 
+                    null
+                }
+                <br/>
                     {
-                        isEditing ?
-                        <form onSubmit={handleEdit}>
-                            <label htmlFor="rating">Rating</label>
-                            <div>
-                                <input 
-                                    required 
-                                    type="range" 
-                                    min="0"
-                                    max="5"
-                                    step="1"
-                                    list="tickmarks"
-                                    name="rating" 
-                                    value={rating}
-                                    onChange={e => setRating(e.target.value)}
-                                />
-                                <datalist id="tickmarks">
-                                    <option value="0" label="0"></option>
-                                    <option value="1" label="1"></option>
-                                    <option value="2" label="2"></option>
-                                    <option value="3" label="3"></option>
-                                    <option value="4" label="4"></option>
-                                    <option value="5" label="5"></option>
-                                </datalist>
-                            </div>
-                            <label htmlFor="hotSauceSpice">How hot is the hot sauce?</label>
-                            <div>
-                                <input 
-                                    required 
-                                    type="range" 
-                                    min="0"
-                                    max="5"
-                                    step="1"
-                                    list="tickmarks"
-                                    name="hotSauceSpice" 
-                                    value={hotSauceSpice}
-                                    onChange={e => setHotSauceSpice(e.target.value)}
-                                />
-                                <datalist id="tickmarks">
-                                    <option value="0" label="0"></option>
-                                    <option value="1" label="1"></option>
-                                    <option value="2" label="2"></option>
-                                    <option value="3" label="3"></option>
-                                    <option value="4" label="4"></option>
-                                    <option value="5" label="5"></option>
-                                </datalist>
-                            </div>
-                            <label htmlFor="review">Review</label>
-                            <div>
-                                <input 
-                                    required 
-                                    type="text" 
-                                    name="review" 
-                                    value={reviewInput}
-                                    onChange={e => setReviewInput(e.target.value)}
-                                />
-                            </div>
-                            <button type="submit">Update Review</button>
-                        </form>
-                        :
+                        isShowingComments ? 
                         <>
-                            <Card.Description>Overall rating: {"⭐️".repeat(review.rating)}</Card.Description>
-                            <Card.Description>Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}</Card.Description>
-                            <Card.Description>{review.review}</Card.Description>
-                        </>
-                    }
-                    {
-                        review.user_id === currentUser.id ? 
-                        <>
-                            <Button icon onClick={toggleEdit}>
-                                {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                            </Button> 
-                            <Button icon onClick={() => handleDelete(review)}>
-                                <Icon name='trash alternate'/>
-                            </Button> 
-                        </>
-                        : 
-                        null
-                    }
-                    <Divider section />
-                    <Button onClick={toggleComments}>
-                        {isShowingComments ? "Hide Comments" : "Show Comments"}
-                    </Button>
-                        {
-                            isShowingComments ? 
-                            <>
-                                <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                                <br />
-                                <button onClick={toggleForm}>
-                                    {isShowingForm ?
-                                        "Cancel"
-                                        :
-                                        "Comment on This Review"
-                                    }
-                                </button>
-                                {isShowingForm ? 
-                                    <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                            <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
+                            <br />
+                            <button onClick={toggleForm}>
+                                {isShowingForm ?
+                                    "Cancel"
                                     :
-                                    null 
+                                    "Comment on This Review"
                                 }
-                            </>
-                            :
-                            <Card.Description>
-                                {totalComments} Comments
-                            </Card.Description> 
-                        }
-                </Card.Content>
-            </Card>
-        {/* </div> */}
-        </Grid.Column>
+                            </button>
+                            {isShowingForm ? 
+                                <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                                :
+                                null 
+                            }
+                        </>
+                        :
+                        <Item.Description>
+                            {totalComments} Comments
+                        </Item.Description> 
+                    }
+                    {/* <br/> */}
+                    <Button onClick={toggleComments}>
+                    {isShowingComments ? "Hide Comments" : "Show Comments"}
+                </Button>
+            </Item.Content>
+        </Item>
     )
 }
 

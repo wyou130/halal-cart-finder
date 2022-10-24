@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ReviewItem from "./ReviewItem"
-import { Grid } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 
 function ReviewsList() {
 
@@ -30,9 +30,9 @@ function ReviewsList() {
     return (
         <div>
             <h3>All Reviews</h3>
-            <Grid columns={3} padded> 
+            <Item.Group divided> 
                 {reviewsList.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
-            </Grid>
+            </Item.Group>
         </div>
     )
 }

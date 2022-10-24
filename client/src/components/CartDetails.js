@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
 import ReviewForm from "./ReviewForm"
-import { Grid, Item, Button } from 'semantic-ui-react'
+import { Item, Button } from 'semantic-ui-react'
 
 function CartDetails() {
 
@@ -105,11 +105,10 @@ function CartDetails() {
                     />
                     <Item.Content>
                         <Item.Header>{displayedCart.name}</Item.Header>
-                        <Item.Meta>Average Rating: {"⭐️".repeat(displayedCart.average_rating)} out of 5
-                            {/* <em>{displayedCart.average_rating} out of 5</em> */}
-                        </Item.Meta>
-                        <Item.Meta>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)} out of 5</Item.Meta>
-                        {/* <em>{displayedCart.average_spice_rating} out of 5</em> */}
+                        <Item.Description>Average Rating: {"⭐️".repeat(displayedCart.average_rating)}</Item.Description>
+                        <Item.Meta>{displayedCart.average_rating} out of 5</Item.Meta>
+                        <Item.Description>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)}</Item.Description>
+                        <Item.Meta>{displayedCart.average_spice_rating} out of 5</Item.Meta>
                         <Item.Description>
                             <p>Location: typically at {displayedCart.street} and {displayedCart.avenue}</p>
                             <p>Approximate hours: {displayedCart.approximate_hours}</p>
@@ -142,7 +141,7 @@ function CartDetails() {
             </div>
             <br/>
             <div>
-                <Grid columns={3}>
+                <Item.Group divided>
                     {
                         displayedReviews.map(review => <ReviewItem 
                             key={review.id} 
@@ -151,7 +150,7 @@ function CartDetails() {
                             onDeleteReview={onDeleteReview} 
                         />)
                     }
-                </Grid>
+                </Item.Group>
             </div>
         </div>
     )
