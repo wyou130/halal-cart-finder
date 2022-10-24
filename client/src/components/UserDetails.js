@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
-import { Grid, Button, Icon } from 'semantic-ui-react'
+import { Grid, Button, Icon, Item } from 'semantic-ui-react'
 
 function UserDetails() {
 
@@ -146,26 +146,35 @@ function UserDetails() {
                     {errors.map(error => <p key={error} className='error'>{error}</p>)}
                 </>
                 :
-                <div>
-                    <p>{displayedUser.name}</p>
-                    <p>{displayedUser.location}</p>
-                </div>
+                <Item.Group>
+                    <Item>
+                        <Item.Image 
+                            src={displayedUser.image}
+                            size='medium'
+                        />
+                        <Item.Content>
+                            <Item.Header>{displayedUser.name}</Item.Header>
+                            <Item.Description>{displayedUser.location}</Item.Description>
+                            <br />
+                            {currentUser && displayedUser.id === currentUser.id ? 
+                                <div>
+                                    <Button icon labelPosition='left' onClick={toggleForm}>
+                                    {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                                    {isEditing ? "Cancel Edit" : "Edit Profile"}
+                                    </Button>
+                                    <Button icon labelPosition='left' onClick={() => handleDelete(currentUser)}>
+                                        <Icon name='trash alternate'/>
+                                        Delete Account
+                                    </Button>
+                                </div>
+                                :
+                                null
+                            }
+                        </Item.Content>
+                    </Item>
+                </Item.Group>
             }
-                {currentUser && displayedUser.id === currentUser.id ? 
-                    <div>
-                        <Button icon labelPosition='left' onClick={toggleForm}>
-                        {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                        {isEditing ? "Cancel Edit" : "Edit Profile"}
-                        </Button>
-                        <Button icon labelPosition='left' onClick={() => handleDelete(currentUser)}>
-                            <Icon name='trash alternate'/>
-                            Delete Account
-                        </Button>
-                    </div>
-                    :
-                    null
-                }
-                <p>{displayedUser.number_of_reviews} Reviews</p>
+                <h3>{displayedUser.total_reviews} Reviews</h3>
                 <Grid columns={3}>
                     {
                         displayedReviews.map(review => <ReviewItem 

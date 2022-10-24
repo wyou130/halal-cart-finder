@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
 import ReviewForm from "./ReviewForm"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Item, Button } from 'semantic-ui-react'
 
 function CartDetails() {
 
@@ -96,23 +96,36 @@ function CartDetails() {
     return (
         <div>
             <button onClick={() => history.goBack()}>Go Back</button>
-            <div>
-                <h3>Cart Details</h3>
-                <p>{displayedCart.name}</p>
-                <p>Average Rating: {"⭐️".repeat(displayedCart.average_rating)}</p>
-                <em>{displayedCart.average_rating} out of 5</em>
-                <p>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)}</p>
-                <em>{displayedCart.average_spice_rating} out of 5</em>
-                <p>Typically at {displayedCart.street} and {displayedCart.avenue}</p>
-                <p>Approximate hours: {displayedCart.approximate_hours}</p>
-                <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
-                <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
-            </div>
+            <Item.Group>
+                <Item>
+                    <Item.Image 
+                        src={displayedCart.image} 
+                        size='medium' 
+                        style={{width: '360px', height: '360px', objectFit: 'cover'}}
+                    />
+                    <Item.Content>
+                        <Item.Header>{displayedCart.name}</Item.Header>
+                        <Item.Meta>Average Rating: {"⭐️".repeat(displayedCart.average_rating)} out of 5
+                            {/* <em>{displayedCart.average_rating} out of 5</em> */}
+                        </Item.Meta>
+                        <Item.Meta>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)} out of 5</Item.Meta>
+                        {/* <em>{displayedCart.average_spice_rating} out of 5</em> */}
+                        <Item.Description>
+                            <p>Location: typically at {displayedCart.street} and {displayedCart.avenue}</p>
+                            <p>Approximate hours: {displayedCart.approximate_hours}</p>
+                            <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
+                            <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
+                        </Item.Description>
+                        <br/>
+                        <Button onClick={handleFavorited}>
+                            {usersFavorited.includes(currentUser.id) ? "Remove from Favorites 🚫" : "Add to Favorites ❤️"}
+                        </Button>
+                        <Item.Extra>* All details subject to change. Please visit the physical cart and owner for the most updated information.</Item.Extra>
+                    </Item.Content>
+                </Item>
+            </Item.Group>
             <br/>
             <div>
-                <button onClick={handleFavorited}>
-                    {usersFavorited.includes(currentUser.id) ? "Remove from Favorites" : "Add to Favorites"}
-                </button>
             </div>
             <br/>
             <div>
