@@ -103,7 +103,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 <Item.Header>
                     <Link to={`/users/${review.user_id}`}>{review.user_name}</Link> visited <Link to={`/carts/${review.cart_id}`}>{review.cart_name}</Link>
                 </Item.Header>
-                <Item.Meta>on {review.date_visited}</Item.Meta>
+                <Item.Meta>on {review.date_visited_formatted}</Item.Meta>
                 {
                     isEditing ?
                     <form onSubmit={handleEdit}>

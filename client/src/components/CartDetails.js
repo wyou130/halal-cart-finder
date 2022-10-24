@@ -110,7 +110,7 @@ function CartDetails() {
                         <Item.Description>Average Spice Rating: {"🌶".repeat(displayedCart.average_spice_rating)}</Item.Description>
                         <Item.Meta>{displayedCart.average_spice_rating} out of 5</Item.Meta>
                         <Item.Description>
-                            <p>Location: typically at {displayedCart.street} and {displayedCart.avenue}</p>
+                            <p>Location: around {displayedCart.street} and {displayedCart.avenue}</p>
                             <p>Approximate hours: {displayedCart.approximate_hours}</p>
                             <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
                             <p>Combo over rice: ${displayedCart.combo_over_rice}</p>

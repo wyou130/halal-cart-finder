@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import CartItem from "./CartItem"
 import Map from "./Map"
-import SortFilter from "./SortFilter"
+import Toggle from "./Toggle"
+import Search from "./Search"
 import { Grid } from 'semantic-ui-react'
+import Sort from "./Sort"
 
 function CartsList() {
 
@@ -27,8 +29,22 @@ function CartsList() {
 
     function onHandleSort(sortInput) {
         setSortBy(sortInput)
-        // console.log(sortInput)
     }
+
+    const sortOptions = [
+        {
+            text: '',
+            value: ''
+        },
+        {
+            text: 'Rating High-to-Low',
+            value: 'rating'
+        },
+        {
+            text: 'Price Low-to-High',
+            value: 'price'
+        }
+    ]
 
     const sortedFilteredCarts = cartsList
         .filter(cart => cart.name.toLowerCase().includes(search.toLowerCase()))
@@ -43,12 +59,18 @@ function CartsList() {
         <>
             <div>
                 <h3>All Carts</h3>
-                <SortFilter 
-                    onHandleSearch={onHandleSearch}    
+                <Sort 
+                    sortOptions={sortOptions} 
+                    onHandleSort={onHandleSort} 
+                />
+                <Toggle 
                     onHandleShowAcceptsCard={onHandleShowAcceptsCard} 
                     isShowingAcceptsCard={isShowingAcceptsCard} 
-                    onHandleSort={onHandleSort} 
-                    sortBy={sortBy}
+                />
+                <Search 
+                    onHandleSearch={onHandleSearch} 
+                    label="Carts" 
+                    placeholder="by cart name"
                 />
             </div>
             <br/>
