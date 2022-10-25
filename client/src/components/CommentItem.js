@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import { Comment, Button, Icon } from 'semantic-ui-react'
+import { Comment, Button, Icon, Form, Input } from 'semantic-ui-react'
 
 function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
 
@@ -19,7 +19,6 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
         let editInput = {
             comment: commentInput
         }
-        // console.log(editInput)
         fetch(`/comments/${comment.id}`, {
             method: 'PATCH',
             headers: {
@@ -40,7 +39,6 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
     }
 
     function handleDelete(comment) {
-        // console.log(comment)
         if(window.confirm('Are you sure you want to delete your comment?')) {
             fetch(`/comments/${comment.id}`, {
                 method: "DELETE"
@@ -56,17 +54,17 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
         <>
             {
                 isEditing ?  
-                <form onSubmit={handleEdit}>
-                    <label htmlFor="comment">Comment: </label>
-                        <input 
+                <Form onSubmit={handleEdit}>
+                    {/* <label htmlFor="comment">Comment: </label> */}
+                        <Input 
                             required 
                             type="text" 
                             name="review" 
                             value={commentInput}
                             onChange={e => setCommentInput(e.target.value)}
                         />
-                    <button type="submit">Update Comment</button>
-                </form>
+                    <Button type="submit">Update Comment</Button>
+                </Form>
                 : 
                 <Comment>
                     <Comment.Avatar src={comment.user_image}/>

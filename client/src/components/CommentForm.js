@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
+import { Form, Input, TextArea, Button } from 'semantic-ui-react'
 
 function CommentForm({ review, onSubmitNewComment }) {
 
@@ -34,10 +35,10 @@ function CommentForm({ review, onSubmitNewComment }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <label htmlFor="comment">Your Comment: </label>
                 <div>
-                    <input 
+                    <TextArea 
                         required 
                         type="text" 
                         name="comment" 
@@ -45,8 +46,8 @@ function CommentForm({ review, onSubmitNewComment }) {
                         onChange={e => setComment(e.target.value)}
                     />
                 </div>
-                <button type="submit">Add Comment</button>
-            </form>
+                <Button type="submit">Add Comment</Button>
+            </Form>
         </div>
     )
 }

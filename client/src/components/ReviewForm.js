@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
-import { Rating } from 'semantic-ui-react'
+import { Rating, Form, Input, TextArea, Button } from 'semantic-ui-react'
 
 function ReviewForm({ cart, onSubmitNewReview }) {
 
@@ -22,7 +22,6 @@ function ReviewForm({ cart, onSubmitNewReview }) {
             user_id: currentUser.id,
             cart_id: cart
         }
-        // console.log(reviewInput)
         fetch('/reviews', {
             method: 'POST',
             headers: {
@@ -48,7 +47,8 @@ function ReviewForm({ cart, onSubmitNewReview }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <h4>Add a Review</h4>
+            <Form onSubmit={handleSubmit}>
                 <datalist id="tickmarks">
                     <option value="0" label="0"></option>
                     <option value="1" label="1"></option>
@@ -59,7 +59,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </datalist>
                 <label htmlFor="dateVisited">Date Visited</label>
                 <div>
-                    <input 
+                    <Input 
                         required 
                         type="date" 
                         name="dateVisited" 
@@ -69,7 +69,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </div>
                 <label htmlFor="rating">Rating</label>
                 <div>
-                    <input 
+                    <Input 
                         required 
                         type="range" 
                         min="0"
@@ -85,7 +85,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </div>
                 <label htmlFor="hotSauceSpice">How hot is the hot sauce?</label>
                 <div>
-                    <input 
+                    <Input 
                         required 
                         type="range" 
                         min="0"
@@ -101,16 +101,17 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </div>
                 <label htmlFor="review">Review</label>
                 <div>
-                    <input 
+                    <TextArea 
                         required 
+                        placeholder="Share your thoughts on this cart"
                         type="text" 
                         name="review" 
                         value={review}
                         onChange={e => setReview(e.target.value)}
                     />
                 </div>
-                <button type="submit">Add Review</button>
-            </form>
+                <Button type="submit">Add Review</Button>
+            </Form>
             {errors.map(error => <p key={error} className='error'>{error}</p>)}
         </div>
     )

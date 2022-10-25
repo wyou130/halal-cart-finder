@@ -95,7 +95,7 @@ function CartDetails() {
 
     return (
         <div>
-            <button onClick={() => history.goBack()}>Go Back</button>
+            <Button onClick={() => history.goBack()}>Go Back</Button>
             <Item.Group>
                 <Item>
                     <img 
