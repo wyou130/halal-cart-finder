@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import { Input, Icon, Button } from 'semantic-ui-react'
+import { Input, Icon, Button, Form } from 'semantic-ui-react'
 
 function Login () {
 
@@ -45,21 +45,23 @@ function Login () {
     return(
         <div>
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
+            <Form onSubmit={handleSubmit}>
+                {/* <label htmlFor="email">Email</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Email"
                         type="text" 
                         name="email" 
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                 </div>
-                <label htmlFor="password">Password</label>
+                {/* <label htmlFor="password">Password</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Password"
                         type={isShowingPassword ? "text" : "password"} 
                         name="password" 
                         value={password}
@@ -68,7 +70,7 @@ function Login () {
                     <Icon name={isShowingPassword ? 'eye slash' : 'eye'} size='large' onClick={() => setIsShowingPassword(!isShowingPassword)}/>
                 </div>
                 <Button type="submit">Log In</Button>
-            </form>
+            </Form>
             {errors.map(error => <p key={error} className='error'>{error}</p>)}
             <br/>
             <div>

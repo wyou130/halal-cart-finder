@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
-import { Divider, Button, Icon, Item } from 'semantic-ui-react'
+import { Form, Button, Icon, Item, Input, TextArea, Rating } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -106,10 +106,18 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 <Item.Meta>on {review.date_visited_formatted}</Item.Meta>
                 {
                     isEditing ?
-                    <form onSubmit={handleEdit}>
+                    <Form onSubmit={handleEdit}>
+                        <datalist id="tickmarks">
+                            <option value="0" label="0"></option>
+                            <option value="1" label="1"></option>
+                            <option value="2" label="2"></option>
+                            <option value="3" label="3"></option>
+                            <option value="4" label="4"></option>
+                            <option value="5" label="5"></option>
+                        </datalist>
                         <label htmlFor="rating">Rating</label>
                         <div>
-                            <input 
+                            <Input 
                                 required 
                                 type="range" 
                                 min="0"
@@ -120,18 +128,12 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                                 value={rating}
                                 onChange={e => setRating(e.target.value)}
                             />
-                            <datalist id="tickmarks">
-                                <option value="0" label="0"></option>
-                                <option value="1" label="1"></option>
-                                <option value="2" label="2"></option>
-                                <option value="3" label="3"></option>
-                                <option value="4" label="4"></option>
-                                <option value="5" label="5"></option>
-                            </datalist>
+                            <br/>
+                            <Rating icon='star' size='huge' rating={rating} maxRating={5}/>
                         </div>
                         <label htmlFor="hotSauceSpice">How hot is the hot sauce?</label>
                         <div>
-                            <input 
+                            <Input 
                                 required 
                                 type="range" 
                                 min="0"
@@ -142,18 +144,12 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                                 value={hotSauceSpice}
                                 onChange={e => setHotSauceSpice(e.target.value)}
                             />
-                            <datalist id="tickmarks">
-                                <option value="0" label="0"></option>
-                                <option value="1" label="1"></option>
-                                <option value="2" label="2"></option>
-                                <option value="3" label="3"></option>
-                                <option value="4" label="4"></option>
-                                <option value="5" label="5"></option>
-                            </datalist>
+                            <br/>
+                            <Rating icon='star' size='huge' rating={hotSauceSpice} maxRating={5}/>
                         </div>
                         <label htmlFor="review">Review</label>
                         <div>
-                            <input 
+                            <TextArea 
                                 required 
                                 type="text" 
                                 name="review" 
@@ -161,8 +157,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                                 onChange={e => setReviewInput(e.target.value)}
                             />
                         </div>
-                        <button type="submit">Update Review</button>
-                    </form>
+                        <Button type="submit">Update Review</Button>
+                    </Form>
                     :
                     <>
                         <Item.Description>
@@ -190,14 +186,15 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         isShowingComments ? 
                         <>
                             <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                            <br />
-                            <button onClick={toggleForm}>
+                            {/* <br /> */}
+                            <Button onClick={toggleForm}>
                                 {isShowingForm ?
                                     "Cancel"
                                     :
                                     "Comment on This Review"
                                 }
-                            </button>
+                            </Button>
+                            <br/>
                             {isShowingForm ? 
                                 <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
                                 :
@@ -209,7 +206,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                             {totalComments} Comments
                         </Item.Description> 
                     }
-                    {/* <br/> */}
+                    <br/>
                     <Button onClick={toggleComments}>
                     {isShowingComments ? "Hide Comments" : "Show Comments"}
                 </Button>

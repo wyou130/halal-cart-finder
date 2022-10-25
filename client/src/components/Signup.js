@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import { Input, Icon, Button } from 'semantic-ui-react'
+import { Input, Icon, Button, Form } from 'semantic-ui-react'
 
 function Signup() {
 
@@ -54,31 +54,34 @@ function Signup() {
     return (
         <div>
             <h1>Create an Account</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Username</label>
+            <Form onSubmit={handleSubmit}>
+                {/* <label htmlFor="name">Username</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Username"
                         type="text" 
                         name="name" 
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                 </div>
-                <label htmlFor="email">Email</label>
+                {/* <label htmlFor="email">Email</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Email"
                         type="text" 
                         name="email" 
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                 </div>
-                <label htmlFor="password">Password</label>
+                {/* <label htmlFor="password">Password</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Password"
                         type={isShowingPassword ? "text" : "password"} 
                         name="password" 
                         value={password}
@@ -86,19 +89,21 @@ function Signup() {
                     />
                     <Icon name={isShowingPassword ? 'eye slash' : 'eye'} size='large' onClick={() => setIsShowingPassword(!isShowingPassword)}/>
                 </div>
-                <label htmlFor="location">Location</label>
+                {/* <label htmlFor="location">Location</label> */}
                 <div>
                     <Input 
                         required 
+                        placeholder="Location"
                         type="text" 
                         name="location" 
                         value={location}
                         onChange={e => setLocation(e.target.value)}
                     />
                 </div>
-                <label htmlFor="image">Profile Picture</label>
+                {/* <label htmlFor="image">Profile Picture</label> */}
                 <div>
                     <Input 
+                        placeholder="Image"
                         type="text" 
                         name="image" 
                         value={image}
@@ -106,7 +111,7 @@ function Signup() {
                     />
                 </div>
                 <Button type="submit">Create Account</Button>
-            </form>
+            </Form>
             {errors.map(error => <p key={error} className='error'>{error}</p>)}
             <br/>
             <div>
