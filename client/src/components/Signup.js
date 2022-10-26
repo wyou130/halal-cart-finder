@@ -112,7 +112,7 @@ function Signup() {
                 </div>
                 <Button type="submit">Create Account</Button>
             </Form>
-            {errors.map(error => <p key={error} className='error'>{error}</p>)}
+            {errors.map(error => <p key={error} className='error'><Icon name='attention'/>{error}</p>)}
             <br/>
             <div>
                 Already have an account? <Link to='/login'>Log in now!</Link>

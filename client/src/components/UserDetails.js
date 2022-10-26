@@ -149,7 +149,7 @@ function UserDetails() {
                                 </div>
                                 <Button type="submit">Update Profile</Button>
                             </Form>
-                            {errors.map(error => <p key={error} className='error'>{error}</p>)}
+                            {errors.map(error => <p key={error} className='error'><Icon name='attention'/>{error}</p>)}
                             <br/>
                             <div>
                                 <Button icon labelPosition='left' onClick={toggleForm}>
@@ -171,8 +171,10 @@ function UserDetails() {
                         />
                         <Item.Content>
                             <Item.Header>{displayedUser.name}</Item.Header>
-                            <Item.Description>{displayedUser.location}</Item.Description>
-                            <Item.Description>Joined on {displayedUser.created_at}</Item.Description>
+                            <Item.Meta>Joined on {displayedUser.created_at}</Item.Meta>
+                            <Item.Description>
+                                <Icon name='home'/>{displayedUser.location}
+                            </Item.Description>
                             <br />
                             {currentUser && displayedUser.id === currentUser.id ? 
                                 <div>
