@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
 
 function NavBar() {
 
@@ -15,30 +15,30 @@ function NavBar() {
     }
 
     return(
-        // <nav>
         <Menu pointing secondary>
-            {/* <Link to="/">Cart Finder</Link> */}
             <Menu.Item as={Link} to="/">Cart Finder</Menu.Item>
-            {/* Above is for logo so not NavLink */}
-            {/* <NavLink to="/carts">Carts</NavLink> */}
             <Menu.Item as={NavLink} to="/carts">Carts</Menu.Item>
-            {/* <NavLink to="/reviews">Reviews</NavLink> */}
             <Menu.Item as={NavLink} to="/reviews">Reviews</Menu.Item>
             {
                 currentUser ? 
                 <>
-                    {/* <NavLink to="/favorites">Favorites</NavLink> */}
                     <Menu.Item as={NavLink} to="/favorites">Favorites</Menu.Item>
-                    {/* <NavLink to="/users">Users</NavLink> */}
                     <Menu.Item as={NavLink} to="/users">Users</Menu.Item>
-                    {/* <NavLink to="/login" onClick={handleLogOut}>Log Out</NavLink> */}
-                    <Menu.Item as={NavLink} to="/login" onClick={handleLogOut}>Log Out</Menu.Item>
+                    <Menu.Menu position='right'>
+                        <Menu.Item as={NavLink} to={`/users/${currentUser.id}`}>
+                            Logged in as {currentUser.name}
+                            <Image avatar src={currentUser.image}/>
+                        </Menu.Item>
+                        <Menu.Item as={NavLink} to="/login" onClick={handleLogOut} style={{marginBottom: '0.35em'}}>
+                            Log Out
+                        </Menu.Item>
+                    </Menu.Menu>
                 </>
                 :
-                // <NavLink to="/login">Log In / Sign Up</NavLink>
-                <Menu.Item as={NavLink} to="/login">Log In / Sign Up</Menu.Item>
+                <Menu.Menu position='right'>
+                    <Menu.Item as={NavLink} to="/login">Log In / Sign Up</Menu.Item>
+                </Menu.Menu>
             }
-        {/* </nav> */}
         </Menu>
     )
 }

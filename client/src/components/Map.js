@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ReactMapGL, { Marker, NavigationControl, Popup } from 'react-map-gl'
 import { FcRating } from 'react-icons/fc'
+// import { Container } from 'semantic-ui-react'
 
 function Map() {
 
@@ -17,14 +18,14 @@ function Map() {
     const [viewport, setViewport] = useState({
         latitude: 40.770627,
         longitude: -73.974409,
-        width: '80vw',
+        width: '100vw',
         height: '80vh',
         zoom: 11
     })
 
 
     return (
-        <div>
+        // <Container textAlign='center'>
             <ReactMapGL 
                 {...viewport} 
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -72,7 +73,7 @@ function Map() {
                     null
                 }
             </ReactMapGL>
-        </div>
+        // </Container>
     )
 }
 

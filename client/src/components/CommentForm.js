@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
-import { Form, Input, TextArea, Button } from 'semantic-ui-react'
+import { Form, TextArea, Button } from 'semantic-ui-react'
 
 function CommentForm({ review, onSubmitNewComment }) {
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import UserItem from "./UserItem"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Container } from 'semantic-ui-react'
 
-function UserList() {
+function UsersList() {
 
     const [usersList, setUsersList] = useState([])
 
@@ -15,13 +15,16 @@ function UserList() {
     // console.log(usersList)
 
     return(
-        <div>
-            <h3>Users List</h3>
+        <Container>
+            <Container textAlign='center'>
+                <h3>Users</h3>
+            </Container>
+            <br/>
             <Grid columns={3} padded> 
                 {usersList.map(user => <UserItem key={user.id} user={user}/>)}
             </Grid>
-        </div>
+        </Container>
     )
 }
 
-export default UserList
+export default UsersList

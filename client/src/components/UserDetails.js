@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
-import { Button, Icon, Item } from 'semantic-ui-react'
+import { Button, Icon, Item, Container, Divider, Form, Input, ItemMeta } from 'semantic-ui-react'
 
 function UserDetails() {
 
@@ -106,52 +106,68 @@ function UserDetails() {
     }
 
     return(
-        <div>
-            <Button onClick={() => history.goBack()}>Go Back</Button>
-            {
-                currentUser && isEditing ? 
-                <>
-                    <form onSubmit={handleUpdate}>
-                        <label htmlFor="image">Profile Picture</label>
-                        <div>
-                            <input 
-                                type="text" 
-                                name="image" 
-                                value={image}
-                                onChange={e => setImage(e.target.value)}
-                            />
-                        </div>
-                        <label htmlFor="name">Username</label>
-                        <div>
-                            <input 
-                                required 
-                                type="text" 
-                                name="name" 
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                            />
-                        </div>
-                        <label htmlFor="location">Location</label>
-                        <div>
-                            <input 
-                                required 
-                                type="text" 
-                                name="location" 
-                                value={location}
-                                onChange={e => setLocation(e.target.value)}
-                            />
-                        </div>
-                        <button type="submit">Update Profile</button>
-                    </form>
-                    {errors.map(error => <p key={error} className='error'>{error}</p>)}
-                </>
-                :
-                <Item.Group>
-                    <Item>
+        <Container>
+            <div>
+                <Button onClick={() => history.goBack()}>Go Back</Button>
+            </div>
+            <Divider/>
+            <br/>
+            <Item.Group>
+                <Item>
+                    {
+                        currentUser && isEditing ? 
+                        <Item.Content>
+                            <Form onSubmit={handleUpdate}>
+                                <label htmlFor="image">Profile Picture</label>
+                                <div>
+                                    <Input 
+                                        type="text" 
+                                        name="image" 
+                                        value={image}
+                                        onChange={e => setImage(e.target.value)}
+                                    />
+                                </div>
+                                <label htmlFor="name">Username</label>
+                                <div>
+                                    <Input 
+                                        required 
+                                        type="text" 
+                                        name="name" 
+                                        value={name}
+                                        onChange={e => setName(e.target.value)}
+                                    />
+                                </div>
+                                <label htmlFor="location">Location</label>
+                                <div>
+                                    <Input 
+                                        required 
+                                        type="text" 
+                                        name="location" 
+                                        value={location}
+                                        onChange={e => setLocation(e.target.value)}
+                                    />
+                                </div>
+                                <Button type="submit">Update Profile</Button>
+                            </Form>
+                            {errors.map(error => <p key={error} className='error'>{error}</p>)}
+                            <br/>
+                            <div>
+                                <Button icon labelPosition='left' onClick={toggleForm}>
+                                    <Icon name='cancel'/>
+                                    Cancel Edit
+                                </Button>
+                                <Button icon labelPosition='left' onClick={() => handleDelete(currentUser)}>
+                                    <Icon name='trash alternate'/>
+                                    Delete Account
+                                </Button>
+                            </div>
+                        </Item.Content>
+                        :
+                        <>
                         <img
                             alt={displayedUser.name} 
                             src={displayedUser.image}
-                            style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "2em", marginLeft: "2em"}}
+                            style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "3em"}}
                         />
                         <Item.Content>
                             <Item.Header>{displayedUser.name}</Item.Header>
@@ -161,8 +177,8 @@ function UserDetails() {
                             {currentUser && displayedUser.id === currentUser.id ? 
                                 <div>
                                     <Button icon labelPosition='left' onClick={toggleForm}>
-                                    {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                                    {isEditing ? "Cancel Edit" : "Edit Profile"}
+                                        <Icon name='edit outline'/>
+                                        Edit Profile
                                     </Button>
                                     <Button icon labelPosition='left' onClick={() => handleDelete(currentUser)}>
                                         <Icon name='trash alternate'/>
@@ -173,10 +189,14 @@ function UserDetails() {
                                 null
                             }
                         </Item.Content>
+                    </>
+                    }
                     </Item>
                 </Item.Group>
-            }
-                <h3>{displayedUser.total_reviews} Reviews</h3>
+                <br/>
+                <Divider horizontal>{displayedUser.total_reviews} Reviews</Divider>
+                <br/>
+                {/* <h3>{displayedUser.total_reviews} Reviews</h3> */}
                 <Item.Group divided>
                     {
                         displayedReviews.map(review => <ReviewItem 
@@ -187,7 +207,7 @@ function UserDetails() {
                         />)
                     }
                 </Item.Group>
-        </div>
+        </Container>
     )
 }
 

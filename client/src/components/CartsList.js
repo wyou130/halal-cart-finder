@@ -3,7 +3,7 @@ import CartItem from "./CartItem"
 import Map from "./Map"
 import Toggle from "./Toggle"
 import Search from "./Search"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Container, Menu } from 'semantic-ui-react'
 import Sort from "./Sort"
 
 function CartsList() {
@@ -56,33 +56,33 @@ function CartsList() {
         })
 
     return (
-        <>
-            <div>
+        <Container>
+            <Container textAlign='center' style={{width: '75%'}}>
                 <h3>All Carts</h3>
-                <Sort 
-                    sortOptions={sortOptions} 
-                    onHandleSort={onHandleSort} 
-                />
-                <Toggle 
-                    onHandleShowAcceptsCard={onHandleShowAcceptsCard} 
-                    isShowingAcceptsCard={isShowingAcceptsCard} 
-                />
-                <Search 
-                    onHandleSearch={onHandleSearch} 
-                    label="Carts" 
-                    placeholder="by cart name"
-                />
-            </div>
+                <Menu text widths={3}>
+                    <Sort 
+                        sortOptions={sortOptions} 
+                        onHandleSort={onHandleSort} 
+                    />
+                    <Toggle 
+                        onHandleShowAcceptsCard={onHandleShowAcceptsCard} 
+                        isShowingAcceptsCard={isShowingAcceptsCard} 
+                    />
+                    <Search 
+                        onHandleSearch={onHandleSearch} 
+                        label="Carts" 
+                        placeholder="by cart name"
+                    />
+                </Menu>
+            </Container>
             <br/>
-            <div>
-                <Grid columns={3} padded> 
-                    {sortedFilteredCarts.map(cart => <CartItem key={cart.id} cart={cart} />)}
-                </Grid>
-            </div>
+            <Grid columns={3} padded> 
+                {sortedFilteredCarts.map(cart => <CartItem key={cart.id} cart={cart} />)}
+            </Grid>
             <div>
                 {/* <Map /> */}
             </div>
-        </>
+        </Container>
     )
 }
 
