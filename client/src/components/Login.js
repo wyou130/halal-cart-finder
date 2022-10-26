@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import { Input, Icon, Button, Form } from 'semantic-ui-react'
+import { Input, Icon, Button, Form, Container } from 'semantic-ui-react'
 
 function Login () {
 
@@ -43,7 +43,7 @@ function Login () {
     }
 
     return(
-        <div>
+        <Container>
             <h1>Log In</h1>
             <Form onSubmit={handleSubmit}>
                 {/* <label htmlFor="email">Email</label> */}
@@ -76,7 +76,7 @@ function Login () {
             <div>
                 Don't have an account yet? <Link to='/signup'>Sign up now!</Link>
             </div>
-        </div>
+        </Container>
     )
 }
 

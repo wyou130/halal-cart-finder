@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
 import ReviewForm from "./ReviewForm"
-import { Item, Button } from 'semantic-ui-react'
+import { Item, Button, Container, Divider } from 'semantic-ui-react'
 
 function CartDetails() {
 
@@ -94,14 +94,18 @@ function CartDetails() {
     }
 
     return (
-        <div>
-            <Button onClick={() => history.goBack()}>Go Back</Button>
+        <Container>
+            <div>
+                <Button onClick={() => history.goBack()}>Go Back</Button>
+            </div>
+            <Divider/>
+            <br/>
             <Item.Group>
                 <Item>
                     <img 
                         alt={displayedCart.name}
                         src={displayedCart.image} 
-                        style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "2em", marginLeft: "2em"}}
+                        style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "3em"}}
                     />
                     <Item.Content>
                         <Item.Header>{displayedCart.name}</Item.Header>
@@ -124,8 +128,10 @@ function CartDetails() {
                 </Item>
             </Item.Group>
             <br/>
-            <div>
-                <h3>{displayedCart.total_reviews} Reviews</h3>
+            <Divider horizontal>{displayedCart.total_reviews} Reviews</Divider>
+            {/* <br/> */}
+            <Container textAlign='center'>
+                {/* <h3>{displayedCart.total_reviews} Reviews</h3> */}
                 <Button onClick={toggleForm}>
                     {isShowingForm ?
                         "Cancel"
@@ -138,8 +144,9 @@ function CartDetails() {
                     : 
                     null
                 }
-            </div>
+            </Container>
             <br/>
+            {/* <br/> */}
             <div>
                 <Item.Group divided>
                     {
@@ -152,7 +159,7 @@ function CartDetails() {
                     }
                 </Item.Group>
             </div>
-        </div>
+        </Container>
     )
 }
 

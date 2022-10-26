@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom'
-import { Grid, Card, Divider, Icon, Image } from 'semantic-ui-react'
+import { Grid, Card, Divider, Icon, Image, Header } from 'semantic-ui-react'
 
 function CartItem({ cart }) {
 
     return (
         <Grid.Column as={Link} to={`/carts/${cart.id}`}>
             <Card style={{width: 'auto', height: '680px'}}>
-            <img
-                alt={cart.name} 
-                src={cart.image} 
-                style={{width: '100%', height: '50%', objectFit: 'cover'}}
-            />
+                {/* <Card.Header>
+                    <Image avatar src={cart.image}/>
+                </Card.Header> */}
+                <img
+                    alt={cart.name} 
+                    src={cart.image} 
+                    style={{width: '100%', height: '50%', objectFit: 'cover'}}
+                />
                 <Card.Content>
                     <Card.Header>{cart.name}</Card.Header>
                     <Card.Description>Around {cart.street} and {cart.avenue}</Card.Description>

@@ -9,7 +9,7 @@ import './App.css'
 import CartsList from './components/CartsList'
 import CartDetails from './components/CartDetails'
 import ReviewsList from './components/ReviewsList'
-import UserList from './components/UserList'
+import UsersList from './components/UsersList'
 import Home from './components/Home'
 import Favorites from './components/Favorites'
 
@@ -39,7 +39,7 @@ function App() {
             <ReviewsList />
           </Route>
           <Route exact path="/users">
-            <UserList />
+            <UsersList />
           </Route>
           <Route exact path="/users/:id">
             <UserDetails />

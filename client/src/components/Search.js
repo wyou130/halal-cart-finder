@@ -1,9 +1,9 @@
-import { Input } from 'semantic-ui-react'
+import { Input, Menu } from 'semantic-ui-react'
 
 function Search({ onHandleSearch, label, placeholder }) {
 
     return (
-        <div>
+        <Menu.Item>
             <label htmlFor="search">Search {label}: </label>
             <Input
                 onChange={(e) => onHandleSearch(e.target.value)}
@@ -11,7 +11,7 @@ function Search({ onHandleSearch, label, placeholder }) {
                 placeholder={placeholder}
                 icon='search'
             />
-        </div>
+        </Menu.Item>
     )
 }
 

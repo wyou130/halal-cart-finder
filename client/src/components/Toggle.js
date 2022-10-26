@@ -1,16 +1,16 @@
-import { Checkbox } from 'semantic-ui-react'
+import { Checkbox, Menu } from 'semantic-ui-react'
 
 function Toggle({ onHandleShowAcceptsCard, isShowingAcceptsCard }) {
 
     return (
-        <div>
+        <Menu.Item>
             <label htmlFor="cards">Accepts Card</label>
             <Checkbox toggle
                 type="checkbox"
                 checked={isShowingAcceptsCard}
                 onChange={onHandleShowAcceptsCard}
             />
-        </div>
+        </Menu.Item>
     )
 }
 

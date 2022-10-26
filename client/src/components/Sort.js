@@ -1,17 +1,15 @@
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Menu } from 'semantic-ui-react'
 
 function Sort({ onHandleSort, sortOptions }) {
 
     return (
-        <div>
-            <div>
-                <label htmlFor="sort">Sort By: </label>
-                <Dropdown 
-                    options={sortOptions}
-                    onChange={(e) => onHandleSort(e.target.textContent)}
-                />
-            </div>
-        </div>
+        <Menu.Item>
+            <label htmlFor="sort">Sort By: </label>
+            <Dropdown 
+                options={sortOptions}
+                onChange={(e) => onHandleSort(e.target.textContent)}
+            />
+        </Menu.Item>
     )
 }
 

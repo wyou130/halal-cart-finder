@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import CartItem from "./CartItem"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Container } from 'semantic-ui-react'
 
 function Favorites() {
 
@@ -15,12 +15,15 @@ function Favorites() {
     // console.log(cartsList)
 
     return (
-        <div>
-            <h3>Favorite Carts</h3>
+        <Container>
+            <Container textAlign='center'>
+                <h3>My Favorites</h3>
+            </Container>
+            <br/>
             <Grid columns={3} padded> 
                 {favoriteCartsList.map(cart => <CartItem key={cart.id} cart={cart.cart} />)}
             </Grid>
-        </div>
+        </Container>
     )
 }
 

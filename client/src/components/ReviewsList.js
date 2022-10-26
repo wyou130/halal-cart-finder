@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ReviewItem from "./ReviewItem"
 import Sort from "./Sort"
 import Search from "./Search"
-import { Item } from 'semantic-ui-react'
+import { Item, Container, Menu } from 'semantic-ui-react'
 
 function ReviewsList() {
 
@@ -69,21 +69,26 @@ function ReviewsList() {
         })
 
     return (
-        <div>
-            <h3>All Reviews</h3>
-            <Sort 
-                sortOptions={sortOptions} 
-                onHandleSort={onHandleSort}
-            />
-            <Search 
-                onHandleSearch={onHandleSearch} 
-                label="Reviews" 
-                placeholder="by cart, user, or content"
-            />
+        <Container>
+            <Container textAlign='center' style={{width: '50%'}}>
+                <h3>All Reviews</h3>
+                <Menu text widths={2}>
+                    <Sort 
+                        sortOptions={sortOptions} 
+                        onHandleSort={onHandleSort}
+                    />
+                    <Search 
+                        onHandleSearch={onHandleSearch} 
+                        label="Reviews" 
+                        placeholder="by cart, user, or content"
+                    />
+                </Menu>
+            </Container>
+            <br/>
             <Item.Group divided> 
                 {sortedFilteredReviews.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
             </Item.Group>
-        </div>
+        </Container>
     )
 }
 
