@@ -52,29 +52,28 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
 
     return (
         <>
-            {
-                isEditing ?  
-                <Form onSubmit={handleEdit}>
-                    {/* <label htmlFor="comment">Comment: </label> */}
-                        <Input 
-                            required 
-                            type="text" 
-                            name="review" 
-                            value={commentInput}
-                            onChange={e => setCommentInput(e.target.value)}
-                        />
-                    <Button type="submit">Update Comment</Button>
-                </Form>
-                : 
-                <Comment>
-                    <Comment.Avatar src={comment.user_image}/>
-                    <Comment.Content>
-                        <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
-                        <Comment.Metadata>on {comment.created_at}, last updated {comment.updated_at}</Comment.Metadata>
+            <Comment>
+                <Comment.Avatar src={comment.user_image}/>
+                <Comment.Content>
+                    <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
+                    <Comment.Metadata>on {comment.created_at}, last updated {comment.updated_at}</Comment.Metadata>
+                    {
+                        isEditing ?  
+                        <Form onSubmit={handleEdit}>
+                            <Input 
+                                required 
+                                type="text" 
+                                name="review" 
+                                value={commentInput}
+                                onChange={e => setCommentInput(e.target.value)}
+                            />
+                            <Button type="submit">Update Comment</Button>
+                        </Form>
+                    : 
                         <Comment.Text>{comment.comment}</Comment.Text>
+                    }
                     </Comment.Content>
                 </Comment>
-            }
             {
                 comment.user_id === currentUser.id ? 
                 <>

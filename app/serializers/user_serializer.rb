@@ -1,10 +1,19 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :location, :image, :total_reviews
+  attributes :id, :name, :email, :location, :image, :total_reviews, :created_at, :favorites
 
   has_many :reviews
+  has_many :favorites
 
   def total_reviews
     object.reviews.length
   end
+
+  def created_at
+    object.created_at.strftime("%b %-d, %Y")
+  end
+
+  # def favorites 
+  #   object.favorites.
+  # end
 
 end

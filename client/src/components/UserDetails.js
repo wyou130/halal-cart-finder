@@ -156,6 +156,7 @@ function UserDetails() {
                         <Item.Content>
                             <Item.Header>{displayedUser.name}</Item.Header>
                             <Item.Description>{displayedUser.location}</Item.Description>
+                            <Item.Description>Joined on {displayedUser.created_at}</Item.Description>
                             <br />
                             {currentUser && displayedUser.id === currentUser.id ? 
                                 <div>
