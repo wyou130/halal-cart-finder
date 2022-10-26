@@ -41,6 +41,8 @@ function Login () {
         setEmail("")
         setPassword("")
     }
+    
+    // console.log(errors)
 
     return(
         <Container>
@@ -71,7 +73,7 @@ function Login () {
                 </div>
                 <Button type="submit">Log In</Button>
             </Form>
-            {errors.map(error => <p key={error} className='error'>{error}</p>)}
+            {errors.length === 0 ? null : <p className='error'><Icon name='attention'/>{errors}</p>}
             <br/>
             <div>
                 Don't have an account yet? <Link to='/signup'>Sign up now!</Link>

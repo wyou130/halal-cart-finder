@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserProvider'
-import { Rating, Form, Input, TextArea, Button } from 'semantic-ui-react'
+import { Rating, Form, Input, TextArea, Button, Icon } from 'semantic-ui-react'
 
 function ReviewForm({ cart, onSubmitNewReview }) {
 
@@ -112,7 +112,7 @@ function ReviewForm({ cart, onSubmitNewReview }) {
                 </div>
                 <Button type="submit">Add Review</Button>
             </Form>
-            {errors.map(error => <p key={error} className='error'>{error}</p>)}
+            {errors.map(error => <p key={error} className='error'><Icon name='attention'/>{error}</p>)}
         </div>
     )
 }

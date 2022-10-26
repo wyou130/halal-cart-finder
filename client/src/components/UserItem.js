@@ -9,7 +9,7 @@ function UserItem({ user }) {
                 <img alt={user.name} src={user.image} style={{width: '100%', height: '75%', objectFit: 'cover'}}/>
                 <Card.Content> 
                     <Card.Header>{user.name}</Card.Header>
-                    <Card.Description>{user.location}</Card.Description>
+                    <Card.Description><Icon name='home'/>{user.location}</Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                     <Icon name='food'/>
