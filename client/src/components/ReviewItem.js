@@ -182,33 +182,34 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     null
                 }
                 <br/>
-                    {
-                        isShowingComments ? 
-                        <>
-                            <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                            {/* <br /> */}
-                            <Button onClick={toggleForm}>
-                                {isShowingForm ?
-                                    "Cancel"
-                                    :
-                                    "Comment on This Review"
-                                }
-                            </Button>
-                            <br/>
-                            {isShowingForm ? 
-                                <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                {
+                    isShowingComments ? 
+                    <>
+                        <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
+                        {/* <br /> */}
+                        <Button onClick={toggleForm}>
+                            {isShowingForm ?
+                                "Cancel"
                                 :
-                                null 
+                                "Comment on This Review"
                             }
-                        </>
-                        :
-                        <Item.Description>
-                            {totalComments} Comments
-                        </Item.Description> 
-                    }
-                    <br/>
-                    <Button onClick={toggleComments}>
-                    {isShowingComments ? "Hide Comments" : "Show Comments"}
+                        </Button>
+                        <br/>
+                        {isShowingForm ? 
+                            <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
+                            :
+                            null 
+                        }
+                    </>
+                    :
+                    // <Item.Description>
+                    //     {totalComments} Comments
+                    // </Item.Description> 
+                    null
+                }
+                <br/>
+                <Button onClick={toggleComments}>
+                    {isShowingComments ? "Hide Comments" : `Show ${totalComments} Comments`}
                 </Button>
             </Item.Content>
         </Item>
