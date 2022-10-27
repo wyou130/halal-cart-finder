@@ -1,14 +1,16 @@
+import { useContext } from "react"
 import { Link } from 'react-router-dom'
-import { Grid, Card, Divider, Icon, Image, Header } from 'semantic-ui-react'
+import { UserContext } from '../context/UserProvider'
+import { Grid, Card, Divider, Icon, Image, Header, Label } from 'semantic-ui-react'
 
 function CartItem({ cart }) {
+
+    let [currentUser] = useContext(UserContext)
 
     return (
         <Grid.Column as={Link} to={`/carts/${cart.id}`}>
             <Card style={{width: 'auto', height: '680px'}}>
-                {/* <Card.Header>
-                    <Image avatar src={cart.image}/>
-                </Card.Header> */}
+                {cart.favorited_by.includes(currentUser.id) ? <Label corner='right' color='red' icon='heart'/> : null}
                 <img
                     alt={cart.name} 
                     src={cart.image} 
