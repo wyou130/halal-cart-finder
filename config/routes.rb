@@ -34,4 +34,7 @@ Rails.application.routes.draw do
   # Custom route for deleting favorite based on user_id and cart_id
   delete '/favorites/:user_id/:cart_id', to: 'favorites#delete'
 
+  # Custom route for deleting like based on user_id and review_id
+  delete '/likes_reviews/:user_id/:review_id', to: 'likes_reviews#delete'
+
 end
