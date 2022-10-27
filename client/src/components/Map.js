@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ReactMapGL, { Marker, NavigationControl, Popup } from 'react-map-gl'
+import ReactMapGL, { Marker, NavigationControl, Popup, GeolocateControl } from 'react-map-gl'
 import { FcRating } from 'react-icons/fc'
 // import { Container } from 'semantic-ui-react'
 
@@ -8,12 +8,21 @@ function Map() {
 
     const [cartsList, setCartsList] = useState([])
     const [selectedCart, setSelectedCart] = useState(null)
+    const [currentLocation, setCurrentLocation] = useState([])
 
     useEffect(() => {
         fetch('/carts')
             .then(res => res.json())
             .then(carts => {setCartsList(carts)})
     }, [])
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCurrentLocation([position.coords.latitude, position.coords.longitude])
+        })
+    }, [])
+
+    // console.log(currentLocation)
 
     const [viewport, setViewport] = useState({
         latitude: 40.770627,
@@ -23,6 +32,15 @@ function Map() {
         zoom: 11
     })
 
+    const geolocateControlStyle = {
+        right: 10,
+        top: 10
+      }
+
+    const navigationControlStyle = {
+    left: 10,
+    top: 10
+    }
 
     return (
         // <Container textAlign='center'>
@@ -34,7 +52,18 @@ function Map() {
                     setViewport(viewport)
                 }}
             >
-                <NavigationControl/>
+                <NavigationControl
+                    style={navigationControlStyle}
+                />
+                <GeolocateControl
+                    positionOptions={{ enableHighAccuracy: true }}
+                    trackUserLocation={true}
+                    style={geolocateControlStyle}
+                    // onGeolocate={(position) => {
+                    //     // get latitude and longitude of user current location
+                    //     console.log(position.coords.latitude)
+                    // }}
+                />
                 {cartsList.map(cart => {
                     return (
                         <>
@@ -44,7 +73,6 @@ function Map() {
                                 longitude={cart.longitude}
                             >
                                 <FcRating 
-                                    // key={cart.name}
                                     onClick={e => {
                                         e.preventDefault()
                                         setSelectedCart(cart)
