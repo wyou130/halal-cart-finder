@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes_reviews, only: [:index, :create, :destroy]
   resources :comments, only: [:create, :update, :destroy]
   resources :favorites, only: [:index, :create]
   resources :reviews

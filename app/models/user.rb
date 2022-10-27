@@ -4,6 +4,7 @@ class User < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
     has_many :carts, through: :favorites
+    has_many :likes_reviews, dependent: :destroy
 
     has_secure_password
 
