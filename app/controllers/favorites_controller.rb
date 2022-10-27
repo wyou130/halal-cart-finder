@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
 
     # This index action shows only the specific favorites for the current user, similar to the specific_review action in comments controller
     def index
-        render json: Favorite.where(user_id: session[:user_id])
+        render json: Favorite.where(user_id: session[:user_id]), status: :ok
     end
 
     def create

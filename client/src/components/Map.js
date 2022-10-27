@@ -35,7 +35,7 @@ function Map() {
     const geolocateControlStyle = {
         right: 10,
         top: 10
-      }
+    }
 
     const navigationControlStyle = {
     left: 10,

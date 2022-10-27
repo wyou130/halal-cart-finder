@@ -7,16 +7,20 @@ import { Form, Button, Icon, Item, Input, TextArea, Rating } from 'semantic-ui-r
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
-    let [currentUser, setCurrentUser] = useContext(UserContext)
+    let [currentUser] = useContext(UserContext)
 
     const [displayedComments, setDisplayedComments] = useState([])
-    const [isShowingForm, setIsShowingForm] = useState(false)
+    const [isShowingCommentsForm, setIsShowingCommentsForm] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [rating, setRating] = useState(review.rating)
     const [hotSauceSpice, setHotSauceSpice] = useState(review.hot_sauce_spice)
     const [reviewInput, setReviewInput] = useState(review.review)
-    const [isShowingComments, setIsShowingComments] = useState(false)
+    // const [isShowingComments, setIsShowingComments] = useState(false)
     const [totalComments, setTotalComments] = useState(review.total_comments)
+    const [totalLikes, setTotalLikes] = useState(review.total_likes)
+    const [isLiked, setIsLiked] = useState(review.liked_by.includes(currentUser.id))
+
+    // console.log(isLiked)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
@@ -24,12 +28,14 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
             .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
     }, [])
 
-    function toggleForm() {
-        setIsShowingForm(!isShowingForm)
-    }
+    // console.log(review.liked_by)
+
+    // function toggleForm() {
+    //     setIsShowingCommentsForm(!isShowingForm)
+    // }
 
     function onSubmitNewComment(newComment) {
-        setIsShowingForm(false)
+        setIsShowingCommentsForm(false)
         setDisplayedComments([...displayedComments, newComment])
         setTotalComments(totalComments => totalComments + 1)
     }
@@ -38,8 +44,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
         setIsEditing(!isEditing)
     }
 
-    function toggleComments() {
-        setIsShowingComments(!isShowingComments)
+    function toggleCommentsForm() {
+        setIsShowingCommentsForm(!isShowingCommentsForm)
     }
 
     function onUpdateComment(updatedComment) {
@@ -56,6 +62,16 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
         })
         setDisplayedComments(updatedCommentList)
         setTotalComments(totalComments => totalComments - 1)
+    }
+
+    function onLikeReview() {
+        setTotalLikes(totalLikes => totalLikes + 1)
+        setIsLiked(true)
+    }
+
+    function onUnlikeReview() {
+        setTotalLikes(totalLikes => totalLikes - 1)
+        setIsLiked(false)
     }
 
     function handleEdit(e) {
@@ -85,7 +101,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     }
 
     function handleDelete(review) {
-        // console.log(review)
         if(window.confirm('Are you sure you want to delete your review?')) {
             fetch(`/reviews/${review.id}`, {
                 method: "DELETE"
@@ -94,6 +109,35 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 onDeleteReview(review)
               })
         } 
+    }
+
+    function handleLiked() {
+        if(isLiked) {
+            fetch(`/likes_reviews/${currentUser.id}/${review.id}`, {
+                method: "DELETE"
+            })
+                .then(onUnlikeReview())
+        } else {
+            let newLike ={
+                user_id: currentUser.id,
+                review_id: review.id
+            }
+            // console.log(newLike)
+            fetch('/likes_reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(newLike)
+            })
+                .then(res => {
+                    if(res.ok) {
+                        res.json()
+                        .then(onLikeReview())
+                        // alert('Cart successfully favorited!')
+                    }
+                })
+        }
     }
 
     return (
@@ -167,7 +211,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                         <Item.Description>{review.review}</Item.Description>
                     </>
                 }
-                <Item.Extra>Posted on {review.created_at}, last updated {review.updated_at}</Item.Extra>
                 {
                     review.user_id === currentUser.id ? 
                     <>
@@ -181,25 +224,33 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     : 
                     null
                 }
-                <br/>
+                <Item.Extra>Posted on {review.created_at}, last updated {review.updated_at}</Item.Extra>
+                <Button icon onClick={handleLiked}>
+                    <Icon 
+                        name={isLiked ? 'thumbs up' : 'thumbs up outline'}
+                    />
+                </Button>
+                <Button icon onClick={toggleCommentsForm}>
+                    <Icon name={'comment outline'}/>
+                </Button>
+                <Item.Description>{totalLikes} likes</Item.Description>
                 {
-                    isShowingComments ? 
+                    isShowingCommentsForm ? 
                     <>
                         <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                        {/* <br /> */}
-                        <Button onClick={toggleForm}>
+                        {/* <Button onClick={toggleForm}>
                             {isShowingForm ?
                                 "Cancel"
                                 :
                                 "Comment on This Review"
                             }
-                        </Button>
+                        </Button> */}
                         <br/>
-                        {isShowingForm ? 
+                        {/* {isShowingForm ?  */}
                             <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
-                            :
+                            {/* :
                             null 
-                        }
+                        } */}
                     </>
                     :
                     // <Item.Description>
@@ -208,8 +259,8 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     null
                 }
                 <br/>
-                <Button onClick={toggleComments}>
-                    {isShowingComments ? "Hide Comments" : `Show ${totalComments} Comments`}
+                <Button onClick={toggleCommentsForm}>
+                    {isShowingCommentsForm ? "Hide Comments" : `Show ${totalComments} Comments`}
                 </Button>
             </Item.Content>
         </Item>

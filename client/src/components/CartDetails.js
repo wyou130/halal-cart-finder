@@ -73,8 +73,8 @@ function CartDetails() {
         }
         else {
             let newFavorite = {
-            user_id: currentUser.id,
-            cart_id: displayedCart.id
+                user_id: currentUser.id,
+                cart_id: displayedCart.id
             }
             fetch('/favorites', {
                 method: 'POST',
