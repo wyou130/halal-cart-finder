@@ -48,4 +48,16 @@ Favorite.create(user_id: justin.id, cart_id: friends.id)
 Favorite.create(user_id: wendy.id, cart_id: usa.id)
 Favorite.create(user_id: ethan.id, cart_id: usa.id)
 
+puts "Seeding likes on reviews..."
+LikesReview.create(user_id: wendy.id, review_id: r1.id)
+LikesReview.create(user_id: wendy.id, review_id: r5.id)
+LikesReview.create(user_id: wendy.id, review_id: r6.id)
+LikesReview.create(user_id: wendy.id, review_id: r7.id)
+LikesReview.create(user_id: ethan.id, review_id: r2.id)
+LikesReview.create(user_id: ethan.id, review_id: r4.id)
+LikesReview.create(user_id: ethan.id, review_id: r5.id)
+LikesReview.create(user_id: ethan.id, review_id: r10.id)
+LikesReview.create(user_id: justin.id, review_id: r1.id)
+LikesReview.create(user_id: justin.id, review_id: r2.id)
+
 puts "Done!"
