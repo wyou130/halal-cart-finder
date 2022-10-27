@@ -58,7 +58,8 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                     <Comment.Author as={Link} to={`/users/${comment.user_id}`}>{comment.user_name}</Comment.Author>
                     <Comment.Metadata>on {comment.created_at}, last updated {comment.updated_at}</Comment.Metadata>
                     {
-                        isEditing ?  
+                        isEditing ?
+                        <>  
                         <Form onSubmit={handleEdit}>
                             <Input 
                                 required 
@@ -69,24 +70,54 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                             />
                             <Button type="submit">Update Comment</Button>
                         </Form>
+                        {
+                            comment.user_id === currentUser.id ? 
+                            <>
+                                <Comment.Action size='mini' onClick={toggleEdit}>
+                                    <Icon name='cancel'/>
+                                </Comment.Action> 
+                                <Comment.Action size='mini'  onClick={() => handleDelete(comment)}>
+                                    <Icon name='trash alternate'/>
+                                </Comment.Action>
+                            </>
+                            : 
+                            null
+                        }
+                        </>
                     : 
+                        <>
                         <Comment.Text>{comment.comment}</Comment.Text>
+                        {
+                            comment.user_id === currentUser.id ? 
+                            <>
+                                <Comment.Action size='mini' onClick={toggleEdit}>
+                                    <Icon name='edit outline'/>
+                                </Comment.Action> 
+                                <Comment.Action size='mini' onClick={() => handleDelete(comment)}>
+                                    <Icon name='trash alternate'/>
+                                </Comment.Action>
+                            </>
+                            : 
+                            null
+                        }
+                        </>
                     }
                     </Comment.Content>
                 </Comment>
-            {
+                {/* Moved the below into the text/form section instead of under the entire comment */}
+            {/* {
                 comment.user_id === currentUser.id ? 
                 <>
-                    <Button size='mini' icon onClick={toggleEdit}>
+                    <Comment.Action size='mini' onClick={toggleEdit}>
                         {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                    </Button> 
+                    </Comment.Action> 
                     <Button size='mini' icon onClick={() => handleDelete(comment)}>
                         <Icon name='trash alternate'/>
                     </Button>
                 </>
                 : 
                 null
-            }
+            } */}
         </>
     )
 }
