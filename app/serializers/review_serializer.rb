@@ -1,10 +1,10 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :rating, :review, :hot_sauce_spice, :date_visited, :cart_name, :user_name, :user_id, :cart_id, :total_comments, :date_visited_formatted, :created_at, :updated_at, :user_image, :total_likes, :liked_by
+  attributes :id, :rating, :review, :hot_sauce_spice, :date_visited, :cart_name, :user_name, :user_id, :cart_id, :total_comments, :date_visited_formatted, :created_at, :updated_at, :user_image, :total_likes, :liked_by, :liked_by_names
 
-  has_one :user
-  has_one :cart
+  # has_one :user
+  # has_one :cart
   has_many :comments
-  # has_many :likes_reviews
+  # has_many :users, through: :likes_reviews
 
   def cart_name
     object.cart.name
@@ -43,8 +43,11 @@ class ReviewSerializer < ActiveModel::Serializer
   end
 
   def liked_by
-    # byebug
     object.likes_reviews.pluck(:user_id)
+  end
+
+  def liked_by_names
+    object.likes_reviews.map {|lr| lr.user.name}
   end
 
 end
