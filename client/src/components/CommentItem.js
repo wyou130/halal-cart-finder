@@ -1,14 +1,15 @@
 import { useState, useContext } from "react"
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
-import { Comment, Button, Icon, Form, Input } from 'semantic-ui-react'
+import { Comment, Button, Icon, Form, Input, Dimmer } from 'semantic-ui-react'
 
 function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
 
-    let [currentUser, setCurrentUser] = useContext(UserContext)
+    let [currentUser] = useContext(UserContext)
 
     const [isEditing, setIsEditing] = useState(false)
     const [commentInput, setCommentInput] = useState(comment.comment)
+    const [active, setActive] = useState(false)
 
     function toggleEdit() {
         setIsEditing(!isEditing)
@@ -59,7 +60,6 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                     <Comment.Metadata>on {comment.created_at}, last updated {comment.updated_at}</Comment.Metadata>
                     {
                         isEditing ?
-                        <>  
                         <Form onSubmit={handleEdit}>
                             <Input 
                                 required 
@@ -69,55 +69,32 @@ function CommentItem({ comment, onUpdateComment, onDeleteComment }) {
                                 onChange={e => setCommentInput(e.target.value)}
                             />
                             <Button type="submit">Update Comment</Button>
+                            <Button icon onClick={toggleEdit}>
+                                <Icon name='cancel'/>
+                            </Button>
                         </Form>
-                        {
-                            comment.user_id === currentUser.id ? 
-                            <>
-                                <Comment.Action size='mini' onClick={toggleEdit}>
-                                    <Icon name='cancel'/>
-                                </Comment.Action> 
-                                <Comment.Action size='mini'  onClick={() => handleDelete(comment)}>
-                                    <Icon name='trash alternate'/>
-                                </Comment.Action>
-                            </>
-                            : 
-                            null
-                        }
-                        </>
                     : 
-                        <>
-                        <Comment.Text>{comment.comment}</Comment.Text>
-                        {
-                            comment.user_id === currentUser.id ? 
-                            <>
-                                <Comment.Action size='mini' onClick={toggleEdit}>
+                        comment.user_id === currentUser.id ? 
+                        <Dimmer.Dimmable
+                            onMouseEnter={() => setActive(true)}
+                            onMouseLeave={() => setActive(false)}
+                            dimmed={active}
+                        >
+                            <Comment.Text>{comment.comment}</Comment.Text>
+                            <Dimmer active={active}>
+                                <Button icon size='mini' onClick={toggleEdit}>
                                     <Icon name='edit outline'/>
-                                </Comment.Action> 
-                                <Comment.Action size='mini' onClick={() => handleDelete(comment)}>
+                                </Button> 
+                                <Button icon size='mini' onClick={() => handleDelete(comment)}>
                                     <Icon name='trash alternate'/>
-                                </Comment.Action>
-                            </>
-                            : 
-                            null
-                        }
-                        </>
+                                </Button>
+                            </Dimmer>
+                        </Dimmer.Dimmable>
+                        : 
+                        <Comment.Text>{comment.comment}</Comment.Text>
                     }
                     </Comment.Content>
                 </Comment>
-                {/* Moved the below into the text/form section instead of under the entire comment */}
-            {/* {
-                comment.user_id === currentUser.id ? 
-                <>
-                    <Comment.Action size='mini' onClick={toggleEdit}>
-                        {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                    </Comment.Action> 
-                    <Button size='mini' icon onClick={() => handleDelete(comment)}>
-                        <Icon name='trash alternate'/>
-                    </Button>
-                </>
-                : 
-                null
-            } */}
         </>
     )
 }
