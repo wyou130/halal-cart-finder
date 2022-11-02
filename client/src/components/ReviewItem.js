@@ -15,24 +15,15 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     const [rating, setRating] = useState(review.rating)
     const [hotSauceSpice, setHotSauceSpice] = useState(review.hot_sauce_spice)
     const [reviewInput, setReviewInput] = useState(review.review)
-    // const [isShowingComments, setIsShowingComments] = useState(false)
     const [totalComments, setTotalComments] = useState(review.total_comments)
     const [totalLikes, setTotalLikes] = useState(review.total_likes)
     const [isLiked, setIsLiked] = useState(review.liked_by.includes(currentUser.id))
-
-    // console.log(isLiked)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
             .then(res => res.json())
             .then(commentsForSpecificReview => setDisplayedComments(commentsForSpecificReview))
     }, [])
-
-    // console.log(review.liked_by)
-
-    // function toggleForm() {
-    //     setIsShowingCommentsForm(!isShowingForm)
-    // }
 
     function onSubmitNewComment(newComment) {
         setIsShowingCommentsForm(false)
@@ -122,7 +113,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 user_id: currentUser.id,
                 review_id: review.id
             }
-            // console.log(newLike)
             fetch('/likes_reviews', {
                 method: 'POST',
                 headers: {
@@ -134,7 +124,6 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     if(res.ok) {
                         res.json()
                         .then(onLikeReview())
-                        // alert('Cart successfully favorited!')
                     }
                 })
         }
@@ -225,7 +214,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     null
                 }
                 <Item.Extra>Posted on {review.created_at}, last updated {review.updated_at}</Item.Extra>
-                <Button icon onClick={handleLiked}>
+                <Button icon onClick={handleLiked} color={isLiked ? 'grey' : null}>
                     <Icon 
                         name={isLiked ? 'thumbs up' : 'thumbs up outline'}
                     />
@@ -238,24 +227,10 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                     isShowingCommentsForm ? 
                     <>
                         <CommentsList displayedComments={displayedComments} onUpdateComment={onUpdateComment} onDeleteComment={onDeleteComment} />
-                        {/* <Button onClick={toggleForm}>
-                            {isShowingForm ?
-                                "Cancel"
-                                :
-                                "Comment on This Review"
-                            }
-                        </Button> */}
                         <br/>
-                        {/* {isShowingForm ?  */}
-                            <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
-                            {/* :
-                            null 
-                        } */}
+                        <CommentForm review={review.id} onSubmitNewComment={onSubmitNewComment} />
                     </>
                     :
-                    // <Item.Description>
-                    //     {totalComments} Comments
-                    // </Item.Description> 
                     null
                 }
                 <br/>
