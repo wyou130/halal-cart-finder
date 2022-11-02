@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
-import { Form, Button, Icon, Item, Input, TextArea, Rating } from 'semantic-ui-react'
+import { Form, Button, Icon, Item, Input, TextArea, Rating, Dimmer } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -18,6 +18,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     const [totalComments, setTotalComments] = useState(review.total_comments)
     const [totalLikes, setTotalLikes] = useState(review.total_likes)
     const [isLiked, setIsLiked] = useState(review.liked_by.includes(currentUser.id))
+    const [active, setActive] = useState(false)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
@@ -191,27 +192,37 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                             />
                         </div>
                         <Button type="submit">Update Review</Button>
+                        <Button icon onClick={toggleEdit}>
+                            <Icon name='cancel'/>
+                        </Button> 
                     </Form>
                     :
-                    <>
-                        <Item.Description>
-                            Overall rating: {"⭐️".repeat(review.rating)} | Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}
-                        </Item.Description>
-                        <Item.Description>{review.review}</Item.Description>
-                    </>
-                }
-                {
-                    review.user_id === currentUser.id ? 
-                    <>
-                        <Button icon onClick={toggleEdit}>
-                            {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
-                        </Button> 
-                        <Button icon onClick={() => handleDelete(review)}>
-                            <Icon name='trash alternate'/>
-                        </Button> 
-                    </>
-                    : 
-                    null
+                        review.user_id === currentUser.id ?
+                        <Dimmer.Dimmable
+                            onMouseEnter={() => setActive(true)}
+                            onMouseLeave={() => setActive(false)}
+                            dimmed={active}
+                        >
+                            <Item.Description>
+                                Overall rating: {"⭐️".repeat(review.rating)} | Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}
+                            </Item.Description>
+                            <Item.Description>{review.review}</Item.Description>
+                            <Dimmer active={active}>
+                                <Button icon onClick={toggleEdit}>
+                                    {isEditing ? <Icon name='cancel'/> : <Icon name='edit outline'/>}
+                                </Button> 
+                                <Button icon onClick={() => handleDelete(review)}>
+                                    <Icon name='trash alternate'/>
+                                </Button> 
+                            </Dimmer>
+                        </Dimmer.Dimmable>
+                        :
+                        <>
+                            <Item.Description>
+                                Overall rating: {"⭐️".repeat(review.rating)} | Hot sauce spice rating: {"🌶".repeat(review.hot_sauce_spice)}
+                            </Item.Description>
+                            <Item.Description>{review.review}</Item.Description>
+                        </>
                 }
                 <Item.Extra>Posted on {review.created_at}, last updated {review.updated_at}</Item.Extra>
                 <Button icon onClick={handleLiked} color={isLiked ? 'grey' : null}>
