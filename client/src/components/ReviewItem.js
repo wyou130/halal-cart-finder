@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentForm from "./CommentForm"
 import CommentsList from "./CommentsList"
 import { UserContext } from '../context/UserProvider'
-import { Form, Button, Icon, Item, Input, TextArea, Rating, Dimmer } from 'semantic-ui-react'
+import { Form, Button, Icon, Item, Input, TextArea, Rating, Dimmer, Popup } from 'semantic-ui-react'
 
 function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
 
@@ -19,6 +19,7 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     const [totalLikes, setTotalLikes] = useState(review.total_likes)
     const [isLiked, setIsLiked] = useState(review.liked_by.includes(currentUser.id))
     const [active, setActive] = useState(false)
+    const [whoLikesThis, setWhoLikesThis] = useState(review.liked_by_names)
 
     useEffect(() => {
         fetch(`/comments/${review.id}`)
@@ -59,11 +60,14 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
     function onLikeReview() {
         setTotalLikes(totalLikes => totalLikes + 1)
         setIsLiked(true)
+        setWhoLikesThis([...whoLikesThis, currentUser.name])
     }
 
     function onUnlikeReview() {
         setTotalLikes(totalLikes => totalLikes - 1)
         setIsLiked(false)
+        let newWhoLikesThis = whoLikesThis.filter(name => name !== currentUser.name)
+        setWhoLikesThis(newWhoLikesThis)
     }
 
     function handleEdit(e) {
@@ -233,7 +237,11 @@ function ReviewItem({ review, onUpdateReview, onDeleteReview }) {
                 <Button icon onClick={toggleCommentsForm}>
                     <Icon name={'comment outline'}/>
                 </Button>
-                <Item.Description>{totalLikes} likes</Item.Description>
+                <Popup
+                    trigger={<Item.Description>{totalLikes} likes</Item.Description>}
+                    position='left center'
+                    content={whoLikesThis.join(', ')}
+                />
                 {
                     isShowingCommentsForm ? 
                     <>

@@ -4,6 +4,7 @@ class Review < ApplicationRecord
   belongs_to :cart
   has_many :comments, dependent: :destroy
   has_many :likes_reviews, dependent: :destroy
+  # has_many :users, through: :likes_reviews
 
   validates :date_visited, :rating, :review, :hot_sauce_spice, presence: true
   validates :rating, :hot_sauce_spice, inclusion: { in: 0..5, message: 'must be rated using the slider' }
