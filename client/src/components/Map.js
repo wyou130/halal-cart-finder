@@ -22,8 +22,6 @@ function Map() {
         })
     }, [])
 
-    // console.log(currentLocation)
-
     const [viewport, setViewport] = useState({
         latitude: 40.770627,
         longitude: -73.974409,
@@ -43,7 +41,6 @@ function Map() {
     }
 
     return (
-        // <Container textAlign='center'>
             <ReactMapGL 
                 {...viewport} 
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -101,7 +98,6 @@ function Map() {
                     null
                 }
             </ReactMapGL>
-        // </Container>
     )
 }
 

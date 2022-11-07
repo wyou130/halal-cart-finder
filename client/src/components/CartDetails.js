@@ -149,14 +149,12 @@ function CartDetails() {
             {/* <br/> */}
             <div>
                 <Item.Group divided>
-                    {
-                        displayedReviews.map(review => <ReviewItem 
+                    {displayedReviews.map(review => <ReviewItem 
                             key={review.id} 
                             review={review} 
                             onUpdateReview={onUpdateReview} 
                             onDeleteReview={onDeleteReview} 
-                        />)
-                    }
+                        />)}
                 </Item.Group>
             </div>
         </Container>

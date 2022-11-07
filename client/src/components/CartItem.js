@@ -9,7 +9,7 @@ function CartItem({ cart }) {
 
     return (
         <Grid.Column as={Link} to={`/carts/${cart.id}`}>
-            <Card style={{width: 'auto', height: '680px'}}>
+            <Card style={{width: 'auto', height: '620px'}}>
                 {cart.favorited_by.includes(currentUser.id) ? <Label corner='right' color='red' icon='heart'/> : null}
                 <img
                     alt={cart.name} 

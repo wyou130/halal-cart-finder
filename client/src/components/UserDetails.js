@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
-import { Button, Icon, Item, Container, Divider, Form, Input, ItemMeta } from 'semantic-ui-react'
+import { Button, Icon, Item, Container, Divider, Form, Input } from 'semantic-ui-react'
 
 function UserDetails() {
 
@@ -28,8 +28,6 @@ function UserDetails() {
         setLocation(currentUser.location)
         setImage(currentUser.image)
     }, [])
-    
-    // console.log(currentUser.name, name)
 
     useEffect(() => {
         fetch(`/users/${id}`)
@@ -200,14 +198,12 @@ function UserDetails() {
                 <br/>
                 {/* <h3>{displayedUser.total_reviews} Reviews</h3> */}
                 <Item.Group divided>
-                    {
-                        displayedReviews.map(review => <ReviewItem 
+                    {displayedReviews.map(review => <ReviewItem 
                             key={review.id} 
                             review={review} 
                             onUpdateReview={onUpdateReview} 
                             onDeleteReview={onDeleteReview} 
-                        />)
-                    }
+                        />)}
                 </Item.Group>
         </Container>
     )
