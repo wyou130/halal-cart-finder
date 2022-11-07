@@ -86,7 +86,12 @@ function ReviewsList() {
             </Container>
             <br/>
             <Item.Group divided> 
-                {sortedFilteredReviews.map(review => <ReviewItem onUpdateReview={onUpdateReview} onDeleteReview={onDeleteReview} key={review.id} review={review}/>)}
+                {sortedFilteredReviews.map(review => <ReviewItem 
+                    onUpdateReview={onUpdateReview} 
+                    onDeleteReview={onDeleteReview} 
+                    key={review.id} 
+                    review={review}
+                />)}
             </Item.Group>
         </Container>
     )
