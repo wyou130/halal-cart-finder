@@ -1,24 +1,28 @@
-# README
+# Halal Cart Finder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A locator for halal carts complete with cart details, user reviews, and the interactivity of social media.
 
-Things you may want to cover:
+## Links
 
-* Ruby version
+[Repo](https://github.com/wyou130/halal-cart-finder "Halal Cart Finder Repo")
 
-* System dependencies
+## To Run This Locally
 
-* Configuration
+Coming soon...
 
-* Database creation
+## Built With
 
-* Database initialization
+- React
+- Ruby on Rails
+- ActiveRecord
+- PostgreSQL
+- React Mapbox GL
+- React Semantic UI
 
-* How to run the test suite
+## Future Updates
 
-* Services (job queues, cache servers, search engines, etc.)
+## Contact
 
-* Deployment instructions
-
-* ...
+Wendy You
+- [LinkedIn](https://www.linkedin.com/in/wendy-you/ "Connect with Wendy on LinkedIn")
+- [GitHub](https://github.com/wyou130 "See more repos from Wendy")
