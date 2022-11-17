@@ -127,7 +127,7 @@ npm start
 
 ## Contact
 
-Wendy You
+**Wendy You**
 - [GitHub](https://github.com/wyou130 "See more repos from Wendy")
 - [LinkedIn](https://www.linkedin.com/in/wendy-you/ "Connect with Wendy on LinkedIn")
 - [Blog](https://medium.com/@wyou130)
