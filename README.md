@@ -9,6 +9,7 @@ A locator for halal carts complete with cart details, user reviews, and the inte
 ## User Stories
 
 The user can: 
+- Sign up and log in
 - View all carts on a map
 - View all carts as a list
 - View all details for a cart
@@ -130,4 +131,4 @@ npm start
 **Wendy You**
 - [GitHub](https://github.com/wyou130 "See more repos from Wendy")
 - [LinkedIn](https://www.linkedin.com/in/wendy-you/ "Connect with Wendy on LinkedIn")
-- [Blog](https://medium.com/@wyou130)
+- [Blog](https://medium.com/@wyou130 "Read articles from Wendy")
