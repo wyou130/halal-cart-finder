@@ -12,8 +12,4 @@ class UserSerializer < ActiveModel::Serializer
     object.created_at.strftime("%b %-d, %Y")
   end
 
-  # def favorites 
-  #   object.favorites.
-  # end
-
 end

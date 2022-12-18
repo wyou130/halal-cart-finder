@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_27_174802) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_18_180858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_27_174802) do
     t.string "image", default: "https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTExXzMuanBn.jpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
   end
 
   add_foreign_key "comments", "reviews"
