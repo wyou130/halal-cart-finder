@@ -7,8 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 puts "Seeding users..."
-wendy = User.create(name: "wenday", email: "wyou130@gmail.com", password: "123", location: "Hell's Kitchen, Manhattan, NY", image: "https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjIxMWJhdGNoMTAtbnVub29uLTM3LWZhc3Rmb29kXzIuanBn.jpg")
-ethan = User.create(name: "ebb", email: "ebb0202@aol.com", password: "456", location: "Hell's Kitchen, Manhattan, NY")
+wendy = User.create(name: "wenday", email: "wyou130@gmail.com", password: "123", location: "Hell's Kitchen, Manhattan, NY", image: "https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjIxMWJhdGNoMTAtbnVub29uLTM3LWZhc3Rmb29kXzIuanBn.jpg", admin: true)
+ethan = User.create(name: "ebb", email: "ebb0202@aol.com", password: "456", location: "Hell's Kitchen, Manhattan, NY", admin: true)
 justin = User.create(name: "sustin", email: "susgancala@gmail.com", password: "789", location: "Upper East Side, Manhattan, NY")
 emilio = User.create(name: "mathmilio", email: "mathmilio@gmail.com", password: "101", location: "Astoria, Queens, NY", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Saddle_Point.png/1200px-Saddle_Point.png")
 
