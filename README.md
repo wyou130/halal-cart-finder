@@ -123,7 +123,10 @@ npm start
 - “Get directions” button to show route from current location to selected cart
 - Sort carts based on distance from current location
 - Suggestions form for users to suggest new carts or edits to cart info
-- Mobile version
+- Admin attribute for users
+  - Suggestions submissions shows for admins to read and take action
+  - Add/edit cart function for admins
+- Mobile version via React Native or Swift
 - Inclusion of other types of street carts
 
 ## Contact
