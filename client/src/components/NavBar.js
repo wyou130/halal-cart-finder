@@ -27,6 +27,7 @@ function NavBar() {
                 <>
                     <Menu.Item as={NavLink} to="/favorites" style={{marginBottom: '0.35em'}}>Favorites</Menu.Item>
                     <Menu.Item as={NavLink} to="/users" style={{marginBottom: '0.35em'}}>Users</Menu.Item>
+                    {currentUser.admin ? <Menu.Item as={NavLink} to="/cart/new" style={{marginBottom: '0.35em'}}>Add Cart</Menu.Item> : null}
                     <Menu.Menu position='right'>
                         <Menu.Item as={NavLink} to={`/users/${currentUser.id}`}>
                             Logged in as {currentUser.name}

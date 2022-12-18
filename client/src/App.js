@@ -12,6 +12,7 @@ import ReviewsList from './components/ReviewsList'
 import UsersList from './components/UsersList'
 import Home from './components/Home'
 import Favorites from './components/Favorites'
+import CartForm from './components/CartForm'
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/users/:id">
             <UserDetails />
+          </Route>
+          <Route exact path="/cart/new">
+            <CartForm />
           </Route>
           <Route path="/">
             <Home /> 
