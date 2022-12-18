@@ -165,7 +165,7 @@ function UserDetails() {
                         <img
                             alt={displayedUser.name} 
                             src={displayedUser.image}
-                            style={{width: '360px', height: '360px', objectFit: 'cover', marginRight: "3em"}}
+                            style={{width: '240px', height: '240px', objectFit: 'cover', marginRight: "3em"}}
                         />
                         <Item.Content>
                             <Item.Header>{displayedUser.name}</Item.Header>
@@ -196,7 +196,6 @@ function UserDetails() {
                 <br/>
                 <Divider horizontal>{displayedUser.total_reviews} Reviews</Divider>
                 <br/>
-                {/* <h3>{displayedUser.total_reviews} Reviews</h3> */}
                 <Item.Group divided>
                     {displayedReviews.map(review => <ReviewItem 
                             key={review.id} 
