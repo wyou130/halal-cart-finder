@@ -4,7 +4,7 @@ import { Rating, Form, Input, TextArea, Button, Icon } from 'semantic-ui-react'
 
 function ReviewForm({ cart, onSubmitNewReview }) {
 
-    let [currentUser, setCurrentUser] = useContext(UserContext)
+    let [currentUser] = useContext(UserContext)
 
     const [dateVisited, setDateVisited] = useState("")
     const [rating, setRating] = useState("")
