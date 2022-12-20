@@ -1,20 +1,21 @@
 import { useState } from 'react'
-import { Container, Form, Input, Radio, Dropdown } from 'semantic-ui-react'
+import { Container, Form, Input, Radio, Dropdown, Button } from 'semantic-ui-react'
 
 function CartForm() {
 
     const [cartName, setCartName] = useState("")
+    const [image, setImage] = useState("")
     const [street, setStreet] = useState("")
-    const [avenue, setavenue] = useState("")
+    const [avenue, setAvenue] = useState("")
+    const [latitude, setLatitude] = useState("")
+    const [longitude, setLongitude] = useState("")
     const [landmarks, setLandmarks] = useState("")
     const [acceptsCard, setAcceptsCard] = useState(false)
     const [openingHours, setOpeningHours] = useState("")
     const [closingHours, setClosingHours] = useState("")
+    // need state for AM/PM fields
     const [chickenPrice, setChickenPrice] = useState("")
-    const [comboPrice, setcomboPrice] = useState("")
-    const [latitude, setLatitude] = useState("")
-    const [longitude, setLongitude] = useState("")
-    const [image, setImage] = useState("")
+    const [comboPrice, setComboPrice] = useState("")
 
     const hourOptions = [
         {
@@ -29,10 +30,23 @@ function CartForm() {
         }
     ]
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        let cartInput = {
+            name: cartName,
+            street: street,
+            avenue: avenue,
+            landmarks: landmarks,
+            accepts_card: acceptsCard,
+            // need to update this to include AM/PM
+            approximate_hours: `${openingHours} to ${closingHours}`
+        }
+    }
+
     return (
         <Container textAlign='center'>
             <h3>Add New Cart</h3>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 {/* <label htmlFor='cartName'>Name</label> */}
                 {/* <div> */}
                     <Form.Input 
@@ -41,6 +55,7 @@ function CartForm() {
                         type='text'
                         name='cartName'
                         value={cartName}
+                        onChange={(e) => setCartName(e.target.value)}
                     />
                     <Form.Input 
                         required
@@ -48,6 +63,7 @@ function CartForm() {
                         type='text'
                         name='image'
                         value={image}
+                        onChange={(e) => setImage(e.target.value)}
                     />
                 {/* </div> */}
                 <Form.Group widths='equal'>
@@ -59,6 +75,7 @@ function CartForm() {
                             type='text'
                             name='street'
                             value={street}
+                            onChange={(e) => setStreet(e.target.value)}
                         />
                     {/* // </div> */}
                     {/* <label htmlFor='avenue'>Cross Avenue</label> */}
@@ -69,6 +86,7 @@ function CartForm() {
                             type='text'
                             name='avenue'
                             value={avenue}
+                            onChange={(e) => setAvenue(e.target.value)}
                         />
                     {/* // </div> */}
                 </Form.Group>
@@ -81,6 +99,7 @@ function CartForm() {
                             type='text'
                             name='latitude'
                             value={latitude}
+                            onChange={(e) => setLatitude(e.target.value)}
                         />
                     {/* </div> */}
                     {/* <label htmlFor='longitude'>Longitude</label> */}
@@ -91,6 +110,7 @@ function CartForm() {
                             type='text'
                             name='longitude'
                             value={longitude}
+                            onChange={(e) => setLongitude(e.target.value)}
                         />
                     {/* </div> */}
                     {/* <label htmlFor='landmarks'>Landmarks</label> */}
@@ -100,6 +120,7 @@ function CartForm() {
                             type='text'
                             name='landmarks'
                             value={landmarks}
+                            onChange={(e) => setLandmarks(e.target.value)}
                         />
                     {/* </div> */}
                 </Form.Group>
@@ -136,6 +157,7 @@ function CartForm() {
                             max='12'
                             name='openingHours'
                             value={openingHours}
+                            onChange={(e) => setOpeningHours(e.target.value)}
                         />
                     </Form.Field>
                     <Form.Field>
@@ -157,6 +179,7 @@ function CartForm() {
                             max='12'
                             name='closingHours'
                             value={closingHours}
+                            onChange={(e) => setClosingHours(e.target.value)}
                         />
                     </Form.Field>
                     <Form.Field>
@@ -209,6 +232,7 @@ function CartForm() {
                             type='number'
                             name='chickenPrice'
                             value={chickenPrice}
+                            onChange={(e) => setChickenPrice(e.target.value)}
                         />
                     {/* </div> */}
                     {/* <label htmlFor='comboPrice'>Combo Over Rice Price</label> */}
@@ -219,9 +243,11 @@ function CartForm() {
                             type='number'
                             name='comboPrice'
                             value={comboPrice}
+                            onChange={(e) => setComboPrice(e.target.value)}
                         />
                     {/* </div> */}
                 </Form.Group>
+                <Button type='submit'>Add Cart</Button>
             </Form>
         </Container>
     )
