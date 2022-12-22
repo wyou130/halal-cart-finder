@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container, Form, Input, Radio, Dropdown, Button } from 'semantic-ui-react'
+import { Container, Form, Input, Button, Select } from 'semantic-ui-react'
 
 function CartForm() {
 
@@ -13,7 +13,8 @@ function CartForm() {
     const [acceptsCard, setAcceptsCard] = useState(false)
     const [openingHours, setOpeningHours] = useState("")
     const [closingHours, setClosingHours] = useState("")
-    // need state for AM/PM fields
+    const [openingAMPM, setOpeningAMPM] = useState("")
+    const [closingAMPM, setClosingAMPM] = useState("")
     const [chickenPrice, setChickenPrice] = useState("")
     const [comboPrice, setComboPrice] = useState("")
 
@@ -38,9 +39,14 @@ function CartForm() {
             avenue: avenue,
             landmarks: landmarks,
             accepts_card: acceptsCard,
-            // need to update this to include AM/PM
-            approximate_hours: `${openingHours} to ${closingHours}`
+            approximate_hours: `${openingHours}${openingAMPM} to ${closingHours}${closingAMPM}`,
+            chicken_over_rice: parseInt(chickenPrice),
+            combo_over_rice: parseInt(comboPrice),
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+            image: image
         }
+        console.log(cartInput)
     }
 
     return (
@@ -150,7 +156,7 @@ function CartForm() {
                 <Form.Group inline>
                     <Form.Field required>
                         <label htmlFor='hours'>Approximate Hours</label>
-                        <Input 
+                        <Input
                             required
                             type='number'
                             min='1'
@@ -158,15 +164,11 @@ function CartForm() {
                             name='openingHours'
                             value={openingHours}
                             onChange={(e) => setOpeningHours(e.target.value)}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Dropdown 
-                            placeholder='AM or PM'
-                            selection
-                            options={hourOptions}
-                            compact
-                        />
+                        >
+                            <input />
+                            <Select placeholder='AM or PM' options={hourOptions} value={openingAMPM}
+                            compact onChange={(e) => setOpeningAMPM(e.target.textContent)}/>
+                        </Input>
                     </Form.Field>
                     <Form.Field>
                         <p> to </p>
@@ -180,54 +182,19 @@ function CartForm() {
                             name='closingHours'
                             value={closingHours}
                             onChange={(e) => setClosingHours(e.target.value)}
-                        />
+                        >
+                            <input />
+                            <Select placeholder='AM or PM' options={hourOptions} value={closingAMPM}
+                            compact onChange={(e) => setClosingAMPM(e.target.textContent)}/>
+                        </Input>
                     </Form.Field>
-                    <Form.Field>
-                        <Dropdown 
-                            placeholder='AM or PM'
-                            selection
-                            options={hourOptions}
-                            compact
-                        />
-                    </Form.Field>
-                    {/* <div> */}
-                        {/* <Form.Input 
-                            required
-                            // label='Approximate Hours'
-                            type='number'
-                            min='1'
-                            max='12'
-                            name='openingHours'
-                            value={openingHours}
-                        />
-                        <Form.Dropdown 
-                            placeholder='AM or PM'
-                            selection
-                            options={hourOptions}
-                            compact
-                        />
-                        <p> to </p>
-                        <Form.Input 
-                            required
-                            type='number'
-                            min='1'
-                            max='12'
-                            name='closingHours'
-                            value={closingHours}
-                        />
-                        <Form.Dropdown 
-                            placeholder='AM or PM'
-                            selection
-                            options={hourOptions}
-                            compact
-                        /> */}
-                    {/* </div> */}
                 </Form.Group>
                 <Form.Group widths='equal'>
                     {/* <label htmlFor='chickenPrice'>Chicken Over Rice Price</label> */}
                     {/* <div> */}
                         <Form.Input 
                             required
+                            min='1'
                             label='Chicken Over Rice Price'
                             type='number'
                             name='chickenPrice'
@@ -239,6 +206,7 @@ function CartForm() {
                     {/* <div> */}
                         <Form.Input 
                             required
+                            min='1'
                             label='Combo Over Rice Price'
                             type='number'
                             name='comboPrice'
