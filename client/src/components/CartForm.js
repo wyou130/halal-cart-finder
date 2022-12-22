@@ -46,7 +46,36 @@ function CartForm() {
             longitude: parseFloat(longitude),
             image: image
         }
-        console.log(cartInput)
+        // console.log(cartInput)
+        fetch('/carts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cartInput)
+        })
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    // .then(newCart => console.log(newCart))
+                    alert('Cart successfully added!')
+                }
+                // else for errors 
+            })
+        setCartName("")
+        setImage("")
+        setStreet("")
+        setAvenue("")
+        setLatitude("")
+        setLongitude("")
+        setLandmarks("")
+        setAcceptsCard(false)
+        setOpeningHours("")
+        setOpeningAMPM("")
+        setClosingHours("")
+        setClosingAMPM("")
+        setChickenPrice("")
+        setComboPrice("")
     }
 
     return (
