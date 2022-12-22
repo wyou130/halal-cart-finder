@@ -7,4 +7,7 @@ class Cart < ApplicationRecord
 
     validates :name, :street, :avenue, :approximate_hours, :chicken_over_rice, :combo_over_rice, :latitude, :longitude, :image, presence: true 
 
+    # validations for prices > 1
+    # validations for coordinates being decimal values
+
 end
