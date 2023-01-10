@@ -19,7 +19,7 @@ function CartItem({ cart }) {
                 <Card.Content>
                     <Card.Header>{cart.name}</Card.Header>
                     <Card.Description>Around {cart.street} and {cart.avenue}</Card.Description>
-                    <Card.Description>Approximate hours: {cart.approximate_hours}</Card.Description>
+                    <Card.Description>Approximate hours: {cart.opening_hours}{cart.opening_am_pm} to {cart.closing_hours}{cart.closing_am_pm}</Card.Description>
                     <Card.Description>Typical platter price: ${cart.average_price}</Card.Description>
                     <Divider section />
                     <Card.Description>Average Rating: {"⭐️".repeat(cart.average_rating)}</Card.Description>

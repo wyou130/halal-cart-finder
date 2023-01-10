@@ -70,6 +70,7 @@ function Map() {
                                 longitude={cart.longitude}
                             >
                                 <FcRating 
+                                    key={cart.id}
                                     onClick={e => {
                                         e.preventDefault()
                                         setSelectedCart(cart)

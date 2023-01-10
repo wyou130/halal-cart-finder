@@ -9,5 +9,7 @@ class Cart < ApplicationRecord
 
     # validations for prices > 1
     # validations for coordinates being decimal values
+    # validations for hours being integer values 1-12
+    # validations for am_pm being only "AM" or "PM"
 
 end
