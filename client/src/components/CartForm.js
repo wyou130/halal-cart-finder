@@ -1,12 +1,7 @@
 import { useState } from 'react'
-// import { useParams } from 'react-router-dom'
 import { Container, Form, Input, Button, Select } from 'semantic-ui-react'
 
 function CartForm({ action, cart }) {
-
-    // let { id } = useParams()
-
-    // console.log(cart)
 
     const [cartName, setCartName] = useState(cart ? cart.name : "")
     const [image, setImage] = useState(cart ? cart.image : "")
@@ -51,7 +46,23 @@ function CartForm({ action, cart }) {
             longitude: parseFloat(longitude),
             image: image
         }
-        fetch('/carts', {
+        if(cart) {
+            fetch(`/carts/${cart.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(cartInput)
+            }) 
+            .then(res => {
+                if(res.ok) {
+                    res.json()
+                    alert('Cart successfully updated!')
+                    // use callback function to setDisplayedCart to the updated cart object
+                }
+                // else for errors 
+            })
+        } else {fetch('/carts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,9 +73,11 @@ function CartForm({ action, cart }) {
                 if(res.ok) {
                     res.json()
                     alert('Cart successfully added!')
+                    // history.push to the new cart details page?
                 }
                 // else for errors 
             })
+        }
         setCartName("")
         setImage("")
         setStreet("")
