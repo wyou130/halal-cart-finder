@@ -1,5 +1,5 @@
 class CartSerializer < ActiveModel::Serializer
-  attributes :id, :name, :street, :avenue, :landmarks, :accepts_card, :approximate_hours, :chicken_over_rice, :combo_over_rice, :favorited_by, :latitude, :longitude, :average_rating, :average_price, :average_spice_rating, :total_reviews, :image
+  attributes :id, :name, :street, :avenue, :landmarks, :accepts_card, :opening_hours, :closing_hours, :opening_am_pm, :closing_am_pm, :chicken_over_rice, :combo_over_rice, :favorited_by, :latitude, :longitude, :average_rating, :average_price, :average_spice_rating, :total_reviews, :image
 
   # Putting this association uses review serializer
   has_many :reviews
