@@ -46,8 +46,11 @@ function App() {
             <UserDetails />
           </Route>
           <Route exact path="/cart/new">
-            <CartForm />
+            <CartForm action='Add New'/>
           </Route>
+          {/* <Route exact path="/carts/edit/:id">
+            <CartForm action='Edit'/>
+          </Route> */}
           <Route path="/">
             <Home /> 
           </Route>

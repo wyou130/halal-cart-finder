@@ -1,22 +1,27 @@
 import { useState } from 'react'
+// import { useParams } from 'react-router-dom'
 import { Container, Form, Input, Button, Select } from 'semantic-ui-react'
 
-function CartForm() {
+function CartForm({ action, cart }) {
 
-    const [cartName, setCartName] = useState("")
-    const [image, setImage] = useState("")
-    const [street, setStreet] = useState("")
-    const [avenue, setAvenue] = useState("")
-    const [latitude, setLatitude] = useState("")
-    const [longitude, setLongitude] = useState("")
-    const [landmarks, setLandmarks] = useState("")
-    const [acceptsCard, setAcceptsCard] = useState(false)
+    // let { id } = useParams()
+
+    // console.log(cart)
+
+    const [cartName, setCartName] = useState(cart ? cart.name : "")
+    const [image, setImage] = useState(cart ? cart.image : "")
+    const [street, setStreet] = useState(cart ? cart.street : "")
+    const [avenue, setAvenue] = useState(cart ? cart.avenue : "")
+    const [latitude, setLatitude] = useState(cart ? cart.latitude : "")
+    const [longitude, setLongitude] = useState(cart ? cart.longitude : "")
+    const [landmarks, setLandmarks] = useState(cart ? cart.landmarks : "")
+    const [acceptsCard, setAcceptsCard] = useState(cart ? cart.accepts_card : false)
     const [openingHours, setOpeningHours] = useState("")
     const [closingHours, setClosingHours] = useState("")
     const [openingAMPM, setOpeningAMPM] = useState("")
     const [closingAMPM, setClosingAMPM] = useState("")
-    const [chickenPrice, setChickenPrice] = useState("")
-    const [comboPrice, setComboPrice] = useState("")
+    const [chickenPrice, setChickenPrice] = useState(cart ? cart.chicken_over_rice : "")
+    const [comboPrice, setComboPrice] = useState(cart ? cart.combo_over_rice : "")
 
     const hourOptions = [
         {
@@ -46,7 +51,6 @@ function CartForm() {
             longitude: parseFloat(longitude),
             image: image
         }
-        // console.log(cartInput)
         fetch('/carts', {
             method: 'POST',
             headers: {
@@ -57,7 +61,6 @@ function CartForm() {
             .then(res => {
                 if(res.ok) {
                     res.json()
-                    // .then(newCart => console.log(newCart))
                     alert('Cart successfully added!')
                 }
                 // else for errors 
@@ -80,10 +83,8 @@ function CartForm() {
 
     return (
         <Container textAlign='center'>
-            <h3>Add New Cart</h3>
+            <h3>{action} Cart</h3>
             <Form onSubmit={handleSubmit}>
-                {/* <label htmlFor='cartName'>Name</label> */}
-                {/* <div> */}
                     <Form.Input 
                         required
                         label='Name'
@@ -100,10 +101,7 @@ function CartForm() {
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
                     />
-                {/* </div> */}
                 <Form.Group widths='equal'>
-                    {/* <label htmlFor='street'>Cross Street</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             required
                             label='Cross Street'
@@ -112,9 +110,6 @@ function CartForm() {
                             value={street}
                             onChange={(e) => setStreet(e.target.value)}
                         />
-                    {/* // </div> */}
-                    {/* <label htmlFor='avenue'>Cross Avenue</label> */}
-                    {/* // <div> */}
                         <Form.Input 
                             required
                             label='Cross Avenue'
@@ -123,11 +118,8 @@ function CartForm() {
                             value={avenue}
                             onChange={(e) => setAvenue(e.target.value)}
                         />
-                    {/* // </div> */}
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    {/* <label htmlFor='latitude'>Latitude</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             required
                             label='Latitude'
@@ -136,9 +128,6 @@ function CartForm() {
                             value={latitude}
                             onChange={(e) => setLatitude(e.target.value)}
                         />
-                    {/* </div> */}
-                    {/* <label htmlFor='longitude'>Longitude</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             required
                             label='Longitude'
@@ -147,9 +136,6 @@ function CartForm() {
                             value={longitude}
                             onChange={(e) => setLongitude(e.target.value)}
                         />
-                    {/* </div> */}
-                    {/* <label htmlFor='landmarks'>Landmarks</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             label='Landmarks'
                             type='text'
@@ -157,7 +143,6 @@ function CartForm() {
                             value={landmarks}
                             onChange={(e) => setLandmarks(e.target.value)}
                         />
-                    {/* </div> */}
                 </Form.Group>
                 <Form.Group inline>
                     <Form.Field required>
@@ -219,8 +204,6 @@ function CartForm() {
                     </Form.Field>
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    {/* <label htmlFor='chickenPrice'>Chicken Over Rice Price</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             required
                             min='1'
@@ -230,9 +213,6 @@ function CartForm() {
                             value={chickenPrice}
                             onChange={(e) => setChickenPrice(e.target.value)}
                         />
-                    {/* </div> */}
-                    {/* <label htmlFor='comboPrice'>Combo Over Rice Price</label> */}
-                    {/* <div> */}
                         <Form.Input 
                             required
                             min='1'
@@ -242,9 +222,8 @@ function CartForm() {
                             value={comboPrice}
                             onChange={(e) => setComboPrice(e.target.value)}
                         />
-                    {/* </div> */}
                 </Form.Group>
-                <Button type='submit'>Add Cart</Button>
+                <Button type='submit'>{action} Cart</Button>
             </Form>
         </Container>
     )

@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from "react"
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import ReviewItem from "./ReviewItem"
 import ReviewForm from "./ReviewForm"
-import { Item, Button, Container, Divider } from 'semantic-ui-react'
+import { Item, Button, Container, Divider, Modal } from 'semantic-ui-react'
+import CartForm from "./CartForm"
 
 function CartDetails() {
 
@@ -123,6 +124,17 @@ function CartDetails() {
                         <Button onClick={handleFavorited}>
                             {usersFavorited.includes(currentUser.id) ? "Remove from Favorites 🚫" : "Add to Favorites ❤️"}
                         </Button>
+                        {/* <Link to={`/carts/edit/${displayedCart.id}`}> */}
+                            {/* <Button>
+                                Edit ✏️
+                            </Button> */}
+                        {/* </Link> */}
+                        <Modal
+                            size="large"
+                            trigger={<Button>Update ✏️</Button>}
+                        >
+                            <CartForm action='Update' cart={displayedCart}/>
+                        </Modal>
                         <Item.Extra>* All details subject to change. Please visit the physical cart and owner for the most updated information.</Item.Extra>
                     </Item.Content>
                 </Item>
