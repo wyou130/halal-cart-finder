@@ -27,7 +27,7 @@ class CartsController < ApplicationController
     private
 
     def cart_params
-        params.permit(:name, :street, :avenue, :landmarks, :accepts_card, :approximate_hours, :chicken_over_rice, :combo_over_rice, :latitude, :longitude, :image)
+        params.permit(:name, :street, :avenue, :landmarks, :accepts_card, :opening_hours, :closing_hours, :opening_am_pm, :closing_am_pm, :chicken_over_rice, :combo_over_rice, :latitude, :longitude, :image)
     end
 
     def not_found

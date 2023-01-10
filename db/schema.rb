@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_18_180858) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_215550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_180858) do
     t.string "avenue"
     t.string "landmarks"
     t.boolean "accepts_card"
-    t.string "approximate_hours"
     t.integer "chicken_over_rice"
     t.integer "combo_over_rice"
     t.datetime "created_at", null: false
@@ -28,6 +27,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_180858) do
     t.decimal "latitude"
     t.decimal "longitude"
     t.string "image"
+    t.integer "opening_hours"
+    t.integer "closing_hours"
+    t.string "opening_am_pm"
+    t.string "closing_am_pm"
   end
 
   create_table "comments", force: :cascade do |t|
