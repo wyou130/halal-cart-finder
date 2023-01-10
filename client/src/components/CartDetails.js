@@ -116,7 +116,7 @@ function CartDetails() {
                         <Item.Meta>{displayedCart.average_spice_rating} out of 5</Item.Meta>
                         <Item.Description>
                             <p>Location: around {displayedCart.street} and {displayedCart.avenue}</p>
-                            <p>Approximate hours: {displayedCart.approximate_hours}</p>
+                            <p>Approximate hours: {displayedCart.opening_hours}{displayedCart.opening_am_pm} to {displayedCart.closing_hours}{displayedCart.closing_am_pm}</p>
                             <p>Chicken over rice: ${displayedCart.chicken_over_rice}</p>
                             <p>Combo over rice: ${displayedCart.combo_over_rice}</p>
                         </Item.Description>
