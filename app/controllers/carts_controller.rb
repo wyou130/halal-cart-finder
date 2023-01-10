@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 
     skip_before_action :authenticated_user, only: [:index, :show]
 
-    # will also want to make sure the user is authorized as admin for the create action
+    # will also want to make sure the user is authorized as admin for the create and update action
 
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
@@ -16,6 +16,12 @@ class CartsController < ApplicationController
 
     def create
         render json: Cart.create!(cart_params), status: :created
+    end
+
+    def update
+        cart = Cart.find(params[:id])
+        cart.update!(cart_params)
+        render json: cart, status: :accepted 
     end
 
     private
