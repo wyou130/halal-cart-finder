@@ -10,7 +10,7 @@ function CartDetails() {
 
     let { id } = useParams()
     let history = useHistory()
-    let [currentUser, setCurrentUser] = useContext(UserContext)
+    let [currentUser] = useContext(UserContext)
 
     const [displayedCart, setDisplayedCart] = useState("")
     const [displayedReviews, setDisplayedReviews] = useState([])
@@ -128,26 +128,20 @@ function CartDetails() {
                         <Button onClick={handleFavorited}>
                             {usersFavorited.includes(currentUser.id) ? "Remove from Favorites 🚫" : "Add to Favorites ❤️"}
                         </Button>
-                        {/* <Link to={`/carts/edit/${displayedCart.id}`}> */}
-                            {/* <Button>
-                                Edit ✏️
-                            </Button> */}
-                        {/* </Link> */}
-                        <Modal
+                        {currentUser.admin ? <Modal
                             size="large"
                             trigger={<Button>Update ✏️</Button>}
                         >
                             <CartForm action='Update' cart={displayedCart} onUpdateCart={onUpdateCart}/>
                         </Modal>
+                        : null}
                         <Item.Extra>* All details subject to change. Please visit the physical cart and owner for the most updated information.</Item.Extra>
                     </Item.Content>
                 </Item>
             </Item.Group>
             <br/>
             <Divider horizontal>{displayedCart.total_reviews} Reviews</Divider>
-            {/* <br/> */}
             <Container textAlign='center'>
-                {/* <h3>{displayedCart.total_reviews} Reviews</h3> */}
                 <Button onClick={toggleForm}>
                     {isShowingForm ?
                         "Cancel"
@@ -162,7 +156,6 @@ function CartDetails() {
                 }
             </Container>
             <br/>
-            {/* <br/> */}
             <div>
                 <Item.Group divided>
                     {displayedReviews.map(review => <ReviewItem 
