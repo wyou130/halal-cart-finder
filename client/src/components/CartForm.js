@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Container, Form, Input, Button, Select } from 'semantic-ui-react'
 
-function CartForm({ action, cart }) {
+function CartForm({ action, cart, onUpdateCart }) {
 
     const [cartName, setCartName] = useState(cart ? cart.name : "")
     const [image, setImage] = useState(cart ? cart.image : "")
@@ -57,8 +57,9 @@ function CartForm({ action, cart }) {
             .then(res => {
                 if(res.ok) {
                     res.json()
+                    .then(updatedCart => onUpdateCart(updatedCart))
                     alert('Cart successfully updated!')
-                    // use callback function to setDisplayedCart to the updated cart object
+                    // close the modal in CartDetails
                 }
                 // else for errors 
             })

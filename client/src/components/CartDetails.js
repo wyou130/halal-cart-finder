@@ -94,6 +94,10 @@ function CartDetails() {
         }
     }
 
+    function onUpdateCart(updatedCart) {
+        setDisplayedCart(updatedCart)
+    }
+
     return (
         <Container>
             <div>
@@ -133,7 +137,7 @@ function CartDetails() {
                             size="large"
                             trigger={<Button>Update ✏️</Button>}
                         >
-                            <CartForm action='Update' cart={displayedCart}/>
+                            <CartForm action='Update' cart={displayedCart} onUpdateCart={onUpdateCart}/>
                         </Modal>
                         <Item.Extra>* All details subject to change. Please visit the physical cart and owner for the most updated information.</Item.Extra>
                     </Item.Content>
