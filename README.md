@@ -31,6 +31,8 @@ The user can:
 - View all reviews written by a user
 - Edit their user profile
 - Delete their user account
+- Add a cart (admin)
+- Edit a cart (admin)
 
 ## Set Up
 
@@ -124,8 +126,8 @@ npm start
 - Sort carts based on distance from current location
 - Suggestions form for users to suggest new carts or edits to cart info
 - ~~Admin attribute for users~~
-  - Suggestions submissions shows for admins to read and take action
-  - Add/edit cart function for admins (in progress)
+  - Suggestions submissions shows for admins to read and take action (in progress)
+  - ~~Add/edit cart function for admins~~
 - Mobile version via React Native or Swift
 - Inclusion of other types of street carts
 
