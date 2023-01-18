@@ -13,6 +13,7 @@ import UsersList from './components/UsersList'
 import Home from './components/Home'
 import Favorites from './components/Favorites'
 import CartForm from './components/CartForm'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -48,13 +49,11 @@ function App() {
           <Route exact path="/cart/new">
             <CartForm action='Add New'/>
           </Route>
-          {/* <Route exact path="/carts/edit/:id">
-            <CartForm action='Edit'/>
-          </Route> */}
           <Route path="/">
             <Home /> 
           </Route>
         </Switch>
+        <Footer />
       </div>
     </UserProvider>
   )
