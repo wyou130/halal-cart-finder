@@ -33,6 +33,7 @@ function CartForm({ action, cart, onUpdateCart }) {
 
     function handleSubmit(e) {
         e.preventDefault()
+        console.log(action)
         let cartInput = {
             name: cartName,
             street: street,
@@ -49,6 +50,8 @@ function CartForm({ action, cart, onUpdateCart }) {
             longitude: parseFloat(longitude),
             image: image
         }
+        // first condition for admin updating cart info, so cart variable is truthy
+        // OR where action === 'Update'
         if(cart) {
             fetch(`/carts/${cart.id}`, {
                 method: 'PATCH',
@@ -66,6 +69,12 @@ function CartForm({ action, cart, onUpdateCart }) {
                 }
                 // else for errors 
             })
+        // second condition for non-admin user suggesting a cart, so current user admin attribute is false
+        // OR where action === 'Suggest a'
+        // } else if (!currentUser.admin) {
+            
+        // third condition for admin adding a cart, so other two conditions are false
+        // OR where action === 'Add New'
         } else {fetch('/carts', {
             method: 'POST',
             headers: {
