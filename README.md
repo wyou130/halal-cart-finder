@@ -31,6 +31,7 @@ The user can:
 - View all reviews written by a user
 - Edit their user profile
 - Delete their user account
+- Suggest a cart
 - Add a cart (admin)
 - Edit a cart (admin)
 
@@ -124,7 +125,7 @@ npm start
   - Ability to upload photos via image hosting site
 - “Get directions” button to show route from current location to selected cart
 - Sort carts based on distance from current location
-- Suggestions form for users to suggest new carts or edits to cart info
+- Suggestions form for users to suggest new carts or edits to cart info (in progress)
 - ~~Admin attribute for users~~
   - Suggestions submissions shows for admins to read and take action (in progress)
   - ~~Add/edit cart function for admins~~
