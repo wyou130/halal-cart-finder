@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../context/UserProvider'
 import { Container, Form, Input, Button, Select } from 'semantic-ui-react'
 
 function CartForm({ action, cart, onUpdateCart }) {
+
+    let [currentUser] = useContext(UserContext)
 
     const [cartName, setCartName] = useState(cart ? cart.name : "")
     const [image, setImage] = useState(cart ? cart.image : "")
@@ -14,7 +17,7 @@ function CartForm({ action, cart, onUpdateCart }) {
     const [openingHours, setOpeningHours] = useState(cart ? cart.opening_hours : "")
     const [closingHours, setClosingHours] = useState(cart ? cart.closing_hours : "")
     const [openingAMPM, setOpeningAMPM] = useState(cart ? cart.opening_am_pm : "")
-    const [closingAMPM, setClosingAMPM] = useState(cart? cart.closing_am_pm : "")
+    const [closingAMPM, setClosingAMPM] = useState(cart ? cart.closing_am_pm : "")
     const [chickenPrice, setChickenPrice] = useState(cart ? cart.chicken_over_rice : "")
     const [comboPrice, setComboPrice] = useState(cart ? cart.combo_over_rice : "")
 
@@ -50,46 +53,65 @@ function CartForm({ action, cart, onUpdateCart }) {
             longitude: parseFloat(longitude),
             image: image
         }
-        // first condition for admin updating cart info, so cart variable is truthy
-        // OR where action === 'Update'
-        if(cart) {
-            fetch(`/carts/${cart.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify(cartInput)
-            }) 
-            .then(res => {
-                if(res.ok) {
-                    res.json()
-                    .then(updatedCart => onUpdateCart(updatedCart))
-                    alert('Cart successfully updated!')
-                    // close the modal in CartDetails
-                }
-                // else for errors 
-            })
-        // second condition for non-admin user suggesting a cart, so current user admin attribute is false
-        // OR where action === 'Suggest a'
-        // } else if (!currentUser.admin) {
-            
-        // third condition for admin adding a cart, so other two conditions are false
-        // OR where action === 'Add New'
-        } else {fetch('/carts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cartInput)
-        })
-            .then(res => {
-                if(res.ok) {
-                    res.json()
-                    alert('Cart successfully added!')
-                    // history.push to the new cart details page?
-                }
-                // else for errors 
-            })
+        // first condition for admin updating cart info, action === 'Update'
+        switch(action) {
+            case 'Update':
+                fetch(`/carts/${cart.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify(cartInput)
+                }) 
+                .then(res => {
+                    if(res.ok) {
+                        res.json()
+                        .then(updatedCart => onUpdateCart(updatedCart))
+                        alert('Cart successfully updated!')
+                        // close the modal in CartDetails
+                    }
+                    // else for errors 
+                })
+                break
+        // second condition for admin adding a cart, action === 'Add New'
+            case 'Add New':
+                fetch('/carts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(cartInput)
+                })
+                .then(res => {
+                    if(res.ok) {
+                        res.json()
+                        alert('Cart successfully added!')
+                        // history.push to the new cart details page?
+                    }
+                    // else for errors 
+                })
+                break
+            // third condition for non-admin user suggesting a cart, action === 'Suggest a'
+            case 'Suggest a':
+                fetch('/suggestions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({...cartInput, user_id: currentUser.id})
+                    })
+                .then(res => {
+                    if(res.ok) {
+                        res.json()
+                        alert('Suggestion successfully submitted!')
+                        // history.push to all carts page? OR, a future "My Suggestions" page
+                    }
+                    // else for errors 
+                })
+                break
+            // TBD on final default code - maybe a window alert instead of console.log? 
+            default:
+                console.log('Action not allowed')
         }
         setCartName("")
         setImage("")
