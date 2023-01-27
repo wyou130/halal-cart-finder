@@ -14,6 +14,7 @@ import Home from './components/Home'
 import Favorites from './components/Favorites'
 import CartForm from './components/CartForm'
 import Footer from './components/Footer'
+import SuggestionsList from './components/SuggestionsList'
 
 function App() {
 
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route exact path="/cart/new">
             <CartForm action='Add New'/>
+          </Route>
+          <Route exact path="/suggestions">
+            <SuggestionsList />
           </Route>
           <Route path="/">
             <Home /> 
