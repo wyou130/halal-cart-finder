@@ -36,7 +36,7 @@ function CartForm({ action, cart, onUpdateCart }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(action)
+        // console.log(action)
         let cartInput = {
             name: cartName,
             street: street,
@@ -73,8 +73,9 @@ function CartForm({ action, cart, onUpdateCart }) {
                     // else for errors 
                 })
                 break
-        // second condition for admin adding a cart, action === 'Add New'
+        // second condition for admin adding a cart, action === 'Add New' OR 'Add Suggested'
             case 'Add New':
+            case 'Add Suggested':
                 fetch('/carts', {
                     method: 'POST',
                     headers: {
@@ -90,6 +91,7 @@ function CartForm({ action, cart, onUpdateCart }) {
                     }
                     // else for errors 
                 })
+                // DELETE suggestion after POST cart? Would need suggestion id here and a rerender on the suggestion (unless history.push)
                 break
             // third condition for non-admin user suggesting a cart, action === 'Suggest a'
             case 'Suggest a':
@@ -109,9 +111,8 @@ function CartForm({ action, cart, onUpdateCart }) {
                     // else for errors 
                 })
                 break
-            // TBD on final default code - maybe a window alert instead of console.log? 
             default:
-                console.log('Action not allowed')
+                alert('Action not allowed')
         }
         setCartName("")
         setImage("")
