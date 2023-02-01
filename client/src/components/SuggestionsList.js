@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import SuggestionItem from "./SuggestionItem"
+import { Item, Container } from 'semantic-ui-react'
 
 function SuggestionsList() {
 
@@ -12,10 +13,14 @@ function SuggestionsList() {
     }, [])
 
     return (
-        <div>
-            <p>Suggestions List</p>
-            {suggestions.map(suggestion => <SuggestionItem key={suggestion.id} suggestion={suggestion} />)}
-        </div>
+        <Container>
+            <Container textAlign='center'>
+                <h3>Suggestions List</h3>
+            </Container>
+            <Item.Group divided>
+                {suggestions.map(suggestion => <SuggestionItem key={suggestion.id} suggestion={suggestion} />)}
+            </Item.Group>
+        </Container>
     )
 }
 
