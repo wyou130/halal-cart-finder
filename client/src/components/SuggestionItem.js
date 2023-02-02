@@ -2,9 +2,18 @@ import { Link } from 'react-router-dom'
 import CartForm from './CartForm'
 import { Modal, Button, Item } from 'semantic-ui-react'
 
-function SuggestionItem({ suggestion }) {
+function SuggestionItem({ suggestion, onDeleteSugg }) {
 
-    // console.log(suggestion)
+    function handleDelete(deletedId) {
+        if(window.confirm('Are you sure you want to delete this suggestion?')) {
+            fetch(`/suggestions/${deletedId}`, {
+                method: "DELETE"
+            })
+              .then(() => {
+                onDeleteSugg(deletedId)
+              })
+        } 
+    }
 
     return (
         <Item>
@@ -25,7 +34,7 @@ function SuggestionItem({ suggestion }) {
                 {/* When admin clicks on view suggestion, all suggestion info should be sent to CartForm so admin can review and make any necessary edits */}
                 {/* Admin should then be able to add the new cart OR cancel editing */}
                 {/* Delete button will be on suggestion item */}
-                <Button>Delete Suggestion</Button>
+                <Button onClick={() => handleDelete(suggestion.id)}>Delete Suggestion</Button>
             </Item.Content>
         </Item>
     )
