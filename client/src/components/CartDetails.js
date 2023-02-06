@@ -98,6 +98,17 @@ function CartDetails() {
         setDisplayedCart(updatedCart)
     }
 
+    function handleDelete(deletedId) {
+        if(window.confirm('Are you sure you want to delete this cart?')) {
+            fetch(`/carts/${deletedId}`, {
+                method: "DELETE"
+            })
+              .then(() => {
+                history.push('/carts')
+              })
+        } 
+    }
+
     return (
         <Container>
             <div>
@@ -128,12 +139,18 @@ function CartDetails() {
                         <Button onClick={handleFavorited}>
                             {usersFavorited.includes(currentUser.id) ? "Remove from Favorites 🚫" : "Add to Favorites ❤️"}
                         </Button>
-                        {currentUser.admin ? <Modal
-                            size="large"
-                            trigger={<Button>Update ✏️</Button>}
-                        >
-                            <CartForm action='Update' cart={displayedCart} onUpdateCart={onUpdateCart}/>
-                        </Modal>
+                        {currentUser.admin ? 
+                            <>
+                                <Modal
+                                    size="large"
+                                    trigger={<Button>Update ✏️</Button>}
+                                >
+                                    <CartForm action='Update' cart={displayedCart} onUpdateCart={onUpdateCart}/>
+                                </Modal>
+                                <Button onClick={() => handleDelete(displayedCart.id)}>
+                                    Delete 🗑
+                                </Button>
+                            </>
                         : null}
                         <Item.Extra>* All details subject to change. Please visit the physical cart and owner for the most updated information.</Item.Extra>
                     </Item.Content>
