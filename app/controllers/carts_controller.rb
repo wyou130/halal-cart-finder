@@ -24,6 +24,11 @@ class CartsController < ApplicationController
         render json: cart, status: :accepted 
     end
 
+    def destroy
+        render json: Cart.find(params[:id]).destroy!
+        head :no_content
+    end
+
     private
 
     def cart_params

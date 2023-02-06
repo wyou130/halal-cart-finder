@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :update, :destroy]
   resources :favorites, only: [:index, :create]
   resources :reviews
-  resources :carts, only: [:index, :show, :create, :update]
+  resources :carts
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
