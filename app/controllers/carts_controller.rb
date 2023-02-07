@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 
     skip_before_action :authenticated_user, only: [:index, :show]
+    before_action :authorize_admin, only: [:create, :update, :destroy]
 
     # will also want to make sure the user is authorized as admin for the create and update action
 

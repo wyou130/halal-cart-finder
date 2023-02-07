@@ -1,5 +1,8 @@
 class SuggestionsController < ApplicationController
 
+    # in the future, we'll want users to see the suggestions they've submitted and be able to delete them, only if they are the owners of the suggestion
+    before_action :authorize_admin, only: [:index, :show, :destroy]
+
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::RecordInvalid, with: :invalid
 
