@@ -34,6 +34,8 @@ The user can:
 - Suggest a cart
 - Add a cart (admin)
 - Edit a cart (admin)
+- Delete a cart (admin)
+- Delete a suggestion (admin)
 
 ## Set Up
 
@@ -122,12 +124,12 @@ npm start
 - Expand social media functionality:
   - Add friends and see their activity on home page feed
   - More user details on their profile (favorites, activity, other friends)
-  - Ability to upload photos via image hosting site
+  - Ability to upload photos via image hosting site (in progress)
 - “Get directions” button to show route from current location to selected cart
 - Sort carts based on distance from current location
-- Suggestions form for users to suggest new carts or edits to cart info (in progress)
+- ~~Suggestions form for users to suggest new carts or edits to cart info~~
 - ~~Admin attribute for users~~
-  - Suggestions submissions shows for admins to read and take action (in progress)
+  - ~~Suggestions submissions shows for admins to read and take action~~
   - ~~Add/edit cart function for admins~~
 - Mobile version via React Native or Swift
 - Inclusion of other types of street carts
