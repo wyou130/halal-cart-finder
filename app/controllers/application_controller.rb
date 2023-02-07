@@ -16,6 +16,11 @@ class ApplicationController < ActionController::API
         render json: { error: "Please log in or sign up to view"}, status: :unauthorized unless @current_user 
     end
 
+    def authorize_admin
+        @current_user ||= User.find_by(id: session[:user_id])
+        render json: { error: "You are not authorized to complete this action"}, status: :unauthorized unless @current_user.admin 
+    end
+
     def invalid(invalid)
         render json: { error: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
