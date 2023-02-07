@@ -45,10 +45,16 @@ To run this project, first fork or clone the repository:
 git clone https://github.com/wyou130/halal-cart-finder
 ```
 
-Seed the data:
+Install Gemfile dependencies:
 
 ```
-rails db:seed
+bundle install
+```
+
+Migrate and seed the data:
+
+```
+rails db:migrate db:seed
 ```
 
 Run the server:
@@ -63,7 +69,7 @@ In another terminal, cd into the client folder:
 cd client
 ```
 
-Install requirements:
+Install package.json requirements:
 
 ```
 npm install
